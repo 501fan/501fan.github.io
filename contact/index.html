@@ -1487,27 +1487,15 @@
                 </div>
 
                 <div id="barrage-twikoo" style="display:none;"></div>
-                <!-- 不加载 Twikoo SDK，直接 HTTP 请求 Render 服务器 -->
+                <!-- 弹幕模块 - 使用 Twikoo SDK -->
                 <script type="text/javascript">
-                    var TWIKOO_SERVER = 'twikoo-d7gwh9lqi0cd62381';
                     var barrageQueue = [];
                     var barrageLoopTimer = null;
 
-                    // 页面加载后直接获取弹幕
                     jQuery(function() {
-                        loadBarrages();
+                        setTimeout(loadBarrages, 2000);
                     });
 
-                    // POST 请求到 Twikoo 服务器
-                    function twikooPost(data) {
-                        return fetch(TWIKOO_SERVER, {
-                            method: 'POST',
-                            headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify(data)
-                        }).then(function(r) { return r.json(); });
-                    }
-
-                    // 解析弹幕内容
                     function parseBarrageItem(item) {
                         try {
                             var match = item.comment.match(/\[barrage\](.*?)\[\/barrage\]/);
@@ -1524,28 +1512,32 @@
                         return null;
                     }
 
-                    // 加载历史弹幕
                     function loadBarrages() {
-                        twikooPost({
-                            event: 'GET_RECENT_COMMENTS',
-                            urls: ['/barrage'],
-                            pageSize: 100,
-                            includeReply: true
+                        if (typeof twikoo === 'undefined') { return; }
+                        twikoo.getComments({
+                            envId: 'twikoo-d7gwh9lqi0cd62381',
+                            url: '/barrage/',
+                            pageSize: 100
                         }).then(function(resp) {
-                            var lists = resp.data || [];
+                            var lists = (resp && resp.list) || [];
                             barrageQueue = [];
                             for (var i = 0; i < lists.length; i++) {
                                 var b = parseBarrageItem(lists[i]);
                                 if (b) barrageQueue.push(b);
+                                if (lists[i].replies) {
+                                    for (var j = 0; j < lists[i].replies.length; j++) {
+                                        var br = parseBarrageItem(lists[i].replies[j]);
+                                        if (br) barrageQueue.push(br);
+                                    }
+                                }
                             }
-                            console.log('弹幕加载成功:', barrageQueue.length, '条');
+                            console.log('[Barrage] loaded:', barrageQueue.length);
                             if (barrageQueue.length > 0) startBarrageLoop();
                         }).catch(function(e) {
-                            console.error('弹幕加载失败:', e);
+                            console.error('[Barrage] load failed:', e);
                         });
                     }
 
-                    // 循环飞入弹幕
                     function startBarrageLoop() {
                         if (barrageLoopTimer) clearTimeout(barrageLoopTimer);
                         function next() {
@@ -1559,7 +1551,6 @@
                         next();
                     }
 
-                    // 发送弹幕
                     function run() {
                         var info = jQuery('input[name=info]').val();
                         if (info === '') info = 'hello world';
@@ -1570,12 +1561,18 @@
 
                         var barrageContent = '[barrage]' + info + '|' + href + '|' + speed + '[/barrage]';
 
-                        twikooPost({
-                            event: 'COMMENT_SUBMIT',
-                            nick: '弹幕', mail: 'barrage@example.com', link: href,
-                            comment: barrageContent, url: '/barrage',
-                            pid: '', rid: '',
-                            ua: navigator.userAgent
+                        if (typeof twikoo === 'undefined') {
+                            alert('Twikoo SDK 尚未加载，请稍后重试');
+                            return;
+                        }
+
+                        twikoo.comment({
+                            envId: 'twikoo-d7gwh9lqi0cd62381',
+                            comment: barrageContent,
+                            nick: '弹幕',
+                            mail: 'barrage@example.com',
+                            link: href,
+                            url: '/barrage/'
                         }).then(function(resp) {
                             if (resp && resp.id) {
                                 var b = { img: '/medias/barrager/' + Math.floor(Math.random() * 3) + '.png', href: href, info: info, speed: speed };
@@ -1589,7 +1586,7 @@
                             }
                         }).catch(function(e) {
                             alert('留言发送失败，请检查网络');
-                            console.error('弹幕发送失败:', e);
+                            console.error('[Barrage] send failed:', e);
                         });
                     }
 
@@ -1629,7 +1626,8 @@
 
             <!-- Twikoo 评论区 ✅ 保留 -->
             
-                <link rel="stylesheet" href="/css/twikoo-custom.css">
+                <link rel="stylesheet" href="https://unpkg.com/twikoo@1.6.39/dist/twikoo.min.css">
+<link rel="stylesheet" href="/css/twikoo-custom.css">
 
 <div class="twikoo-cyber-container">
     <div class="cyber-decoration cyber-decoration-1"></div>
@@ -1652,13 +1650,13 @@
     </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/twikoo@1.6.42/dist/twikoo.all.min.js"></script>
+<script src="https://unpkg.com/twikoo@1.6.39/dist/twikoo.all.min.js"></script>
 <script>
     if (typeof twikoo !== 'undefined') {
         twikoo.init({
             envId: 'twikoo-d7gwh9lqi0cd62381',
             el: '#tcomments',
-            region: '',
+            region: 'ap-guangzhou',
             path: window.location.pathname,
             placeholder: '留下你的想法...'
         }).then(function() {
