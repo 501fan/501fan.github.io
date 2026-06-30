@@ -1740,7 +1740,7 @@
 <p>  如果需要更强的加速                                                            </p>
 <p>  ┌─────────────────┬────────────────────────────────────────────────────────┐<br>  │      方式       │                          说明                          │<br>  ├─────────────────┼────────────────────────────────────────────────────────┤<br>  │ 自定义域名      │ 绑定自己的域名（如 msg.example.com），可开启更多       │<br>  │                 │ Cloudflare 功能                                        │<br>  ├─────────────────┼────────────────────────────────────────────────────────┤<br>  │ Workers Paid    │ $5&#x2F;月，CPU 时间从 10ms 提升到 30s，请求无限制          │<br>  │ 计划            │                                                        │<br>  ├─────────────────┼────────────────────────────────────────────────────────┤<br>  │ Cache API       │ 在 Worker 中用 caches.default 手动缓存动态响应         │<br>  └─────────────────┴────────────────────────────────────────────────────────┘  </p>
 <p>  目前免费计划已经够用，Cloudflare 的 CDN 是开箱即用的，不需要额外配置。        </p>
-<p>以下是 message-board-api Worker 的域名绑定情况：<br>域和路由：<br>类型    地址<br>workers.dev 子域名    message-board-api.manle.workers.dev<br>自定义域名    fuliefu.bbroot.com<br>路由    无<br>绑定：<br>R2 存储桶：message-board-images（绑定名 IMAGES）<br>KV 命名空间：MESSAGE_BOARD<br>其他信息：<br>最近一次部署：18 小时前（通过 Wrangler）<br>24 小时请求量：267 次，3 个错误</p>
+<p>以下是 message-board-api Worker 的域名绑定情况：<br>域和路由：<br>类型	地址<br>workers.dev 子域名	message-board-api.manle.workers.dev<br>自定义域名	fuliefu.bbroot.com<br>路由	无<br>绑定：<br>R2 存储桶：message-board-images（绑定名 IMAGES）<br>KV 命名空间：MESSAGE_BOARD<br>其他信息：<br>最近一次部署：18 小时前（通过 Wrangler）<br>24 小时请求量：267 次，3 个错误</p>
 <h3 id="在线地址"><a href="#在线地址" class="headerlink" title="在线地址"></a>在线地址</h3><table>
 <thead>
 <tr>
@@ -2046,11 +2046,11 @@
     </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/twikoo@1.7.13/dist/twikoo.all.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/twikoo@1.6.42/dist/twikoo.all.min.js"></script>
 <script>
     if (typeof twikoo !== 'undefined') {
         twikoo.init({
-            envId: 'https://twikoo-ydp0.onrender.com',
+            envId: 'http://localhost:8080',
             el: '#tcomments',
             region: '',
             path: window.location.pathname,
@@ -2239,13 +2239,13 @@
                 Next&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2026/05/02/Hexo%E5%8D%9A%E5%AE%A2%E4%BC%98%E5%8C%96%E6%95%99%E7%A8%8B%EF%BC%9A%E5%9B%BE%E5%BA%93%E9%98%B2%E7%9B%97%E9%93%BE%E3%80%81%E5%9B%9E%E5%88%B0%E9%A1%B6%E9%83%A8%E3%80%81%E6%82%AC%E6%8C%82%E5%96%B5%E5%8A%9F%E8%83%BD%E4%BF%AE%E5%A4%8D/">
+                <a href="/2026/05/02/Live2D%E7%9C%8B%E6%9D%BF%E5%A8%98%E9%9B%86%E6%88%90%E6%95%99%E7%A8%8B/">
                     <div class="card-image">
                         
                         
-                        <img src="https://cdn.jsdelivr.net/gh/500fan/500fan.github.io@1.33/medias/featureimages/22.jpg" class="responsive-img" alt="Hexo博客优化教程：图库防盗链、回到顶部、悬挂喵功能修复">
+                        <img src="https://cdn.jsdelivr.net/gh/500fan/500fan.github.io@1.33/medias/featureimages/6.jpg" class="responsive-img" alt="Live2D看板娘集成教程">
                         
-                        <span class="card-title">Hexo博客优化教程：图库防盗链、回到顶部、悬挂喵功能修复</span>
+                        <span class="card-title">Live2D看板娘集成教程</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -2277,28 +2277,16 @@
                         <span class="chip bg-color">Hexo</span>
                     </a>
                     
-                    <a href="/tags/JavaScript/">
-                        <span class="chip bg-color">JavaScript</span>
+                    <a href="/tags/%E5%89%8D%E7%AB%AF/">
+                        <span class="chip bg-color">前端</span>
                     </a>
                     
-                    <a href="/tags/Gitee/">
-                        <span class="chip bg-color">Gitee</span>
+                    <a href="/tags/Live2D/">
+                        <span class="chip bg-color">Live2D</span>
                     </a>
                     
-                    <a href="/tags/%E9%98%B2%E7%9B%97%E9%93%BE/">
-                        <span class="chip bg-color">防盗链</span>
-                    </a>
-                    
-                    <a href="/tags/%E5%9B%BE%E5%BA%93/">
-                        <span class="chip bg-color">图库</span>
-                    </a>
-                    
-                    <a href="/tags/%E5%9B%9E%E5%88%B0%E9%A1%B6%E9%83%A8/">
-                        <span class="chip bg-color">回到顶部</span>
-                    </a>
-                    
-                    <a href="/tags/CSS/">
-                        <span class="chip bg-color">CSS</span>
+                    <a href="/tags/%E7%9C%8B%E6%9D%BF%E5%A8%98/">
+                        <span class="chip bg-color">看板娘</span>
                     </a>
                     
                 </div>

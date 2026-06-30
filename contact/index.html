@@ -1489,7 +1489,7 @@
                 <div id="barrage-twikoo" style="display:none;"></div>
                 <!-- 不加载 Twikoo SDK，直接 HTTP 请求 Render 服务器 -->
                 <script type="text/javascript">
-                    var TWIKOO_SERVER = 'https://twikoo-ydp0.onrender.com';
+                    var TWIKOO_SERVER = 'http://localhost:8080';
                     var barrageQueue = [];
                     var barrageLoopTimer = null;
 
@@ -1652,11 +1652,11 @@
     </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/twikoo@1.7.13/dist/twikoo.all.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/twikoo@1.6.42/dist/twikoo.all.min.js"></script>
 <script>
     if (typeof twikoo !== 'undefined') {
         twikoo.init({
-            envId: 'https://twikoo-ydp0.onrender.com',
+            envId: 'http://localhost:8080',
             el: '#tcomments',
             region: '',
             path: window.location.pathname,
