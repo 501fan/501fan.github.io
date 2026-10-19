@@ -334,6 +334,104 @@ Gitee 防盗链检测到跨站引用 → ❌ 403	Gitee 无法识别来源 → �
       </tags>
   </entry>
   <entry>
+    <title>Hexo Matery 修改导航菜单名称教程</title>
+    <url>/2026/04/16/Hexo-Matery%E4%BF%AE%E6%94%B9%E5%AF%BC%E8%88%AA%E8%8F%9C%E5%8D%95%E5%90%8D%E7%A7%B0%E6%95%99%E7%A8%8B/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="一、导航菜单配置位置"><a href="#一、导航菜单配置位置" class="headerlink" title="一、导航菜单配置位置"></a>一、导航菜单配置位置</h2><p>文件：<code>themes/hexo-theme-matery/_config.yml</code>，顶部 <code>menu</code> 配置段。</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">menu:</span></span><br><span class="line">  <span class="attr">Index:</span></span><br><span class="line">    <span class="attr">url:</span> <span class="string">/</span></span><br><span class="line">    <span class="attr">icon:</span> <span class="string">fas</span> <span class="string">fa-home</span></span><br><span class="line">  <span class="attr">About:</span></span><br><span class="line">    <span class="attr">icon:</span> <span class="string">fas</span> <span class="string">fa-user-circle</span></span><br><span class="line">    <span class="attr">children:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">liuyan</span>          <span class="comment"># ← 菜单显示名称（修改此处）</span></span><br><span class="line">        <span class="attr">url:</span> <span class="string">/musics</span>           <span class="comment"># ← 页面路径（不变）</span></span><br><span class="line">        <span class="attr">icon:</span> <span class="string">fas</span> <span class="string">fa-music</span>     <span class="comment"># ← 图标（不变）</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="二、修改方法"><a href="#二、修改方法" class="headerlink" title="二、修改方法"></a>二、修改方法</h2><h3 id="2-1-修改位置"><a href="#2-1-修改位置" class="headerlink" title="2.1 修改位置"></a>2.1 修改位置</h3><p><code>themes/hexo-theme-matery/_config.yml</code> 第 27 行：</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 修改前</span></span><br><span class="line"><span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Musics</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 修改后</span></span><br><span class="line"><span class="bullet">-</span> <span class="attr">name:</span> <span class="string">liuyan</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="2-2-仅改-name-字段"><a href="#2-2-仅改-name-字段" class="headerlink" title="2.2 仅改 name 字段"></a>2.2 仅改 name 字段</h3><table>
+<thead>
+<tr>
+<th>字段</th>
+<th>作用</th>
+<th>是否修改</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>name</code></td>
+<td>导航栏显示的文字</td>
+<td>改为 <code>liuyan</code></td>
+</tr>
+<tr>
+<td><code>url</code></td>
+<td>点击后跳转的路径</td>
+<td>不改，仍为 <code>/musics</code></td>
+</tr>
+<tr>
+<td><code>icon</code></td>
+<td>菜单项图标</td>
+<td>不改，仍为 <code>fas fa-music</code></td>
+</tr>
+</tbody></table>
+<p><code>name</code> 只影响导航栏显示文字，不影响页面路径和功能。</p>
+<hr>
+<h2 id="三、Matery-菜单结构说明"><a href="#三、Matery-菜单结构说明" class="headerlink" title="三、Matery 菜单结构说明"></a>三、Matery 菜单结构说明</h2><h3 id="3-1-一级菜单"><a href="#3-1-一级菜单" class="headerlink" title="3.1 一级菜单"></a>3.1 一级菜单</h3><figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">menu:</span></span><br><span class="line">  <span class="attr">Index:</span>             <span class="comment"># ← 一级菜单名</span></span><br><span class="line">    <span class="attr">url:</span> <span class="string">/</span>           <span class="comment"># ← 链接</span></span><br><span class="line">    <span class="attr">icon:</span> <span class="string">fas</span> <span class="string">fa-home</span></span><br></pre></td></tr></table></figure>
+
+<p>一级菜单直接显示在导航栏，点击跳转。</p>
+<h3 id="3-2-二级下拉菜单"><a href="#3-2-二级下拉菜单" class="headerlink" title="3.2 二级下拉菜单"></a>3.2 二级下拉菜单</h3><figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">menu:</span></span><br><span class="line">  <span class="attr">About:</span>                    <span class="comment"># ← 父菜单名（悬停展开下拉）</span></span><br><span class="line">    <span class="attr">icon:</span> <span class="string">fas</span> <span class="string">fa-user-circle</span></span><br><span class="line">    <span class="attr">children:</span>               <span class="comment"># ← 子菜单列表</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">liuyan</span>        <span class="comment">#    子项显示名</span></span><br><span class="line">        <span class="attr">url:</span> <span class="string">/musics</span>        <span class="comment">#    子项链接</span></span><br><span class="line">        <span class="attr">icon:</span> <span class="string">fas</span> <span class="string">fa-music</span>   <span class="comment">#    子项图标</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">about</span></span><br><span class="line">        <span class="attr">url:</span> <span class="string">/about</span></span><br><span class="line">        <span class="attr">icon:</span> <span class="string">fas</span> <span class="string">fa-paste</span></span><br></pre></td></tr></table></figure>
+
+<p><code>children</code> 下的每个 <code>- name:</code> 都是一个下拉菜单项。</p>
+<h3 id="3-3-字段对照表"><a href="#3-3-字段对照表" class="headerlink" title="3.3 字段对照表"></a>3.3 字段对照表</h3><table>
+<thead>
+<tr>
+<th>字段</th>
+<th>位置</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>menu.键名</code></td>
+<td>一级菜单</td>
+<td>导航栏直接显示的文字</td>
+</tr>
+<tr>
+<td><code>children[].name</code></td>
+<td>二级菜单</td>
+<td>下拉菜单中显示的文字</td>
+</tr>
+<tr>
+<td><code>url</code></td>
+<td>通用</td>
+<td>点击跳转的路径</td>
+</tr>
+<tr>
+<td><code>icon</code></td>
+<td>通用</td>
+<td>Font Awesome 图标类名</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="四、其他常见修改示例"><a href="#四、其他常见修改示例" class="headerlink" title="四、其他常见修改示例"></a>四、其他常见修改示例</h2><h3 id="改菜单名称"><a href="#改菜单名称" class="headerlink" title="改菜单名称"></a>改菜单名称</h3><figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 把 &quot;about&quot; 改成 &quot;关于我&quot;</span></span><br><span class="line"><span class="bullet">-</span> <span class="attr">name:</span> <span class="string">关于我</span></span><br><span class="line">  <span class="attr">url:</span> <span class="string">/about</span></span><br><span class="line">  <span class="attr">icon:</span> <span class="string">fas</span> <span class="string">fa-paste</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="改菜单图标"><a href="#改菜单图标" class="headerlink" title="改菜单图标"></a>改菜单图标</h3><p>图标来自 <a href="https://fontawesome.com/icons">Font Awesome</a>，替换 <code>icon</code> 值即可：</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 把音乐图标改成评论图标</span></span><br><span class="line"><span class="bullet">-</span> <span class="attr">name:</span> <span class="string">liuyan</span></span><br><span class="line">  <span class="attr">url:</span> <span class="string">/musics</span></span><br><span class="line">  <span class="attr">icon:</span> <span class="string">fas</span> <span class="string">fa-comments</span>    <span class="comment"># 原来是 fas fa-music</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="添加新菜单项"><a href="#添加新菜单项" class="headerlink" title="添加新菜单项"></a>添加新菜单项</h3><p>在 <code>children</code> 下新增一个 <code>- name:</code> 块：</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">About:</span></span><br><span class="line">  <span class="attr">icon:</span> <span class="string">fas</span> <span class="string">fa-user-circle</span></span><br><span class="line">  <span class="attr">children:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">liuyan</span></span><br><span class="line">      <span class="attr">url:</span> <span class="string">/musics</span></span><br><span class="line">      <span class="attr">icon:</span> <span class="string">fas</span> <span class="string">fa-music</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">text</span>              <span class="comment"># ← 新增</span></span><br><span class="line">      <span class="attr">url:</span> <span class="string">/text</span>              <span class="comment"># ← 新增</span></span><br><span class="line">      <span class="attr">icon:</span> <span class="string">fas</span> <span class="string">fa-file-alt</span>   <span class="comment"># ← 新增</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="删除菜单项"><a href="#删除菜单项" class="headerlink" title="删除菜单项"></a>删除菜单项</h3><p>直接删除对应的 <code>- name:</code> 整块即可。</p>
+<hr>
+<h2 id="五、注意事项"><a href="#五、注意事项" class="headerlink" title="五、注意事项"></a>五、注意事项</h2><ol>
+<li><strong>name 与 url 是独立的</strong>：改 <code>name</code> 不需要改 <code>url</code>，页面路径不受影响</li>
+<li><strong>name 支持中文</strong>：可以写 <code>name: 留言</code> 或任意文字</li>
+<li><strong>修改后需重启</strong>：<code>_config.yml</code> 修改后需重新运行 <code>hexo s</code> 才能生效</li>
+<li><strong>缩进必须用空格</strong>：YAML 不允许 Tab 缩进，必须用空格，且层级对齐</li>
+</ol>
+]]></content>
+      <categories>
+        <category>技术教程</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
+        <tag>主题配置</tag>
+        <tag>导航菜单</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Hexo Matery text 页面添加 Canvas 彩色粒子上升特效教程</title>
     <url>/2026/04/16/Hexo-Matery-text%E9%A1%B5%E9%9D%A2Canvas%E5%BD%A9%E8%89%B2%E7%B2%92%E5%AD%90%E7%89%B9%E6%95%88%E6%95%99%E7%A8%8B/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="一、改造前后对比"><a href="#一、改造前后对比" class="headerlink" title="一、改造前后对比"></a>一、改造前后对比</h2><table>
@@ -3029,7 +3127,7 @@ Gitee 防盗链检测到跨站引用 → ❌ 403	Gitee 无法识别来源 → �
 <li>把 Vercel 的 Twikoo 数据迁移过去</li>
 <li>更新你 hexo 配置里的 envId</li>
 </ul>
-<p> ❯ 现在去 Zeabur 部署。先打开 Zeabur：<a href="https://zeabur.com/login">https://zeabur.com/login</a><br>GitHub500fan登陆，邮箱<a href="mailto:&#x33;&#57;&#50;&#x36;&#51;&#55;&#50;&#50;&#x31;&#64;&#113;&#x71;&#46;&#99;&#x6f;&#109;">&#x33;&#57;&#50;&#x36;&#51;&#55;&#50;&#50;&#x31;&#64;&#113;&#x71;&#46;&#99;&#x6f;&#109;</a><br>需要购买</p>
+<p> ❯ 现在去 Zeabur 部署。先打开 Zeabur：<a href="https://zeabur.com/login">https://zeabur.com/login</a><br>GitHub500fan登陆，邮箱<a href="mailto:&#x33;&#x39;&#50;&#54;&#51;&#55;&#x32;&#50;&#49;&#64;&#x71;&#113;&#46;&#x63;&#111;&#x6d;">&#x33;&#x39;&#50;&#54;&#51;&#55;&#x32;&#50;&#49;&#64;&#x71;&#113;&#46;&#x63;&#111;&#x6d;</a><br>需要购买</p>
 <pre><code>帮你在 Render 上部署 Twikoo。先看看 Twikoo 自部署的架构：
 </code></pre>
 <p>render.yaml&#96; 已经推在哪个的仓库<br>在你 GitHub 的 fork 仓库里：</p>
@@ -3083,7 +3181,7 @@ Gitee 防盗链检测到跨站引用 → ❌ 403	Gitee 无法识别来源 → �
 <li>Zeabur 原生支持 MongoDB</li>
 <li>但需要付费</li>
 </ul>
-<p>你要走哪个方案？如果选 Atlas，你先去注册，我帮你配置。<br>mongodb+srv:&#x2F;&#x2F;eric:<a href="mailto:&#x74;&#48;&#48;&#48;&#48;&#48;&#x36;&#x32;&#53;&#49;&#54;&#x40;&#x63;&#108;&#117;&#x73;&#x74;&#101;&#x72;&#x30;&#46;&#x69;&#x31;&#117;&#x30;&#99;&#x66;&#111;&#x2e;&#109;&#111;&#110;&#x67;&#x6f;&#100;&#x62;&#x2e;&#x6e;&#101;&#116;">&#x74;&#48;&#48;&#48;&#48;&#48;&#x36;&#x32;&#53;&#49;&#54;&#x40;&#x63;&#108;&#117;&#x73;&#x74;&#101;&#x72;&#x30;&#46;&#x69;&#x31;&#117;&#x30;&#99;&#x66;&#111;&#x2e;&#109;&#111;&#110;&#x67;&#x6f;&#100;&#x62;&#x2e;&#x6e;&#101;&#116;</a>&#x2F;?appName&#x3D;Cluster0t     </p>
+<p>你要走哪个方案？如果选 Atlas，你先去注册，我帮你配置。<br>mongodb+srv:&#x2F;&#x2F;eric:<a href="mailto:&#116;&#48;&#x30;&#x30;&#48;&#48;&#x36;&#50;&#x35;&#x31;&#54;&#64;&#x63;&#x6c;&#117;&#115;&#x74;&#101;&#x72;&#48;&#46;&#x69;&#49;&#117;&#48;&#x63;&#x66;&#111;&#x2e;&#x6d;&#111;&#110;&#x67;&#x6f;&#x64;&#98;&#x2e;&#x6e;&#101;&#116;">&#116;&#48;&#x30;&#x30;&#48;&#48;&#x36;&#50;&#x35;&#x31;&#54;&#64;&#x63;&#x6c;&#117;&#115;&#x74;&#101;&#x72;&#48;&#46;&#x69;&#49;&#117;&#48;&#x63;&#x66;&#111;&#x2e;&#x6d;&#111;&#110;&#x67;&#x6f;&#x64;&#98;&#x2e;&#x6e;&#101;&#116;</a>&#x2F;?appName&#x3D;Cluster0t     </p>
 <p>，<br>好的！连接字符串在 MongoDB Atlas 控制台获取，步骤如下：</p>
 <ol>
 <li>打开 <a href="https://cloud.mongodb.com/">https://cloud.mongodb.com/</a></li>
@@ -3093,15 +3191,15 @@ Gitee 防盗链检测到跨站引用 → ❌ 403	Gitee 无法识别来源 → �
 <li>选择 <strong>Drivers</strong>（或 Connect your application）</li>
 <li>就能看到连接字符串，类似：<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mongodb+srv://&lt;username&gt;:&lt;password&gt;@cluster0.xxxxx.mongodb.net/?retryWrites=true&amp;w=majority</span><br></pre></td></tr></table></figure></li>
 </ol>
-<p>你需要把 <code>&lt;username&gt;</code> 和 <code>&lt;password&gt;</code> 替换成你创建数据库用户时设置的用户名和密码。<br>mongodb+srv:&#x2F;&#x2F;eric:<a href="mailto:&#x74;&#x30;&#x30;&#x30;&#x30;&#x30;&#x36;&#x32;&#x35;&#x31;&#x36;&#x40;&#99;&#108;&#117;&#115;&#x74;&#x65;&#x72;&#x30;&#x2e;&#x69;&#x31;&#117;&#48;&#x63;&#102;&#111;&#x2e;&#109;&#x6f;&#110;&#x67;&#x6f;&#x64;&#x62;&#46;&#x6e;&#101;&#116;">&#x74;&#x30;&#x30;&#x30;&#x30;&#x30;&#x36;&#x32;&#x35;&#x31;&#x36;&#x40;&#99;&#108;&#117;&#115;&#x74;&#x65;&#x72;&#x30;&#x2e;&#x69;&#x31;&#117;&#48;&#x63;&#102;&#111;&#x2e;&#109;&#x6f;&#110;&#x67;&#x6f;&#x64;&#x62;&#46;&#x6e;&#101;&#116;</a>&#x2F;twikoo?appName&#x3D;Cluster0t</p>
+<p>你需要把 <code>&lt;username&gt;</code> 和 <code>&lt;password&gt;</code> 替换成你创建数据库用户时设置的用户名和密码。<br>mongodb+srv:&#x2F;&#x2F;eric:<a href="mailto:&#x74;&#x30;&#x30;&#x30;&#48;&#48;&#54;&#x32;&#x35;&#x31;&#x36;&#64;&#99;&#108;&#x75;&#115;&#116;&#101;&#x72;&#48;&#46;&#x69;&#x31;&#x75;&#x30;&#x63;&#x66;&#111;&#46;&#x6d;&#x6f;&#110;&#103;&#111;&#x64;&#98;&#x2e;&#110;&#101;&#116;">&#x74;&#x30;&#x30;&#x30;&#48;&#48;&#54;&#x32;&#x35;&#x31;&#x36;&#64;&#99;&#108;&#x75;&#115;&#116;&#101;&#x72;&#48;&#46;&#x69;&#x31;&#x75;&#x30;&#x63;&#x66;&#111;&#46;&#x6d;&#x6f;&#110;&#103;&#111;&#x64;&#98;&#x2e;&#110;&#101;&#116;</a>&#x2F;twikoo?appName&#x3D;Cluster0t</p>
 <p>mongodb+srv:&#x2F;&#x2F;eric:<db_password>@cluster0.i1u0cfo.mongodb.net&#x2F;</p>
 <p>mongodb+srv:&#x2F;&#x2F;eric:<db_password>@cluster0.i1u0cfo.mongodb.net&#x2F;?appName&#x3D;Cluster0</p>
-<p>mongodb+srv:&#x2F;&#x2F;eric:<a href="mailto:&#116;&#48;&#48;&#x30;&#x30;&#48;&#x36;&#50;&#53;&#49;&#x36;&#x40;&#99;&#x6c;&#x75;&#115;&#116;&#x65;&#114;&#48;&#x2e;&#x69;&#x31;&#117;&#x30;&#99;&#102;&#111;&#46;&#x6d;&#111;&#x6e;&#103;&#x6f;&#100;&#x62;&#46;&#110;&#x65;&#116;">&#116;&#48;&#48;&#x30;&#x30;&#48;&#x36;&#50;&#53;&#49;&#x36;&#x40;&#99;&#x6c;&#x75;&#115;&#116;&#x65;&#114;&#48;&#x2e;&#x69;&#x31;&#117;&#x30;&#99;&#102;&#111;&#46;&#x6d;&#111;&#x6e;&#103;&#x6f;&#100;&#x62;&#46;&#110;&#x65;&#116;</a>&#x2F;?appName&#x3D;Cluster0</p>
+<p>mongodb+srv:&#x2F;&#x2F;eric:<a href="mailto:&#x74;&#x30;&#48;&#48;&#x30;&#x30;&#x36;&#50;&#x35;&#x31;&#x36;&#x40;&#99;&#x6c;&#x75;&#x73;&#x74;&#x65;&#114;&#x30;&#x2e;&#105;&#49;&#x75;&#48;&#99;&#102;&#111;&#x2e;&#109;&#111;&#110;&#103;&#111;&#100;&#98;&#46;&#110;&#101;&#116;">&#x74;&#x30;&#48;&#48;&#x30;&#x30;&#x36;&#50;&#x35;&#x31;&#x36;&#x40;&#99;&#x6c;&#x75;&#x73;&#x74;&#x65;&#114;&#x30;&#x2e;&#105;&#49;&#x75;&#48;&#99;&#102;&#111;&#x2e;&#109;&#111;&#110;&#103;&#111;&#100;&#98;&#46;&#110;&#101;&#116;</a>&#x2F;?appName&#x3D;Cluster0</p>
 <p>mongodb+srv:&#x2F;&#x2F;eric:<db_password>@cluster0.i1u0cfo.mongodb.net&#x2F;?appName&#x3D;Cluster0</p>
-<p>mongodb+srv:&#x2F;&#x2F;eric:<a href="mailto:&#x54;&#x74;&#48;&#48;&#48;&#48;&#x30;&#x36;&#x32;&#53;&#49;&#54;&#64;&#99;&#x6c;&#x75;&#x73;&#116;&#x65;&#114;&#x30;&#46;&#x69;&#49;&#117;&#x30;&#x63;&#102;&#x6f;&#46;&#109;&#x6f;&#x6e;&#x67;&#x6f;&#x64;&#x62;&#x2e;&#x6e;&#x65;&#116;">&#x54;&#x74;&#48;&#48;&#48;&#48;&#x30;&#x36;&#x32;&#53;&#49;&#54;&#64;&#99;&#x6c;&#x75;&#x73;&#116;&#x65;&#114;&#x30;&#46;&#x69;&#49;&#117;&#x30;&#x63;&#102;&#x6f;&#46;&#109;&#x6f;&#x6e;&#x67;&#x6f;&#x64;&#x62;&#x2e;&#x6e;&#x65;&#116;</a>&#x2F;?appName&#x3D;Cluster0</p>
-<p>mongodb+srv:&#x2F;&#x2F;eric:<a href="mailto:&#x74;&#48;&#x30;&#x30;&#x30;&#48;&#54;&#50;&#x35;&#49;&#x36;&#x40;&#99;&#x6c;&#117;&#x73;&#x74;&#101;&#x72;&#48;&#46;&#x69;&#49;&#117;&#x30;&#x63;&#102;&#111;&#46;&#x6d;&#111;&#110;&#103;&#x6f;&#100;&#x62;&#x2e;&#x6e;&#101;&#x74;">&#x74;&#48;&#x30;&#x30;&#x30;&#48;&#54;&#50;&#x35;&#49;&#x36;&#x40;&#99;&#x6c;&#117;&#x73;&#x74;&#101;&#x72;&#48;&#46;&#x69;&#49;&#117;&#x30;&#x63;&#102;&#111;&#46;&#x6d;&#111;&#110;&#103;&#x6f;&#100;&#x62;&#x2e;&#x6e;&#101;&#x74;</a>&#x2F;</p>
+<p>mongodb+srv:&#x2F;&#x2F;eric:<a href="mailto:&#84;&#116;&#48;&#x30;&#x30;&#x30;&#48;&#x36;&#x32;&#x35;&#x31;&#54;&#x40;&#x63;&#x6c;&#117;&#x73;&#x74;&#101;&#114;&#x30;&#46;&#105;&#x31;&#117;&#48;&#x63;&#102;&#111;&#x2e;&#x6d;&#x6f;&#x6e;&#103;&#111;&#x64;&#x62;&#x2e;&#110;&#x65;&#116;">&#84;&#116;&#48;&#x30;&#x30;&#x30;&#48;&#x36;&#x32;&#x35;&#x31;&#54;&#x40;&#x63;&#x6c;&#117;&#x73;&#x74;&#101;&#114;&#x30;&#46;&#105;&#x31;&#117;&#48;&#x63;&#102;&#111;&#x2e;&#x6d;&#x6f;&#x6e;&#103;&#111;&#x64;&#x62;&#x2e;&#110;&#x65;&#116;</a>&#x2F;?appName&#x3D;Cluster0</p>
+<p>mongodb+srv:&#x2F;&#x2F;eric:<a href="mailto:&#x74;&#x30;&#x30;&#x30;&#48;&#48;&#x36;&#x32;&#x35;&#49;&#54;&#x40;&#99;&#108;&#117;&#115;&#x74;&#x65;&#114;&#x30;&#46;&#x69;&#49;&#117;&#48;&#x63;&#x66;&#x6f;&#x2e;&#109;&#x6f;&#x6e;&#x67;&#x6f;&#x64;&#x62;&#46;&#110;&#101;&#116;">&#x74;&#x30;&#x30;&#x30;&#48;&#48;&#x36;&#x32;&#x35;&#49;&#54;&#x40;&#99;&#108;&#117;&#115;&#x74;&#x65;&#114;&#x30;&#46;&#x69;&#49;&#117;&#48;&#x63;&#x66;&#x6f;&#x2e;&#109;&#x6f;&#x6e;&#x67;&#x6f;&#x64;&#x62;&#46;&#110;&#101;&#116;</a>&#x2F;</p>
 <p>在你的 Mac 终端运行这个命令（替换密码）：                                        </p>
-<p>  mongosh “mongodb+srv:&#x2F;&#x2F;eric:<a href="mailto:&#84;&#116;&#48;&#x30;&#48;&#x30;&#x30;&#54;&#x32;&#53;&#x31;&#54;&#64;&#x63;&#x6c;&#117;&#115;&#x74;&#x65;&#114;&#48;&#46;&#105;&#49;&#117;&#48;&#99;&#102;&#111;&#46;&#109;&#111;&#x6e;&#x67;&#x6f;&#x64;&#x62;&#46;&#x6e;&#x65;&#116;">&#84;&#116;&#48;&#x30;&#48;&#x30;&#x30;&#54;&#x32;&#53;&#x31;&#54;&#64;&#x63;&#x6c;&#117;&#115;&#x74;&#x65;&#114;&#48;&#46;&#105;&#49;&#117;&#48;&#99;&#102;&#111;&#46;&#109;&#111;&#x6e;&#x67;&#x6f;&#x64;&#x62;&#46;&#x6e;&#x65;&#116;</a>&#x2F;twikoo”<br>  –eval “db.comment.find().toArray()”                                             </p>
+<p>  mongosh “mongodb+srv:&#x2F;&#x2F;eric:<a href="mailto:&#x54;&#116;&#48;&#x30;&#48;&#48;&#x30;&#x36;&#x32;&#53;&#x31;&#54;&#64;&#99;&#x6c;&#117;&#115;&#x74;&#x65;&#x72;&#48;&#x2e;&#105;&#49;&#x75;&#x30;&#99;&#x66;&#x6f;&#x2e;&#x6d;&#x6f;&#x6e;&#103;&#111;&#x64;&#98;&#x2e;&#x6e;&#x65;&#x74;">&#x54;&#116;&#48;&#x30;&#48;&#48;&#x30;&#x36;&#x32;&#53;&#x31;&#54;&#64;&#99;&#x6c;&#117;&#115;&#x74;&#x65;&#x72;&#48;&#x2e;&#105;&#49;&#x75;&#x30;&#99;&#x66;&#x6f;&#x2e;&#x6d;&#x6f;&#x6e;&#103;&#111;&#x64;&#98;&#x2e;&#x6e;&#x65;&#x74;</a>&#x2F;twikoo”<br>  –eval “db.comment.find().toArray()”                                             </p>
 <p>  如果没装 mongosh：                                                               </p>
 <p>  brew install mongosh                                                             </p>
 <p>  这个命令会直接连接 Atlas 的 twikoo 数据库，看有没有数据。如果返回空数组 []，说明<br>  Atlas 连接正常但没有数据写入，问题在 tkserver 那边。                             </p>
@@ -3186,7 +3284,7 @@ Gitee 防盗链检测到跨站引用 → ❌ 403	Gitee 无法识别来源 → �
 <ol>
 <li>Render → Environment                                                          </li>
 <li>把 Key 从 MONGODB_URL 改成 MONGO_URI                                          </li>
-<li>Value<br>  不变：mongodb+srv:&#x2F;&#x2F;eric:<a href="mailto:&#x54;&#x74;&#x30;&#48;&#x30;&#48;&#x30;&#x36;&#x32;&#x35;&#x31;&#54;&#64;&#x63;&#x6c;&#x75;&#115;&#116;&#101;&#114;&#x30;&#x2e;&#105;&#x31;&#x75;&#48;&#99;&#102;&#111;&#46;&#x6d;&#x6f;&#110;&#103;&#x6f;&#100;&#x62;&#x2e;&#x6e;&#x65;&#116;">&#x54;&#x74;&#x30;&#48;&#x30;&#48;&#x30;&#x36;&#x32;&#x35;&#x31;&#54;&#64;&#x63;&#x6c;&#x75;&#115;&#116;&#101;&#114;&#x30;&#x2e;&#105;&#x31;&#x75;&#48;&#99;&#102;&#111;&#46;&#x6d;&#x6f;&#110;&#103;&#x6f;&#100;&#x62;&#x2e;&#x6e;&#x65;&#116;</a>&#x2F;twikoo        </li>
+<li>Value<br>  不变：mongodb+srv:&#x2F;&#x2F;eric:<a href="mailto:&#84;&#116;&#x30;&#48;&#x30;&#48;&#48;&#x36;&#50;&#x35;&#x31;&#x36;&#64;&#x63;&#108;&#117;&#115;&#116;&#101;&#114;&#x30;&#x2e;&#105;&#49;&#117;&#x30;&#x63;&#x66;&#x6f;&#x2e;&#x6d;&#111;&#x6e;&#x67;&#x6f;&#x64;&#x62;&#x2e;&#x6e;&#x65;&#116;">&#84;&#116;&#x30;&#48;&#x30;&#48;&#48;&#x36;&#50;&#x35;&#x31;&#x36;&#64;&#x63;&#108;&#117;&#115;&#116;&#101;&#114;&#x30;&#x2e;&#105;&#49;&#117;&#x30;&#x63;&#x66;&#x6f;&#x2e;&#x6d;&#111;&#x6e;&#x67;&#x6f;&#x64;&#x62;&#x2e;&#x6e;&#x65;&#116;</a>&#x2F;twikoo        </li>
 <li>保存，等重新部署</li>
 </ol>
 <p>  部署后看启动日志，应该会变成 Twikoo is using mongodb database。 </p>
@@ -3213,7 +3311,7 @@ Gitee 防盗链检测到跨站引用 → ❌ 403	Gitee 无法识别来源 → �
 <ol>
 <li>打开 <a href="https://uptimerobot.com/">https://uptimerobot.com/</a></li>
 <li>点击 “Get started free”</li>
-<li>用GitHub，500fan注册<br>eric<br><a href="mailto:&#x33;&#57;&#50;&#x36;&#51;&#x37;&#x32;&#50;&#49;&#x40;&#x71;&#113;&#x2e;&#x63;&#x6f;&#109;">&#x33;&#57;&#50;&#x36;&#51;&#x37;&#x32;&#50;&#49;&#x40;&#x71;&#113;&#x2e;&#x63;&#x6f;&#109;</a></li>
+<li>用GitHub，500fan注册<br>eric<br><a href="mailto:&#51;&#x39;&#x32;&#x36;&#51;&#55;&#50;&#50;&#49;&#64;&#x71;&#113;&#46;&#99;&#111;&#x6d;">&#51;&#x39;&#x32;&#x36;&#51;&#55;&#50;&#50;&#49;&#64;&#x71;&#113;&#46;&#99;&#111;&#x6d;</a></li>
 <li>密码：t0000062516（我设置的，你可以改）</li>
 </ol>
 <p>注册完成后告诉我，我帮你添加监控。<br>好的！现在添加监控：</p>
@@ -3419,7 +3517,7 @@ Gitee 防盗链检测到跨站引用 → ❌ 403	Gitee 无法识别来源 → �
 </ol>
 <p>  推荐用 SM.MS（免费，无需注册）：                                                 </p>
 <ol>
-<li><p>去 sm.ms 注册账号   <a href="https://s.ee/zh-CN/">https://s.ee/zh-CN/</a><br><a href="mailto:&#x33;&#57;&#50;&#x36;&#x33;&#x37;&#x32;&#50;&#49;&#64;&#113;&#x71;&#46;&#99;&#x6f;&#109;">&#x33;&#57;&#50;&#x36;&#x33;&#x37;&#x32;&#50;&#49;&#64;&#113;&#x71;&#46;&#99;&#x6f;&#109;</a><br>Tt0000062516@</p>
+<li><p>去 sm.ms 注册账号   <a href="https://s.ee/zh-CN/">https://s.ee/zh-CN/</a><br><a href="mailto:&#x33;&#57;&#x32;&#54;&#x33;&#55;&#x32;&#50;&#x31;&#x40;&#x71;&#113;&#46;&#99;&#x6f;&#x6d;">&#x33;&#57;&#x32;&#54;&#x33;&#55;&#x32;&#50;&#x31;&#x40;&#x71;&#113;&#46;&#99;&#x6f;&#x6d;</a><br>Tt0000062516@</p>
 </li>
 <li><p>获取 API Token（Dashboard → API Token）                                       </p>
 </li>
@@ -3435,7 +3533,7 @@ Gitee 防盗链检测到跨站引用 → ❌ 403	Gitee 无法识别来源 → �
 <p>  你用哪种方式？<br><a href="https://github.com/settings/tokens">https://github.com/settings/tokens</a> Giscus 评论区</p>
 <p>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是Personal access tokens (classic)twikoo-img — repo</p>
 <p>twikoo-img — repo图床，<a href="https://7bu.top/register">https://7bu.top/register</a> 注册</p>
-<p>用户名<br>eric<br>姓名<br>er<br><a href="mailto:&#51;&#57;&#50;&#x36;&#51;&#55;&#x32;&#x32;&#x31;&#x40;&#113;&#x71;&#x2e;&#99;&#111;&#x6d;">&#51;&#57;&#50;&#x36;&#51;&#55;&#x32;&#x32;&#x31;&#x40;&#113;&#x71;&#x2e;&#99;&#111;&#x6d;</a>密码t0000062516</p>
+<p>用户名<br>eric<br>姓名<br>er<br><a href="mailto:&#x33;&#57;&#50;&#54;&#51;&#x37;&#50;&#x32;&#x31;&#x40;&#x71;&#x71;&#46;&#x63;&#111;&#109;">&#x33;&#57;&#50;&#54;&#51;&#x37;&#50;&#x32;&#x31;&#x40;&#x71;&#x71;&#46;&#x63;&#111;&#109;</a>密码t0000062516</p>
 <p>你先打开 PicList 地址看看能不能访问？                                            </p>
 <p>❯ <a href="https://piclist-f85t.onrender.com/">https://piclist-f85t.onrender.com/</a> 可以打开登陆吗                                </p>
 <p>换成<br><a href="https://github.com/500fan/PicList">https://github.com/500fan/PicList</a><br>⏺ 你自己在浏览器打开 <a href="https://piclist-f85t.onrender.com/">https://piclist-f85t.onrender.com/</a> 试试看。                   </p>
@@ -4102,10 +4200,10 @@ Gitee 防盗链检测到跨站引用 → ❌ 403	Gitee 无法识别来源 → �
 
 <p>编译完成后会生成 <code>dist/</code> 目录，然后在微信开发者工具中导入这个 <code>dist/</code> 目录即可预览。</p>
 <p>要我现在帮你运行这些命令吗？<br>运行这些命令，完成之后补充到教程里说明<br>────────────────────────────────────────</p>
-<p>  ┊ 💻 preparing terminal…<br>  💻 cd &#x2F;Users&#x2F;apple&#x2F;Downloads&#x2F;blog&#x2F;zhaoo&#x2F;my-taro-app &amp;&amp; npm install<br>依赖已安装。现在编译小程序<br>  💻 cd &#x2F;Users&#x2F;apple&#x2F;Downloads&#x2F;blog&#x2F;zhaoo&#x2F;my-taro-app &amp;&amp; npm install @tarojs&#x2F;<a href="mailto:&#x70;&#108;&#x75;&#x67;&#x69;&#110;&#x2d;&#112;&#x6c;&#97;&#116;&#x66;&#111;&#114;&#x6d;&#x2d;&#x77;&#101;&#x61;&#112;&#x70;&#64;&#51;&#x2e;&#50;&#x2e;&#49;">&#x70;&#108;&#x75;&#x67;&#x69;&#110;&#x2d;&#112;&#x6c;&#97;&#116;&#x66;&#111;&#114;&#x6d;&#x2d;&#x77;&#101;&#x61;&#112;&#x70;&#64;&#51;&#x2e;&#50;&#x2e;&#49;</a> –registry <a href="https://registry.npmmirror.com/">https://registry.npmmirror.com</a> 2&gt;&amp;1  (26.1s)</p>
+<p>  ┊ 💻 preparing terminal…<br>  💻 cd &#x2F;Users&#x2F;apple&#x2F;Downloads&#x2F;blog&#x2F;zhaoo&#x2F;my-taro-app &amp;&amp; npm install<br>依赖已安装。现在编译小程序<br>  💻 cd &#x2F;Users&#x2F;apple&#x2F;Downloads&#x2F;blog&#x2F;zhaoo&#x2F;my-taro-app &amp;&amp; npm install @tarojs&#x2F;<a href="mailto:&#112;&#108;&#x75;&#103;&#105;&#x6e;&#x2d;&#112;&#x6c;&#x61;&#116;&#x66;&#x6f;&#x72;&#109;&#x2d;&#119;&#x65;&#x61;&#x70;&#112;&#x40;&#x33;&#x2e;&#x32;&#x2e;&#49;">&#112;&#108;&#x75;&#103;&#105;&#x6e;&#x2d;&#112;&#x6c;&#x61;&#116;&#x66;&#x6f;&#x72;&#109;&#x2d;&#119;&#x65;&#x61;&#x70;&#112;&#x40;&#x33;&#x2e;&#x32;&#x2e;&#49;</a> –registry <a href="https://registry.npmmirror.com/">https://registry.npmmirror.com</a> 2&gt;&amp;1  (26.1s)</p>
 <p> ⚕ mimo-v2.5-p<br> npm install 超时了，node_modules 已部分安装。再跑一次让它补完缺失的包：<br>╰─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯<br>  ┊ 💻 preparing terminal…<br>  💻 cd &#x2F;Users&#x2F;apple&#x2F;Downloads&#x2F;blog&#x2F;zhaoo&#x2F;my-taro-app &amp;&amp; npm install –prefer-offline –registry <a href="https://registry.npmmirror.com/">https://registry.npmmirror.com</a> 2&gt;&amp;1 | tail -10  (31.8s)</p>
 <p>安装成功！现在编译：<br>╰─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯<br>  ┊ 💻 preparing terminal…</p>
-<p>╭─ ⚕ Hermes ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮<br><code>node-sass</code> 不兼容 Node.js v24。需要替换为 <code>sass</code>（Dart Sass）：<br>╰─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯<br>  ┊ 💻 preparing terminal…<br>  💻 cd &#x2F;Users&#x2F;apple&#x2F;Downloads&#x2F;blog&#x2F;zhaoo&#x2F;my-taro-app &amp;&amp; npm uninstall node-sass –ignore-scripts 2&gt;&amp;1 &amp;&amp; npm install <a href="mailto:&#x73;&#x61;&#115;&#115;&#x40;&#49;&#x2e;&#51;&#50;&#46;&#x30;">&#x73;&#x61;&#115;&#115;&#x40;&#49;&#x2e;&#51;&#50;&#46;&#x30;</a> –save-dev –registry <a href="https://registry.npmmirror.com/">https://registry.npmmirror.com</a> –ignore-scripts 2&gt;&amp;1</p>
+<p>╭─ ⚕ Hermes ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮<br><code>node-sass</code> 不兼容 Node.js v24。需要替换为 <code>sass</code>（Dart Sass）：<br>╰─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯<br>  ┊ 💻 preparing terminal…<br>  💻 cd &#x2F;Users&#x2F;apple&#x2F;Downloads&#x2F;blog&#x2F;zhaoo&#x2F;my-taro-app &amp;&amp; npm uninstall node-sass –ignore-scripts 2&gt;&amp;1 &amp;&amp; npm install <a href="mailto:&#x73;&#97;&#x73;&#x73;&#64;&#49;&#x2e;&#x33;&#50;&#x2e;&#x30;">&#x73;&#97;&#x73;&#x73;&#64;&#49;&#x2e;&#x33;&#50;&#x2e;&#x30;</a> –save-dev –registry <a href="https://registry.npmmirror.com/">https://registry.npmmirror.com</a> –ignore-scripts 2&gt;&amp;1</p>
 <p> ⚕ mimo-v2<br>现在重新编译：<br>╰────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯<br>  ┊ 💻 preparing terminal…</p>
 <p>╭─ ⚕ Hermes ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮<br>node-sass 还在，需要彻底删除：<br>╰────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯<br>  ┊ 💻 preparing terminal…<br>  ⟳ compacting context…<br>⚠️  Session compressed 6 times — accuracy may degrade. Consider &#x2F;new to start fresh.</p>
 <p>╭─ ⚕ Hermes ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮<br>问题：Taro 3.2.1 的 <code>@tarojs/mini-runner</code> 硬性依赖 <code>node-sass</code>，但 node-sass 不兼容 Node.js v24。</p>
@@ -5219,12 +5317,12 @@ Gitee 防盗链检测到跨站引用 → ❌ 403	Gitee 无法识别来源 → �
 <hr>
 <p><img src="http://imageproxy.chaoxing.com/0x0,q15,jpeg,samd7X0ZrJL6oHlAytD1Nbu9HyggfcanZX83-Ec8kDIk/http://p.ananas.chaoxing.com/star3/origin/3ef8e1bbeb56b0c2cd90df1ce4a3f119.png" alt="今日微信群"></p>
 
-        <div id="aplayer-swDGVmjW" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-kkeHEmbT" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-swDGVmjW"),
+            element: document.getElementById("aplayer-kkeHEmbT"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -5266,6 +5364,17 @@ lrctype= 0
 <p><meting-js
     auto="https://y.qq.com/n/yqq/song/001RGrEX3ija5X.html"><br></meting-js></p>
 ]]></content>
+  </entry>
+  <entry>
+    <title>亚硝胺</title>
+    <url>/2024/09/30/%E4%BA%9A%E7%A1%9D%E8%83%BA/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>亚硝胺是一类强烈的化学致癌物质，被视为四大食品污染物之一。它是由硝酸盐、亚硝酸盐及胺类在一定条件下生成的。亚硝胺主要存在于腌制食品、霉变食品、烟熏制品中，如腌菜、熏肉、腐乳、罐头、剁椒酱、辣酱等。此外，香烟、酒精、化妆品、啤酒以及某些不新鲜的食品，如过夜的剩菜、腐烂的蔬菜等，也可能含有亚硝胺。</p>
+<p>亚硝胺在人体内可转化为亚硝酸，进而与血红蛋白中的血红蛋白氧化为高铁血红蛋白，导致血红蛋白失去携氧能力，引起组织缺氧。长期大量摄入含有亚硝胺的食物，可能会增加患上消化系统肿瘤的风险，如胃癌、食管癌等。</p>
+<p>虽然亚硝酸盐并不一定会转化为亚硝胺产生致癌作用，但为了避免潜在的健康风险，建议在日常生活中保持饮食清洁卫生，避免吃过夜的剩菜或腐烂的蔬菜，减少腌制、熏制食品的摄入，并避免长期大量饮酒和吸烟。</p>
+]]></content>
+      <tags>
+        <tag>致癌物质</tag>
+      </tags>
   </entry>
   <entry>
     <title>不索怎得</title>
@@ -5337,17 +5446,6 @@ lrctype= 0
 <p>免责声明：以上内容源自网络，版权归原作者所有，如有侵犯您的原创版权请告知，我们将尽快删除相关内容。</p>
 <p>我说的才是捷径<br>每个人对每个人具体都不同<br>教程是假象，虽然我当时也用上了，受益，但是这正是专家用来骗取人性的有力兵器<br>变化快得很<br>实践起来又是陌生的同一起跑线<br>稍微用耐心反思又了不得<br><a href="https://hesifan.top/2021/042039526.html%E7%BB%99%E6%B7%B1%E8%89%B2%E6%A8%A1%E5%BC%8F">https://hesifan.top/2021/042039526.html给深色模式</a><br><a href="https://notes.zhangxiaocai.cn/posts/7404e01a.html/tianjiaartitalk">https://notes.zhangxiaocai.cn/posts/7404e01a.html/tianjiaartitalk</a><br><a href="https://bb.js.org/quick-start.html#%F0%9F%93%83%E5%89%8D%E8%A8%80">https://bb.js.org/quick-start.html#%F0%9F%93%83%E5%89%8D%E8%A8%80</a><br><a href="https://leancloud.cn/docs/start.html">https://leancloud.cn/docs/start.html</a><br><a href="https://taro-docs.jd.com/taro/docs/GETTING-STARTED/#%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F">https://taro-docs.jd.com/taro/docs/GETTING-STARTED/#%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F</a><br><a href="https://artitalk.js.org/links.html#%E5%A6%82%E4%BD%95%E5%8A%A0%E5%85%A5%E6%88%90%E5%8A%9F%E6%A1%88%E4%BE%8B">https://artitalk.js.org/links.html#%E5%A6%82%E4%BD%95%E5%8A%A0%E5%85%A5%E6%88%90%E5%8A%9F%E6%A1%88%E4%BE%8B</a><br><a href="http://i.mooc.chaoxing.com/space/index?t=1625019560226">http://i.mooc.chaoxing.com/space/index?t=1625019560226</a></p>
 ]]></content>
-  </entry>
-  <entry>
-    <title>亚硝胺</title>
-    <url>/2024/09/30/%E4%BA%9A%E7%A1%9D%E8%83%BA/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>亚硝胺是一类强烈的化学致癌物质，被视为四大食品污染物之一。它是由硝酸盐、亚硝酸盐及胺类在一定条件下生成的。亚硝胺主要存在于腌制食品、霉变食品、烟熏制品中，如腌菜、熏肉、腐乳、罐头、剁椒酱、辣酱等。此外，香烟、酒精、化妆品、啤酒以及某些不新鲜的食品，如过夜的剩菜、腐烂的蔬菜等，也可能含有亚硝胺。</p>
-<p>亚硝胺在人体内可转化为亚硝酸，进而与血红蛋白中的血红蛋白氧化为高铁血红蛋白，导致血红蛋白失去携氧能力，引起组织缺氧。长期大量摄入含有亚硝胺的食物，可能会增加患上消化系统肿瘤的风险，如胃癌、食管癌等。</p>
-<p>虽然亚硝酸盐并不一定会转化为亚硝胺产生致癌作用，但为了避免潜在的健康风险，建议在日常生活中保持饮食清洁卫生，避免吃过夜的剩菜或腐烂的蔬菜，减少腌制、熏制食品的摄入，并避免长期大量饮酒和吸烟。</p>
-]]></content>
-      <tags>
-        <tag>致癌物质</tag>
-      </tags>
   </entry>
   <entry>
     <title>关于体力锻炼，午睡</title>
@@ -5962,103 +6060,5 @@ lrctype= 0
 <p>第二章 材料与方 法<br>第二 章 材 料与 方法<br>材料<br>泡菜 制作<br>主料： 新鲜萝 卜<br>辅料 ； 大蒜 、 生姜、 辣椒、 食盐<br>主要试剂<br>憐酸二氡钾 分析纯 天津福晨化学试剂厂<br>硫酸猛 分析纯 天津福晨化学试剂厂<br>吐 温 分析纯 上海化学试剂厂<br>乳酸 分析纯 上海化学试剂厂<br>号 胆盐 生化试剂 上海化学试剂厂<br>乳糖 生化试剂 上海化学试剂厂<br>梓檬酸氧 二氨 分析纯 天津福晨化学试剂厂<br>酸钠 分析纯 天津福晨化学试剂 厂<br>硫酸镁 分析纯 天津福晨化学试剂厂<br>结 晶 紫 指示剂 天津福晨化学试剂厂<br>中 性红 指示剂 天津福晨化学试剂厂<br>氯化钠 分析纯 天津福晨化学试剂厂<br>亚稍酸钠 分析纯 天津福晨化学试剂 厂<br>氢氧化 钠 分析纯 天津福晨化 学试剂厂<br>七水硫酸 锌 分析纯 天津福晨化学试剂厂<br>冰 乙酸 分析纯 天津福晨化学试剂厂<br>氨 水 分析纯 天津福晨化学试剂厂<br>盐酸 分析纯 天津福晨化学试剂 厂<br>蛋 白 胨 生化试‘ 剂 上海生化试剂公 司<br>降低酸萝 卜 中 亚摘 酸盐含量 的方法研究<br>酵母 浸粉 生化试剂 上海生化试剂 公司<br>牛 肉 浸膏 生化试剂 上海生化试剂 公 司<br>葡 萄糖 生化试剂 上海生化试剂 公司<br>对氨 基苯擴酸 分析纯 上海化学试剂研究所<br>碘 分析纯 天津福晨化学试剂厂<br>盐酸萘 乙 二 胺盐酸盐 分析 纯 天津福晨化 学试剂厂<br>铬酸钾 分析 纯 天津福晨化学 试剂厂<br>碘化钾 分析纯 天津福晨 化学试剂厂<br>草酸铵 分析纯 天津福晨 化学试剂厂<br>蕃 红 指示剂 天津福晨化学试剂厂<br>溴 甲 粉紫 指示剂 天津福晨化学试剂厂<br>溴粉蓝 指示剂 天津福 晨化学试剂厂<br>正丁醇 分析 纯 天津福晨化学试剂厂<br>苯 甲 醇 分析 纯 天津福晨化学试剂厂<br>乙 醇 分析纯 天津福晨化学试剂厂<br>甲 酸 分析纯 天津福晨化学试剂厂<br>过氧化氧 分析纯 天津福晨化 学试剂 厂<br>硫酸铜 分析纯 天津福晨化 学试剂厂<br>亚铁氰 化钾 分析纯 天津化学试剂厂<br>酒石酸钾钠 分析 纯 天 津化学 试剂厂<br>次 甲 基蓝 指示剂 天 津化学 试剂厂<br>乙 酸锌 分析 纯 天津化学试剂厂<br>二 乙 基亚硝 胺 色谱纯 上海化学试剂研究所<br>强碱性 阴 离子交换树脂 氯型 上海化学试剂研究所<br>主要培养 基<br>固 体培养基<br>葡萄糖<br>梓檬酸 二铵<br>第 二章 材料与 方法<br>硫酸镁<br>琼脂粉 调 值 ， ° 灭菌<br>蛋 白 膝<br>酵母提取物<br>肉 膏<br>乙 酸钠<br>磷酸氢二钾<br>硫酸猛<br>吐温<br>蒸馈水<br>紫红胆 盐葡 萄糖琼 脂：<br>蛋 白 胨<br>乳糖<br>酵母提 取物<br>中 性红<br>葡萄糖<br>氯化钠<br>号 胆盐<br>结 晶 紫<br>琼脂<br>蒸馆水 调 ， 此 培养基无须灭菌 ， 煮沸 即 可 。<br>孟加拉红琼脂 ：<br>孟加 拉红琼脂粉末 蒸馆水 ° 灭菌 。<br>营 养琼脂 ：<br>营 养琼脂粉末 蒸懷水 灭菌 。<br>乳酸菌葡萄糖发酵试验用 培养基 ：<br>蛋 白 胨<br>肉 膏<br>降低酸萝 卜 中 亚確 酸盐含 量的 方法研 究<br>酵母提取物<br>吐 温<br>葡萄糖<br>溴 甲 酌紫<br>琼脂<br>蒸馆水<br>调 ， ° 灭菌 。<br>菌种<br>棒状乳杆菌棒状亚种 ； 短乳杆菌 ； 布 氏 乳杆菌<br>干 酪乳杆菌干酪亚种 ； 植物 乳杆菌<br>生化培养箱 上海一恒科学仪器有限 公 司<br>电热恒温培养箱 上海一恒科学仪器有 限公 司<br>普通光学显 微镜 上海光 学仪器厂<br>手提式高压灭菌锅 浙 江托普仪器有限公 司<br>型 计 上海华岩仪器设 备有 限 公司<br>可见分光 光度计 上海优浦科学仪器有 限 公司<br>型 电子 天平 北京赛多 利斯天平有 限 公司<br>超净 工作台 苏州 净化设备工 程有 限公司<br>破碎机 金坛市 国 旺实验仪器厂<br>电 热恒温水浴 锅 金坛市 国 旺 实验 仪器厂<br>离子交换柱 太仓市新 达化工设备厂<br>磁力 搅拌器 金坛市盛 蓝仪器制造有 限公 司<br>菌种培养<br>菌数 测定 ： 菌数测 定 采用 平 板计数 法 （ 。<br>第 二章 材料与 方法<br>悬 菌 液 制 备 ： 将 棒 状 乳 杆 菌 棒 状 亚 种 ， 短 乳 杆 菌<br>， 布 氏 乳 杆 菌 （ 干 酷 乳 杆 菌 干 酪 亚 种<br>， 植物乳杆菌 株乳 酸菌 菌种在 液体培<br>养基 中 活化， 然后 转入 支 液体管 中进行扩大培养 （ ° ， 测 各管 的 。 值。<br>以 上菌种培养 ， 均在无菌条件下操作 。<br>试验方 法<br>泡菜样品 的 制作<br>研究食盐对 泡菜发酵 的影 响所用 样品 的 制作<br>新鲜萝 卜 一 清洗 一 切分一 装 坛 一 水封一 发降― 成品 一 藏 °<br>°<br>、 和 的食盐水<br>研究生姜和 大蒜对 泡菜发 酵的 影响 所用 样 品 的制作 ：<br>的食盐水<br>新鲜 萝 卜 一 清洗 一 切 分一 装坛 一 水封一 发吣成 品一 ： ：： 藏 °<br>个 （ 。 ，<br>分别添加 生姜 、 大蒜 、 辣椒<br>研究人工接种 对泡菜发酵 的影响 所用 样 品 的制作 ：<br>新鲜萝 卜 一 清洗 切 分一 装 水封一 发 成 品一 藏 ：<br>°<br>活化乳酸菌— 液体 培 养基— 离 心— 菌体— 食盐水<br>用 无菌 生 理盐水洗络 次<br>取样与样 品处理<br>化学指标测 定 ： 分别 在发酵期 间 的第 ， ， ， ， ， ， 从各 个<br>降低酸萝 卜 中 亚稍酸盐含量 的 方法研 究<br>泡菜坛中取 出 萝 卜 样品 ， 与 去 离 子水混合 ， 置于破碎机 中 充分破碎 。<br>微生物指标测 定 ： 分别 在发酵期 间 的第 ， ， ， ， ， ， 从各个泡菜<br>坛中 取 出 泡菜样 品 ， 无菌剪碎 。<br>泡菜 中 主要指标测 定方法<br>亚销酸盐测定 ： 盐 酸萘乙 二胺法<br>标准溶液的配制 ： 准确 称取 于娃胶干燥器 中 干燥 的 固 体<br>粉末 ， 加水溶解移入 容量瓶中 ， 用去 离子水 定容 ， 此 溶液 的浓度为 。<br>标 准使用 液 的 配制 ： 准确 吸取 标准溶液 移 入 容量瓶中 ，<br>定容 ， 此 溶液的 浓度为 再取 该稀 释液于 容量瓶 中 ， 定容 ，<br>即得到 的 溶液 。<br>标准 曲 线 的绘制 ： 分别 吸取 、 、 、 、 、 、 标准<br>使用 液 分别 相 当 于 、 、 、 、 、 、 ， 分 别 置于 容量瓶中 ，<br>向 容量瓶 中 分别 加 入 氯化铵 缓冲液 的 乙 酸溶液后 ， 立 即<br>加入 对氨基苯横酸溶液 和 盐酸 萘乙 二胺 作为 显色剂 ， 定容 ，<br>混 匀 ， 静置 于暗处显 色 于 波长 处测其吸光度， 绘制标准 曲 线 。<br>样 品 的 处理及 测定 ： 称取约 上述经破碎 的样 品 ， 置 于 容量瓶 中 ，<br>加 去 离子水 、 氧氧 化钠 溶液 约 和 硫酸 锌溶液 如 不 产生 自 色沉<br>淀， 再补加 氧氧化钠） ； 置 水浴 中 加热 ， 取 出 后冷至室温， 加水至刻<br>度 ， 混勾 ； 放置 后 ， 用 滤纸过滤， 弃 去初 滤液 ， 收集滤液备用 。 吸取<br>滤液 于 容 量瓶 中 ， 分 别 加入 氯化按 缓冲 液 、 的 乙<br>酸、 显色剂对氨基苯磺酸溶液 和 盐酸萘 乙 二胺 各 ， 定容 ， 混匀 ，<br>静置于 暗处 后 于波长 皿处测 其吸光度 。 根据 吸 光度和 标准曲 线 计算 出 样 品 中<br>的 亚硝 酸盐含 量。 同 时 做试剂空 白 。 标准 曲线 见图 ， 计算 公 式如下 ：<br>第二章 材料与 方法<br>式 中 ： —样 品 中 亚確酸盐 （ 以 计 含量 ，<br>—测定样液 中 亚稍 酸盐含量 ，<br>样 品 质量 ，<br>—测定用 样液体积 ，<br>—样 品处理液总 体积 ，<br>图 溶液在 波 长下 的 标准 曲 线<br>值测定<br>取经过上述破碎处理 的泡菜样品 ， 置于 小烧 杯 中 ， 加入 蒸馆 水混合 ，<br>在室温下静置 左右 ， 将 计的 电位 计插入烧杯 中 ， 读取 值 ；<br>允许误差 ： 相对差值<br>还原糖 的 测定 ： 斐林试剂法<br>标定 斐林试剂溶液 ： 吸取斐林试 剂 甲 、 乙液各 ， 置于 锥形瓶 中 ， 力口<br>去 离 子水 及 玻璃珠 粒 ， 从滴 定 管 滴加 约 葡萄 糖标准 溶 液 （ ， 控制 在<br>降低酸萝 卜 中 亚確 酸盐含量 的方法研 究<br>内 加热 至沸 ， 趁沸 以 滴 的速度继 续滴加葡 萄糖标准溶液 ， 直至溶液蓝 色刚<br>好褪去 为终 点 ， 记录消 耗葡萄 糖标准溶液的 总体积 ， 同 时平行操作三份 ， 取其平均值，<br>计算每 甲 、 乙 液各 斐林试剂溶液相 当 于葡萄 糖 的质量 。<br>样 品 处理： 取上述经过破碎 的样 品 ， 置于 容量瓶 中 ， 向 容量瓶中 加入<br>约 去 离子水， 然 后将容量瓶置于约 水浴保温 ， 其间 摇动 数次 ， 取 出 。<br>加 入 乙酸锌溶液 及亚铁氰化钾溶液 各 冷却 至室温后 ， 定容 ， 用<br>滤纸过滤 ， 收集滤液备用 。<br>样 品 预测 定 ： 吸取斐林试剂 甲 、 乙液各 ， 置于 锥形瓶 中 ， 加 去离 子<br>水 及 粒玻璃珠， 控制在 内 加热至 沸， 趁沸 以 先快后 慢的速度， 从滴 定 管 中<br>滴加样 品溶液， 直至溶液蓝色刚好褪去 为 滴 定 终点 ， 记录样品 液消 耗体积 。<br>样 品 溶液测 定 ： 吸取斐林试剂 甲 、 乙 液各 置 于 锥形瓶 中 ， 加水<br>及玻璃珠 粒， 从滴 定 管滴 加 比预测 定 体积少 的样 品 溶液 ， 加 热使之在 内 沸<br>腾 ， 趁沸继续 以 滴 的速度滴定 ， 直至蓝色刚 好褪去为 终点 ， 记录样液消 耗体积 ，<br>同 法平行操作三份 ， 得 出 平均 消 耗体积。<br>计算公 式 ：<br>式 中 ： —样品 中 还 原糖 的含量 （ 以葡 萄糖 计） ，<br>— 所 消 耗的标准还原糖 溶液 的 体积 ，<br>— 斐林试剂 甲 、 乙 液的混合液所消 耗的 测定用样 品 溶液 的体积，<br>亚硝胺的 测 定<br>取 中 破碎样 品 ， 置于 三角 瓶中 ， 向 其 中 加 入 用 正丁醇饱和 的<br>的 溶液 ； 浸泡 后 ， 转入蒸馆烧瓶 中 ， 对其进行水 蒸气 蒸馆 ， 待蒸 出<br>混合液 ， 即 停 止水 蒸 气 蒸馆 ； 把蒸 馈得 到 的 混合 液置于 波长 为 紫 外灯 下 照射<br>使亚销胺分解 为 亚销酸根和胺类 物质； 将经过紫外灯 照射的 混合液 以<br>的速度通过离子交 换树脂， 待 交换完成后 ， 用 的 溶液进行洗 脱 ， 洗脱两 次 ，<br>第二章 材料与 方法<br>洗 脱 液 分 别 收 集 于 容 量 瓶 中 ； 向 小 容 量 瓶 中 分 别 加 入 氯 化 铵 缓 冲 液<br>、 的 乙酸 、 显色剂对氨基苯磺酸溶液 和 盐酸萘 乙 二胺 （<br>各 ， 定 容 ， 混匀 ， 静置于暗 处 后于 波长 处测其 吸光度 ， 根据<br>吸光度 和标准 曲 线求得亚硝 酸根 的 含量， 再根据亚销酸根 的量进而推算 出 样 品 中 的 亚<br>摘胺含 量 。<br>计算公式 ：<br>式 中 ： —样 品 中 亚销胺的 含量 （ 以 ， 二 乙基 亚稍胺计<br>—所测样 品 的质量，<br>样 品 中 亚摘酸钠 的含量，<br>—亚確酸钠与 ， 二 乙 基亚确胺之 间 的转换系数<br>允许误差 ： 相 对差值 。<br>维生素 的测 定<br>抗坏血酸标准溶液 的配制准确称取 纯抗坏血 酸加人 到 草酸<br>溶液 中 。 此抗坏血酸标准溶液 的浓度为 。<br>抗坏 血酸标准使用 液 的配制 ： 力 卩 活性炭于 标准溶液中 ， 摇动 ，<br>过滤 。 取 滤液加人到 容量瓶 中 ， 力口 硫脲 ， 用 草酸溶 液稀释 至刻度 。<br>抗坏血 酸浓度 为 。<br>标准 曲 线 的 绘制 ： 取 ， ， ， ， ， ， 稀释液 ， 分别 加入 到 个<br>容量瓶中 ， 用 硫脲 溶液稀 释至刻度 ， 使稀释液中 抗坏血 酸的 浓度分别 为 ， ，<br>， ， ， 及 ， 在紫外可见分光光度 计上于波长 处测其 吸 光度 ， 绘制<br>标准 曲 线 。 全 部实验 过程应避光 。<br>样品 的 处理 及测 定 ： 称取 泡菜样 品 和 草酸溶液 ， 倒入 打碎<br>机 中 打 成勾 衆 ， 量取 勻 衆 含 抗坏血酸 倒入 容量瓶 中 ， 用<br>草酸溶液稀释至刻度 ， 混匀 。 将上述滤液过滤 ， 滤液备用 。 不 易 过滤 的样 品可用 离心<br>降低酸萝 卜 中 亚硝酸盐含量 的方法研究<br>机沉淀后 ， 倾 出 上清液 ， 过滤， 备用 。<br>氧化处理 ： 取 上述滤液， 加 活性炭 ， 振摇 ， 过滤 ， 弃去 最初数毫<br>升滤液 。 取 而此氧化提取液， 加 硫脲溶液 混勻 。<br>呈色 反应 ： 于三个试管 中 各加 人 稀释液 。 一个试管作为 空 白 ， 在其余试管 中<br>加 入 ， 二销基 苯肼溶液 ， 将所有试管放入 ° 土 ° 恒温箱或水浴 中 ， 保<br>温 。 后 取 出 ， 除 空 白 管 外 ， 将所有试管放入冰 水 中 。 空 白 管取 出 后 使其 冷到 室温 ，<br>然后 加 入 ， 二 稍基苯肼溶液 ， 在室温中 放置 — 后放入冰水 内 。<br>其余步骤 同样 品 。<br>硫酸处理 当 试管放入冰水后 ， 向 每一试管 中 加 入 硫酸 ， 滴加 时 间<br>至少 需要 边加边摇动 试管 。 将试管 自 冰水 中 取 出 ， 在室温放置 后 比色 。<br>用 比 色杯 ， 以空 白 液调 零点 ， 于 波长 处测其 吸光度 。 根据 吸光度和标准 曲 线<br>计算出 样 品 中 的抗坏血酸含 量。 同 时做试剂空 白 。<br>。<br>〉<br>。<br>■ ！ — — — — — ；<br>抗 坏 血酸 （<br>图 抗坏 血酸溶液 在 波长下 的 标准 曲 线<br>第二 章 材料与 方法<br>式 中 ： —样品 中 抗坏血 酸含 量 ，<br>测定样液 中 抗坏 血酸浓度 ，<br>—试样用 草 酸溶液定 溶 的 体积 ，<br>—样 品氧化 处理过 程中 的稀释倍数，<br>样 品质量 ，<br>样 品处理液总 体积 ，<br>结果 的允许差 ： 统一实验室平行 或重复测 定 相 对偏差绝对值 。<br>微生物指标的测 定<br>在无 菌条件下 ， 剪碎 泡菜样品 ， 取剪碎 样 品 ， 以 倍稀释法对其依次进行<br>稀释 。 选取 个适宜的连续浓度 的菌悬 液， 倾倒平板 。<br>乳酸菌数 ： 无菌操 作 ， 分别 用 移 液枪吸取 个适宜 的连续浓度 的菌悬液 ，<br>分别 注入经过灭菌 的培养皿 中 ； 用 冷却 至 的 固 体培养基倾 倒平 板 ， 待其 凝<br>固 后 置于 条件下培养 后 ， 计数 ；<br>肠道 菌数 ： 在无菌条件下 ， 用 移液枪吸取 适 宜浓度 的菌悬 液 ， 用 °<br>的紫红胆盐葡 萄搪 琼脂倾倒双层平板 ， 每个菌悬液浓度做 个平行。 ° 条件下培养<br>计数。<br>芽孢菌总 数 ： 将样 品 悬浮液置于 水浴 中 加热 ， 取出 迅速冷却 ； 在无<br>菌条件下用 移液枪 吸 取 适宜浓 度 的 菌悬液 ， 用 的 营养琼脂倾倒平板 ， 每个<br>菌悬液浓度做 个平行 。 于 ° 条件下培养 ， 计数 。<br>真菌总 数 ： 在无菌条件下用 移液枪 吸取 适 宜 浓度 的 菌悬液 ， 用 冷<br>的孟加 拉红 琼脂倾 倒 平板 ， 每个 菌悬液浓度做 个平行 。 在 ° 条件下培养 ， 选取<br>菌落 数在 的平板进行计数 。<br>数据处理方 法<br>釆用 数 理统计分析方法， 检验 ， 单 向 方差分析 。</p>
 <p>第 三章 结 果 与讨论<br>第三章 结果 与 讨论<br>食 盐浓度对亚硝酸 盐及相 关指标 的影 响<br>亚销酸盐 的变 化<br>亚硝酸盐是一种有害物质 ， 摄入过量 的亚摘酸盐会造成亚确酸盐 中 毒 ， 亚硝酸 盐<br>还是强致癌物亚确胺 的前体物质 。 脆制蔬菜 中 的亚確酸盐含量超标 的 问 题是倍受广大<br>消 费者关注 的 问 题， 一直 困 扰着蔬菜腌制 厂家 。 早在 年 就指 出 蔬菜中 的稍<br>酸盐可被细 菌还原 成亚销酸 盐 喂 养动 物后使动物 的血红蛋 白 变成高铁血红蛋 白 而 中<br>毒 。 同 时 由 于微生物和酶对蔬菜 、 肉 类等食物 中 蛋 白 质 、 多肽和氨基酸 的 降 解作用 ，<br>致使这 些食物 中 存在一定 量 的胺类物质如 二级胺和 三级胺， 这些胺类物质与 亚销酸盐<br>在一定 条件下合成 亚硝基化合物 简称亚摘胺。 年 将含有 的 甲 基亚<br>稍胺的 饲料 喂养大 鼠 一年 几乎全部发生肝癌， 揭示 了 亚销胺类物质 的致癌性 。 据有 关<br>报道通 常绿色有根 的 蔬菜 中 硝酸盐含量较高 在消 化过程 中 转化成亚確酸盐 ， 与 现代<br>脆 肉制 品 相 比 它使人致癌 的 可能性更大 。 还有研究报道人们 食用 的亚销酸盐有<br>是来源 于蔬菜 我 国 食 品 卫 生法规定 了 腌制品 中 亚确酸盐含量 〈 。 也规 定<br>亚销酸盐的 值为 。<br>泡菜主要 是依靠 一定浓度 的 食盐抑制有害微生物 的 生长繁 殖 ， 而让乳酸菌 生长和<br>进行乳酸发酵 。 因 此 食盐浓度对泡菜发酵过程 中 有害 物质 的形成有着显著 的影 响 。<br>从 图 中 可 以 看 出 ， 泡菜 中 亚销酸盐含量在发酵初期均 处于上升趋势 ， 在第<br>的 时候会达到 一个最高值， 即 出 现 “ 亚 摘 峰” 。 之后幵始逐渐下降 ， 在 发酵 时 间 达到<br>左右 的 时候下降 到一个相 对 比较稳定 的数值， 达到 平 稳状态 。 对 比不同 食盐浓度 的<br>泡菜 中 亚销 酸盐含量 ， 食盐浓度 为 的泡菜 中 亚确酸盐含量总 体上是三种样 品 中 最 高<br>的 ； 食盐浓度为 的泡菜 中 亚確酸盐含量变化最快 ， 它的 最高值是三 种样品 中 最高 的 ，<br>当 亚確酸盐 降到 最低值时 ， 也是三种样 品 中 最低 的 ； 而食盐浓度 为 的 泡菜 中 亚硝 酸<br>盐含量变化不大 ， 一直处于较低 的 数值 。<br>降低酸萝 卜 中 亚稍 酸 盐含 量的 方法研究<br>「 一》— 食盐浓度 ■一 食 盐浓度 食 盐浓度<br>时 间 （<br>图 三种 食盐浓度 下亚 销酸盐含 量 的 变 化<br>对于上述变化 ， 可分析 为 发酵初期 ， 泡菜 中 的微生物生长 很快 ， 微生物将蔬菜 中<br>的石肖 酸盐氧化成亚销酸盐 ， 如 此 同 时 ， 蔬菜中 的 酷类物质和 维 生素 等 物质也会将亚<br>石肖 酸盐还 原 ， 但总 体来说 ， 生成 的 亚硝 酸 盐大于 被还 原 的 亚摘 酸盐， 因 此 ， 随着 发酵<br>时 间 的进行 ， 亚确酸盐的 含量会逐步上升 。 随着微生物代谢活动 的 持续 ， 氧 消耗殆 尽 ，<br>泡菜坛 中 的环境不 利 于 除乳酸菌 以 外的 其他微 生物 的 生长 。 与 此 同 时 ， 蔬菜 中 的 確酸<br>盐含量 由 于被氧化而减 少 ， 因 此 ， 亚销酸盐 的 含量会逐渐下 降并趋于一个相 对稳定 的<br>数值 。<br>食 盐浓度对泡菜 中 的 亚摘 酸盐 含量产生显著影响 。 根据所测 得 的数据 可 以 发现，<br>的食 盐浓 度所制 作的 泡菜 ， 经过 发酵后 ， 袍菜 中 的 亚稍 酸盐含量相对较 高 ， 低浓<br>度 的食 盐溶液可 能对 微生物生长 的抑制作用 较小 。 的浓度制作 的泡样样 品 的 峰值最<br>小 ， 样 品 中 的亚销酸盐含量也较低 ， 且变化平缓， 说 明 较高 的食盐浓度能 减少亚销酸<br>盐 的 生成 ， 但它 同 时也抑制 了 乳 酸菌的 生长 ， 导 致亚销酸盐 的 降解速度较慢 。 经过对<br>泡菜 品 尝 比 较， 认为 食盐浓度为 的泡菜 比 较适合食用 ， 从安全角 度讲 ， 要在发酵<br>时 间 达到 以 后 食用 较适宜 。<br>第 三章 结果与 讨论<br>泡菜中 的 亚销酸 盐是 由 蔬菜 原料表面 附着 的 有害 杂菌 主要 是肠杆菌科 的某些细<br>菌 在销 酸盐 还原酶 的作用 下还 原稍酸盐产生的 。 泡菜发酵初期 ， 环境 中 丰 富 的营养<br>物质还原 糖和 适宜 的 值为 有 害杂 菌的繁 殖提供 了 条件 ， 使其能够 迅速 繁殖 ， 导致 亚<br>确酸盐含量持续增 加 ； 发酵 中 期乳酸菌启 动发酵 ， 环境 中 的 值 开始下 降 ， 有 害杂菌<br>的生长受到 抑制， 并且乳 酸菌对亚销酸盐亦有很强 的 降解能力 ， 致使亚销酸盐 的含 量<br>开始逐渐降低 。<br>值 的 变化<br>从图 中 可看到 ， 三种泡菜样 品 的 值变化均呈不断下 降趋势 ， 在最初 内 ，<br>值变化平缓； 在第 ， 值 由 迅速下 降到 ， 食盐浓度越低， 下降越快，<br>盐度为 的 泡菜 值 比 盐度 下降速度快， 而 的又 比 的下 降速度快， 这是因 为<br>食盐溶 液具有较高 的渗透压 ， 能抑制一些有害微生物 的活动 ， 而且乳酸菌在此状态下也<br>会受到 一定 程度 的抑制 ， 盐浓度越高这种 抑制作用 越大 ， 又因 泡菜产 品 中 影响 值的<br>微生物主要 是 乳酸菌， 从而导 致食盐 浓度较高的泡菜乳酸菌 的代谢 能力 不旺 盛， 发酵速<br>度较慢 ； 然后 逐渐趋于平缓； 至 时 ， 和 二种样品 的 值均在 以下 。<br>食 盐浓度 食盐浓度 食盐浓度<br>量 ：：：：<br>！<br>时 间<br>图 三种食 盐 浓度 下 值变化 的 比 较<br>与 值变化相 对应 的是发酵过程三种 样 品 的 总酸含量不 断增加 。 腌制初 期 ， 由 于<br>启 动 乳酸发酵的 乳酸菌 为异 型乳酸菌 ， 其代谢产物 中 乳酸含 量相对较 少 。 随着 发酵 的<br>降低酸 萝 卜 中 亚硝 酸盐含量 的方法研 究<br>进行 ， 总 酸增加 的速度较缓慢 ， 随着 同 型乳酸菌逐渐代替异型乳酸菌， 总 酸增加 的速<br>度变快 ， 值下降 加快 。 至发酵后 期 ， 总酸 含量变化趋于平缓 。 因 此 为 最适宜发<br>酵的 食盐浓度 。<br>是摘酸盐还原 酶酶活性的 启动 点 ， 食用 泡菜 时应该避免 。 及 以 下 能够<br>抑制銷酸盐还原 酶的 活性 ， 抑制 了 亚确酸盐的 生成 ， 降低 了 泡菜 中 的亚摘酸盐含量 。<br>此外 ， 及 以下 能 够加速亚摘酸 盐的 降 解， 从 而进一步 降低泡菜 中 的 亚確 酸盐含<br>量 。 在 乳酸 乳酸钠 理想缓冲 体系 中 ， 缓冲溶液 的 值越低 ， 亚稍酸盐 降解速率<br>越大 。 低 值 ， 能够加 速亚確酸盐 的 降解 ， 保温 后 的 降解率<br>分别 为 、 和 ° 。 有 研究证 明 ， 以 大 白 菜 、 萝 卜 、 黄 瓜三种原 料 ， 釆<br>用 自 然发酵、 接种发酵和加 酸发酵三种 发酵 方式 ， 发现和 自 然发酵相 比 ， 接种 发酵 和<br>加酸 发酵 调 节 齒汁 值到 均能 在 降低泡菜 原 料 中 硝 酸 盐含量的 同 时 ， 使发酵 过<br>程 中 亚销酸 盐 的含量 处于较 低水平 ， 达到 国 家绿色食 品 要求 。<br>还原 糖 的 变 化<br>— 食 盐法虔—— 一 食 盐浓虔 二 — 食—盐浓度<br>§<br>时 间<br>图 三种食 盐浓 度下 还原 糖含量 的 变化<br>从图 可 以看 出 ， 发酵过程中 三种样 品 的还 原糖含量均不 断下 降 ， 的食盐浓<br>度样 品 的还 原糖 含量一直处于 高位 ， 表 明 的食 盐浓度抑制微 生物生长 ， 减少 了 其对<br>第 三 章 结 果与 讨论<br>营养物质 的 消 耗 ； 发酵后 期 的 食盐浓度样 品 的 还原 糖含量低于 食盐浓度 的样 品 ，<br>这说 明 采用 的食盐浓度时 微生物在前期代谢活 动 较旺 盛 ， 较多 的消 耗 了 环 境 中 的营<br>养物质， 导致其在发酵前期还原 糖含量下 降较快 ， 而后 期 乳酸菌 的代谢活动 相 对较弱 ，<br>消 耗 的营 养物质较少 。<br>亚销胺的变 化<br>亚销胺具 有强烈 的致癌性 ， 己知 可使 多种动 物、 多 种器官 组织产生肿瘤 ； 少<br>胺 结合 生成亚确胺 ， 而生物胺在发酵性蔬菜 中 亦普遍存在 。<br>通 过检验 发酵 三种样 品 中 挥发性亚确胺 的含量发现 ， 三种样 品 中 挥发性亚硝胺<br>的含 量随食 盐浓度 的增加而减小 ， 且三种 食盐浓度下三种样 品 的挥 发性亚稍胺含量存<br>在显著差异， 这说 明 食盐对泡菜发酵过程 中 微生物 的 销酸盐还原 酶和 生物胺合成酶 的<br>活性有显著的 影响 ， 高食盐浓度 能够抑制其活性 ， 减少亚確胺 的生成 。 结 果 见表 。 。<br>表 发酵 三种泡菜 样品 的 挥发 性亚销胺含 量<br>食盐浓度 食盐浓度 食盐浓度 食盐浓度<br>挥 发性 亚碑胺 含量<br>± ± ±<br>微生物学 指标 的变 化<br>新鲜蔬菜 的表面 附着有大量 的 附 生微 生物 ， 这些 微生物 包括霉菌 、 酵母 菌、 乳酸<br>菌 、 肠杆菌科细 菌及 假单胞菌属 细 菌等 “ 。 蔬菜 原料 即 使经过 反 复清洗 ， 附 生微 生物<br>也不 能被彻底清除 。 泡菜 中 的乳 酸和乳酸菌对人体健康有益， 乳酸菌在乳酸发酵 的冷<br>加工方 式对蔬菜营 养成分 ， 色香味 的保持极为 有利， 产 品 既有 良 好 的感官 品 质 ， 又节<br>约能源 ， 同 时在发酵过程 中 ， 乳酸菌产生大量 的乳酸 ， 使环境 降低 ， 在 的作用 下 ，<br>有利 于购 还 原成 ， 从而降低 亚销酸 盐的残 留 量 。<br>降 低酸萝 卜 中 亚確酸盐含 量的 方法研 究<br>有害微生物 如肠杆菌科细 菌、 真菌等 的大量繁 殖对产 品 质量是非常有害 的 ， 它们<br>的代谢产物会 严重影响 泡菜终产品 的 风味 ， 破坏产 品 的 感观 品 质， 更重要 的 是它们 能<br>还原 確酸 盐为 亚硝 酸盐 ， 并且能 使氨基酸脱幾产 生生物胺 ， 使泡菜 中 间产 品 和 终产 品<br>积 累 一定量 的亚销酸盐和生物胺 ， 亚销酸盐和 生物胺在泡菜发酵的酸性环境 中 极易 生<br>成 强致癌 性 的亚确基化合物 ； 有些微生物在代谢过程 中 甚至还产生毒素 如肠 毒素 、<br>真菌 毒素等 ， 严重影 响产 品 的安全性 ， 因 此研究在 泡菜发酵过程中 的微生物 学指标<br>对降 低亚销酸盐含量是非常有意义 的 。<br>乳酸菌 见 图 是泡菜发酵过程 中 的优势菌群 。 从 起至发酵 结束 ， 三种泡 菜<br>样 品 的乳酸菌数都在 样 品 ， 三者之 间 差异不显著 表 明 一 定浓 度范 围 内 的<br>食盐对乳酸菌数影 响 不大 。<br>肠道菌 见图 是既 不耐酸也不耐盐 的革兰 氏 阴 性菌。 一般用 来制作 泡菜的 蔬<br>菜原 料表面 都附着有数量不等 的肠杆菌科细 菌 ， 即使 反复清洗 也未能彻底 清除 。 发<br>酵初期肠道菌大量繁殖 ， 至 时其数量开始减 少 ， 至 时 ， 三种 样品 中 肠 道菌数量均<br>小于 。 发酵过程 中 三种样 品 的肠道菌数 关系 为 〉 ， 表 明 采用 低食盐浓<br>度有利 于抑制肠道菌 的生长 。 这是 因 为低食盐浓度 能使乳酸菌迅速 繁殖 并成为 优势<br>菌 ， 抑制肠道菌 的 生长 ； 高食盐浓度对肠道菌虽有抑制作用 ， 但同 时 它也削 弱 了 乳酸<br>发酵 ， 导 致肠道菌数量相 对偏高 。<br>三种样 品 的真菌数 见 图 在 发酵初期均有不 同 程度的 增加 ， 至 时趋于平稳 ，<br>时 三种样 品 的真菌数均 小 于 。 与肠 道菌数变化相 似 ， 三种样 品 中 真 菌数 的<br>关系为 〈 〈 ， 且三者之 间 存在显 著差异 ， 表 明 食盐浓度对真菌 的生长有较显著 影<br>响 。 较 高 的 食盐浓度 能较大程度 的 降低环境 中 氧气 的 含量 ， 产生较高 的渗透压 ， 而且<br>高浓度 的 还 能破坏 微生物 的酶系 统， 影 响 微生物 的代谢活动 “ ， 这些是造成高浓度<br>食盐 中 真菌数量 较少 的原 因 。<br>芽孢 菌数 见 图 在发酵初期不断增 加 然后 其数量逐渐减少 。 食 盐水腌制 的<br>样 品 的 芽孢菌数量始终低于另 外两种样 品 的芽孢菌数 ， 且存在显著性差异 ， 说 明 采用<br>低浓度食 盐时 芽孢菌较大程度 的受到抑制 。 这 可能是 由 于低食 盐浓度 能较迅速 的 降 低<br>环 境 值， 而 值迅速 降低 不利 于芽孢菌 的 生长 。 和 两种浓度的 食盐水腌制 的泡<br>菜样 品 中 芽孢菌数之 间 差异 不显著 ， 表 明 一定浓度范 围 内 的食 盐水对 芽孢菌生长 的抑<br>第三章 结果与 讨 论<br>制作 用 不 明 显 。<br>对发酵结 束后 的三种产 品 进行 的致病 菌 的检测 结果表 明 ， 三种 泡菜产 品 中 均未检<br>出 沙 门 氏 菌 、 金黄色葡萄球 菌和 腊样芽孢 杆菌 。 综合 肠道菌 、 真菌及芽孢菌 的 消 长规<br>律 ， 发酵结 束 时 ， 肠道菌数 小于 真菌数小 于 ， 芽孢菌数在<br>以 下 ， 它们 均在安 全 限量 以 内 ， 这些微生物学 指标说 明 三种 泡菜产 品 都具有较好 的微<br>生物学 安全性 。<br>■ — 食盐浓度<br>食盐浓度<br>° 盐浓度<br>饰<br>▼ 乙 丨<br>时 间 （<br>图 三 种食盐浓 度下 乳酸菌 的 变 化<br>八<br>■ — 食盐浓度<br>讓<br>、 「<br>时间 （<br>图 三种食盐浓 度下 肠道 菌 的 变化<br>降低酸萝 卜 中 亚销酸盐含量 的方法研 究<br>食盐浓度<br>地 食盐浓度<br>合 ° 盐浓度<br>时 间 （<br>三种 食盐浓度 下真菌 的 变 化<br>”<br>□ —— 食 盐浓度<br>一 食盐浓度<br>食盐浓度<br>、 一 ：<br>时 间 （<br>图 三种食盐 浓度 下 芽抱 菌 的 变 化<br>香辛 料对亚销 酸盐 的 影 响<br>亚销酸 盐 的 变 化<br>大蒜、 生姜 、 辣椒等 因其特有 的香味 ， 是制作泡菜 必 不可少 的 香辛料 ， 它们 不但<br>第三章 结果 与 讨论<br>可 以 改善泡菜 产品 的 风味， 还会对泡菜发酵过程 中 复杂 的化 学反 应进程产 生一定 的 影<br>响 。 据 文献报道 ， 大蒜、 辣椒、 生姜均 有一定 的抑菌的 作用 。 因 此香辛料 因 其种类<br>的不 同 及添加量 的 多 少会对泡菜发酵过程 中 各种微生物 的代谢作用 产生不 同 程度 的<br>影 响 ， 从而影 响亚 肖 酸盐及其它有害化学物质的含量 。 本试验通过三 因 子 三水平正 交<br>试验设计研究大蒜、 生姜 、 辣椒三种香辛料对亚硝酸盐 的影 响 。<br>表 因 子水 平表<br>二 三<br>大蒜<br>辣椒<br>生 姜<br>表 正 交 试验设计<br>试验号 因 子<br>大蒜 辣椒 生姜<br>降 低酸萝 卜 中 亚確酸盐含量 的方法研 究<br>— 试验<br>试验<br>试验<br>‘ 试验<br>试验<br>一试验<br>试验<br>丨 丨<br>‘ 丄 ‘ ‘ ■ ‘<br>时 间 （<br>图 正 交 试验设计下亚销酸盐 含量 的 变 化<br>表 正 交试验设 计下 发酵第 试验结 果<br>试验号 因 子 试验 结果<br>大蒜 辣椒 生姜 ， ， 、<br>第三章 结 果与讨 论<br>表 正 交 试验设计下发 酵第 影 响亚销酸盐各 因 素 显著 性分 析<br>因 素<br>大蒜 辣椒 生姜<br>主次因 素 大蒜 生 姜 辣椒<br>由 图 可 以 看 出 ， 向 泡菜 中 添加 生姜 、 大蒜和辣 椒均有阻断亚確酸 盐产生 的作<br>用 ， 且 效果显著 。 发酵初期 ， 几组样品 亚稍酸盐均呈 上升趋势 ， 在第 到达峰值 ， 添<br>加 了 生姜 、 大蒜和辣椒 的几组样 品 亚确 酸盐峰值 明 显低于普通泡菜样 品 ， 尤 其是试验<br>中 亚销 酸盐峰值仅为 普通泡 菜样 品 试验 的 到 达峰值后 ， 普通泡菜样 品 亚 确<br>酸盐含量呈现 出 微弱 的 降低趋势 ， 而添加 了 生姜 、 大蒜和 辣椒 的几组样 品 亚 稍酸盐含<br>量仍逐渐 降低 。<br>在表 显 示的 结 果 中 ， 大蒜 是影响 亚硝酸盐含 量 的主要 因素 ， 大蒜 添加 量 的 多<br>少 能 显著影响泡菜发酵过程中 各种 微生物数量， 从而 改变 了 微 生物 区 系 。 生姜为 影 响<br>样 品 中 亚確 酸盐含量 的第 二 主要 因 素 ， 辣椒为 次要 因 素， 表 明 辣椒在 减少样 品 亚确酸<br>盐含 量方面能力 较弱 。<br>利 用 极 差 分析方 法对发 酵第 时 正交试验 的 因 素及水平对样 品 中 的 亚確酸 盐含<br>量 表 的影 响规律进行分析， 结果 显示在本实验所采用 的 种 香辛 料中 。 大蒜是影<br>响 亚硝酸盐含量最主要 因 素 ， 生姜为影 响样 品 中 亚销 酸盐含量 第二主要 因 素 ， 辣椒 为<br>次 要 因 素 。 大蒜 、 生姜对 亚硝酸盐含量 的 影 响 与浓度有 关， 浓度越 高影响越大， 降低<br>摘酸盐含量 的 作用 越 明 显 ， 大蒜 汁 以 和 浓度 作用 均 较明 显 ， 生姜汁 以 浓度作用<br>较 明 显 ， 浓度作用 均微弱 。<br>降 低酸萝 卜 中 亚摘酸 盐含量 的方法研究<br>维生素 含 量 的 变 化<br>维生素 是人体 内 不可缺少 的维生素之一 ， 它还 能 防止 胃 中 亚摘胺 的 形成 ， 抑制<br>亚 确胺 的致癌突变 作用 。 但泡菜在制作 初 期 由 于切分 整理 ， 维 生素 在氧气 的作用 下<br>迅速氧 化 ， 失去 部分应有 的作 用 。 大蒜 、 生姜都具有较 强的 抗氧化作用 ， 它们在 降低<br>泡菜发酵过程 中 的亚确酸盐含 量的 同 时 ， 也对 维生素 产生 了 一定 影 响 。<br>由 图 可见， 发酵初期， 维生素 含 量不断下 降 ； 从第 起始 ， 随发酵 时 间<br>的延长 ， 维生素 含量 的稳定 增加 。 在此过程 中 ， 添加 了 大蒜汁、 生姜汁 的两个试验<br>组维生素 含量始终高于普通组 ， 下 降趋势亦更 加平 缓， 且 维生素 含量与 亚销酸盐<br>的 积累 呈负 相关 性 。<br>— — 普通 泡菜 ■一 加 生姜 汁 加 蒜 汁<br>！<br>时 间<br>图 添 加 大蒜、 生姜对维生 素 含 量 的影 响 变 化<br>人工接种泡菜 中 亚销酸 盐 的 变 化<br>亚销 酸盐含量 的 影 响<br>本试验通过在泡菜 中 人工 接种不 同 乳酸菌菌株进行发酵与 传统的 自 然 发酵泡菜<br>进行 比较 ， 分析人工接种对酸萝 卜 泡 菜 中 的亚销酸盐含量 。<br>第三章 结果与 讨论<br>八 ：<br>丨 —<br>— “<br>时 间 （<br>图 接种不 同 乳酸菌泡 菜 中 亚销酸盐含量 的 变 化 趋势<br>不 同 处理 方式下 ， 亚硝酸盐含 量变化分析 结 果见图 。 由 图 可 知 ， 在泡菜<br>发酵过程 中 ， 亚確 酸盐含量呈规律变化 ， 到 第 天亚硝酸盐均 出 现一个 明 显 的峰 值。<br>对照 组 发酵 出 现 的 亚稍峰 明 显 高于人工接种 乳酸菌 的亚硝 峰， 峰值 为 。 随<br>着环境 的 降低和 总 酸度 的增加 ， 亚摘酸盐迅速 降低 ， 在第 天均低 于 。 人工<br>接种 乳酸菌的 亚銷峰 明 显低 于 自 然 发酵 的 ， 表 明 人工接种发酵有利 于抑制亚销酸盐 的<br>生成 ， 减少 亚確酸盐含量积累 。 这是 由 于人工接 种的 泡菜坛 中 的乳酸菌一 幵始就远远<br>高于 自 然发酵 中 的乳酸菌， 能立即 进行乳酸发酵 ， 产生大量乳酸， 从而有效地抑制泡<br>菜坛 中 的不耐酸 的其它杂菌的 活动 。 同 时 ， 乳酸 菌能够使 厂 的还原 过程相对加快 ，<br>故使亚 销 峰 值 降低「 。 在 同 一时 间 ， 人工接种 的 乳酸菌 不 同 ， 泡菜 中 亚确 酸盐残 留 量<br>也 不 同 。 其 中 ， 人 工 接 种 短 乳 杆 菌 、 、 干 酪 乳 杆 菌 干 酪 亚 种<br>、 棒状乳 杆菌 棒状亚 种 、 和布 氏 乳 杆菌<br>的泡菜 中 亚销峰 值相对较 高； 而人工 接种植物乳杆 菌<br>纯菌种 的 泡菜 中 亚確酸盐含量最小 ， 峰值约 为 ， 并且在整个测定 期 间都保 持<br>较低含量 。 为 了 进一步分析其原 因 ， 对人工接种 乳酸菌的亚確 酸盐 降解量进行差 异显<br>著性分 析 ， 结 果见表 。<br>降 低酸萝 卜 中 亚硝酸盐 含量 的方法 研究<br>表 菌 株 间 对亚硝酸 盐降解能 力 的差 异显著性 比较<br>乳酸菌 平均值 差异显著 性<br>— — 一<br>上述分析表 明 （ 表 ， 乳酸菌对亚硝酸盐有 降解 能力 ， 菌株 间 对亚硝酸盐 的<br>降解能 力 有极显著 的差异 。<br>值分析<br>在 发酵过程 中 ， 乳酸菌产 生大量 的乳酸 ， 使环境 降低 ， 在 的 作用 下 ， 有利 于<br>还 原 成 ， 从而 降低亚硝 酸盐 的残 留量 。 为 了 分 析整个过程 中 ， 乳酸菌 对亚硝酸<br>盐的 降解能力 与 发酵 过程中 的 值 的关系 。 在测 定 亚硝酸盐含量 的 同 时 ， 对 泡菜汁 中<br>的 值进行测定 ， 结 果见 图 。<br>第三章 结果与讨 论<br>— 对照 组 —<br>“<br>—<br>时 间<br>图 接种 不 同 乳酸 菌泡 菜 中 值变 化趋势 图<br>从 图 中 可 以 看 出 人工接种 植物乳杆菌 的 变化趋势最 明 显 ，<br>降低 的最快 ， 值最低 ， 最终 可达到 ， 这与 植物 乳杆菌产 生大 量的乳 酸使环 境<br>中 酸度升高 ， 急 速降低有密切 关系 ； 而其它人工接种乳酸菌的 泡菜 的 变化相 对较<br>缓慢 ， 值相对较大 。 就对照而言 ， 整个 发酵 过程中 变化趋势最 为缓慢 ， 值降低<br>趋势 的 也最 为平缓 。<br>综合对亚硝酸盐含量和 值变化分析 ， 人工接种乳酸菌在泡菜中 ， 可 降低泡菜 中<br>亚硝酸 盐残 留 量， 提 前亚硝 峰值出 现 的 时 间 ， 其 中 以 接种植物乳杆菌 效果 最佳， 整个<br>发酵过程中 亚硝酸盐 都维持在极低 的水平 。 随 着泡菜腌制 时间 的延 长 ， 泡菜 的 值降<br>低， 促进 了 亚硝酸盐 的降解 ， 使泡菜中 亚硝酸 盐 的含 量降低 。 由 于人工接种乳酸菌 的<br>含量远 高于 自 然发酵泡菜 中 的乳酸菌含量 ， 发酵乳酸生成快 ， 使环境 中 的 值迅速 降<br>低 ， 抑制或杀 死其 中 一些不耐酸 的病 原 菌及有害菌生长 ’ 。 同 时 ， 硝 酸还原 酶 的<br>适宜 值为 ， 随着环境酸度增加 ， 降低 ， 还原 酶活性降低 ， 甚至无活性 ，<br>促使亚硝酸盐降解 ， 从而减 少亚硝酸盐与 二 级胺 反应生成致癌物质—亚硝胺 。 因<br>此 ， 采用 人工接种发酵泡菜 可抑制病原 菌及杂菌 的繁殖 ， 从而抑制 亚硝 酸盐形成 ， 使<br>降 低酸萝 卜 中亚硝 酸盐含量 的方法研 究<br>其亚硝 峰在泡菜可食用 之前 出现 ， 大大提 高 了 泡菜 的安全性和 货 架期 。<br>在泡菜发酵过程中 ， 影 响 泡菜 品 质 的 因 素主要是人工接种 乳酸菌 。 人工接种 发酵<br>泡菜可 以 加快发酵速度 ， 缩短发酵时 间 ， 乳 酸的 大量产生抑制 了 杂菌感染， 使泡菜成<br>品 率 提高 。 并 且 改 善 了 泡 菜 的 风 味 ， 提 高泡 菜 品 质 。 尤 其 人 工 接种 植物 乳 杆 菌<br>， 在泡 菜初期 快速 产生大量乳酸 ， 从而缩短泡 菜发酵时 间 ， 并 且 明<br>显 降低亚硝酸盐 的残 留 量 ， 有效地抑 制其它杂菌 的 活动 。 而且 泡菜的 风味纯 正， 色泽<br>好 ， 口 感舒适， 利于工业化控制 。 说明 ， 植物乳杆菌 是这 株乳酸菌<br>菌株 中 最适用 于 泡菜规模化生产 的菌 株 。<br>参 考文 献<br>参考文 献<br>林亲 录 ， 邓 放明 园 艺产 品 加 工学 北京 ： 中 国农业出 版社 ， ，<br>陈仲 翔 董 英 泡菜工业化 生产的 研究进展 江苏 食品 与 发酵<br>江汉 湖 食 品微生物学 北 京 ： 中 国农 业出 版社 ， ，<br>李幼 筠 成都泡菜正成 为 调 味品 行 业新 的 经济增 长 点 江苏 食品 与发酵<br>，<br>，<br>，<br>，<br>杨 洁彬 乳酸菌 生物学基础及应用<br>余小林 韩 国 泡菜产业现代化的 启 示 江苏食 品 与 发酵工业<br>杨万祥 家庭咸菜酱菜泡菜<br>陆步 诗， 李新社 ， 李 健 多 菌种 混合 发酵生 产 百合泡菜工 艺初探 江苏食品 与 发酵<br>孙力军 ， 孙德坤 ， 王 良 富 ， 李 吉芳 低盐苔菜泡菜生产 工 艺条件优化 江苏食品 与 发酵<br>，<br>吴 正 奇 ， 凌 秀 菊 酱 腌 菜 生 产 过 程 中 亚 硝 酸 盐 和 亚 硝 胺 的 产 生 与 预 防 中 国 调 味 品<br>，<br>吴永宁现代食品 安全科学 北京 ： 化学 工业出 版社 ， ，<br>， ，<br>，<br>，<br>降 低酸萝 卜 中 亚硝 酸盐含量 的方法研究<br>， ，<br>，<br>，<br>，<br>， ，<br>无锡 轻工业学 院 ， 天津轻工 业学 院合编 食品 微生物学 北京 ： 中 国轻工 业出 版社 ，<br>，<br>张小 红， 车 慧淑， 尹艳荣 食 品 中 亚 硝 酸盐对人体 的 危 害及防 治 地方病通报 ，<br>胡 长敏 ， 丁蕴铮等 新鲜蔬菜和 水果 中 亚硝酸盐测 定方法 研究环境化学 ， ，<br>周 彬 ， 孟宪军 ， 张 忠泽 白 菜乳酸菌混菌 发醉 的研 究 微生物学杂志 ， ，<br>王肇慈 粮油 食 品 卫生检验 第 二版 北京 ： 中 国轻 工业 出 版社 ， ， —<br>， ，<br>段 发淼， 陈恺 玲， 骆和 东 啤 酒 、 酱 油 、 香肠 中 亚硝 荃化合物含量的 调 查分析 现代预防医<br>学 ， ， ：<br>， ， ，<br>吴晓敏 ， 吴永写 总 亚稍 基化合物 的 测 定方法 国 外 医学 卫生学分 册， ，<br>李玉民 ， 陈立仁， 武威市 腌菜中 亚硝基化合 物 的测 定及 其 胃 癌 高发原 因 的 分析 分析测 试技<br>术与仪器，<br>林 昆 ， 沈文英 南方食管 癌高 、 低发区 人群总 亚 硝基化合物接触 水平 中 华预防 医学 杂志 ，<br>参 考文献<br>吴延东 啤酒 中 生物胺的 产 生与控制 淮 阴工 学 院学报 ， ，<br>凌代文 ， 东 秀珠 乳酸细 菌分 类鉴定及实验 方法 北 京 ： 中 国 轻工业 出版社 ，<br>杨 洁彬 ， 凌代文 乳酸菌 生物学 基础及 应用 北京 中 国 轻工业 出版 社，<br>东 秀珠 ， 蔡妙英 常 见 细菌 系统鉴 定手册 ， 北 京 科学 出 版社 ， ，<br>杨 春哲， 冉红颜 乳酸 菌在 泡菜生产 中 的 应用 食 品工业，<br>林亲 录， 何煜波 传统芥菜发酵制 品 中优势 乳酸菌种 的 分 离 鉴定 食品 科学 ，<br>李金红 泡菜与 乳酸菌 中 国 调味 品 ，<br>蔡信之， 黄军 红 微生 物学 第 二版 ， 北京 ： 高等 教育出 版社 ，<br>，<br>，<br>，<br>，<br>郭 晓红 ， 杨 洁彬 ， 张建军 甘蓝乳 酸发酵过程中 亚硝 酸盐 消长机制 及抑制途径的 研究 食品 科<br>学 ， ：<br>杨性 民 ， 刘青梅 ， 徐喜园 人工 接种 对泡菜 品质及亚硝 酸盐含量 的 影响 浙江大学学报<br>：<br>蒋和 体 四 川 泡菜袋装发酵研究 食品科学 ， ：<br>周 光燕 ， 张 小平 乳酸菌对泡菜发酵 过程 中 亚硝酸 盐含 量变化及 泡菜 品质 的 影 响研究 西南 农<br>业学报，<br>方样， 胡 文锋， 张辉华 乳酸菌 的 分离 、 鉴定及其生 长特性 中 国 微生态 学杂志 ， ，<br>‘<br>降 低酸萝 卜 中 亚硝酸盐含量 的方法研 究<br>，<br>，<br>杨 荣华 ， 胡小健 香辛料的 生理功 能 中 国 调味 品 ， ，<br>葛 毅强 ， 倪元颖 生姜、 大蒜、 洋 葱 种 传统香辛调味料 的 研究开发 食品 发酵工业 ， ，<br>李录久 ， 郭 熙盛， 丁 楠等 钾 氮配施对生姜产量和 品 质的 影 响 土壤肥料 ， ， （<br>李干红 大蒜 抗癌机理研究进展 中 国 调 味 品 ， ，<br>徐为 民， 周 光宏， 徐幸莲 大蒜对干发 酵香肠 中肠道菌 的 抑制作用 研究 食 品科学 ， ，<br>孙力 军 ， 张 中 ， 陆兆 新 种 香辛料对泡菜发酵过程中 乳酸 菌生长 的 影响 食 品 与 发酵工 业，<br>苏世彦 食 品微生 物检验手册 北 京 ： 中 国 轻工业 出 版社 ， ，<br>李锡香 新 鲜果蔬的 品 质及其分析 法 北京 ： 中 国 农 业出 版社 ，<br>赵书欣 接种乳酸菌腌制渍菜过程中 亚硝酸 盐变化规律的研究 中 国 畜 产与 食品 ， ，<br>：<br>陈有容 ， 杨凤琼 降低腌制 蔬菜亚 硝酸 盐含量方法 的研究 进展 上 海水产大 学学报 ， ，<br>：<br>张庆芳 ， 迟乃玉 短乳杆菌 （ 如 去处 亚硝 酸盐 的研究 微生物学通报 ，<br>：<br>唐 爱明 ， 夏廷斌 乳酸菌 降解猪血培养基中 亚硝酸 盐 的 研究 肉 类工业， ：<br>杨洁彬， 郭 兴华 ， 凌代文等 乳酸菌 生物学基础及应用 北京 ： 中 国 轻工业 出 版社 ，<br>全 文结论<br>全 文结论<br>萝 卜 在 发酵初期 ， 其亚 硝酸盐含量一直 在上升 ， 在发酵 时 间 达到第 时 ， 其<br>亚硝酸盐含量会达到 一个最高值 。 之后 ， 亚硝酸盐含量将 慢慢下降 。 从第 幵始 ， 亚<br>硝 酸盐含量 变得平缓 ， 其值远低于 限 量值 。 因 此， 食 用 酸萝 卜 应不 早于 腌制<br>后 的第 天 。<br>食盐用 量对 萝 卜 发酵过程 中 的 亚硝 酸 盐含量 及微生物变 化具 有较显 著 的 影 响<br>作 用 。 的食盐浓度制 作 的样 品 ， 在发酵后期 ， 亚硝酸 盐含 量相 对较高 ； 食盐浓度为<br>的 样 品 中 亚硝酸盐含量变化最快 ， 它 的 亚硝 峰是三种样 品 中 最 高 的 ， 在 发酵后期 ，<br>其值却 较低； 的食盐浓度 样品 的亚硝峰值最小 ， 其亚硝酸盐含量始 终处于低位 ， 且<br>变化平缓 ， 说 明 较 高的 食盐浓度 能 减少亚硝酸盐 的生成 ， 但它 同 时也抑制 了 乳酸菌的<br>生长， 导致亚硝 酸盐 的 降解速度 较慢。<br>大蒜 、 辣椒 、 生姜三种香辛料 对萝 卜 发酵 过程 中 的 亚硝酸 盐含量具有不 同程<br>度的 影响 作用 。 添加 了 生姜 、 大蒜和辣椒的几 组样 品 亚硝 酸盐峰值 明 显低于对照组 未<br>添加 香辛料） ， 且到达峰值后 ， 对照组样 品 的 亚硝 酸盐含量 呈现 出 微弱 的 降 低趋势 ，<br>而添加 了 生姜 、 大蒜和辣椒的几 组样 品 亚 硝酸盐含量仍逐渐降 低 。 大蒜为 影 响亚硝 酸<br>盐含量 的主要 因 素 ； 生姜 为 影响 样 品 中 亚 硝酸盐含量的第 二主 要 因素 ， 辣椒 为 次要 因<br>素 。 大蒜、 生姜对亚硝酸盐含量的影 响 与浓度 有关， 大蒜汁 以 和 浓度作用 均 较明<br>显， 生姜汁 以 浓度作用 较 明显 ， 浓度作用 均微弱 。<br>人工接 种乳酸菌 在酸萝 卜 中 ， 可 降低酸萝 卜 发酵过程 中 的 亚硝 峰值及亚硝<br>酸含 量 ， 其 中 以 接种 植物 乳 杆菌 效果 最佳 ， 整个发酵 过程 中 亚硝 酸盐 都维 持在 极低<br>的 水平 。</p>
 ]]></content>
-  </entry>
-  <entry>
-    <title>Hexo Matery 修改导航菜单名称教程</title>
-    <url>/2026/04/16/Hexo-Matery%E4%BF%AE%E6%94%B9%E5%AF%BC%E8%88%AA%E8%8F%9C%E5%8D%95%E5%90%8D%E7%A7%B0%E6%95%99%E7%A8%8B/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="一、导航菜单配置位置"><a href="#一、导航菜单配置位置" class="headerlink" title="一、导航菜单配置位置"></a>一、导航菜单配置位置</h2><p>文件：<code>themes/hexo-theme-matery/_config.yml</code>，顶部 <code>menu</code> 配置段。</p>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">menu:</span></span><br><span class="line">  <span class="attr">Index:</span></span><br><span class="line">    <span class="attr">url:</span> <span class="string">/</span></span><br><span class="line">    <span class="attr">icon:</span> <span class="string">fas</span> <span class="string">fa-home</span></span><br><span class="line">  <span class="attr">About:</span></span><br><span class="line">    <span class="attr">icon:</span> <span class="string">fas</span> <span class="string">fa-user-circle</span></span><br><span class="line">    <span class="attr">children:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">liuyan</span>          <span class="comment"># ← 菜单显示名称（修改此处）</span></span><br><span class="line">        <span class="attr">url:</span> <span class="string">/musics</span>           <span class="comment"># ← 页面路径（不变）</span></span><br><span class="line">        <span class="attr">icon:</span> <span class="string">fas</span> <span class="string">fa-music</span>     <span class="comment"># ← 图标（不变）</span></span><br></pre></td></tr></table></figure>
-
-<hr>
-<h2 id="二、修改方法"><a href="#二、修改方法" class="headerlink" title="二、修改方法"></a>二、修改方法</h2><h3 id="2-1-修改位置"><a href="#2-1-修改位置" class="headerlink" title="2.1 修改位置"></a>2.1 修改位置</h3><p><code>themes/hexo-theme-matery/_config.yml</code> 第 27 行：</p>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 修改前</span></span><br><span class="line"><span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Musics</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 修改后</span></span><br><span class="line"><span class="bullet">-</span> <span class="attr">name:</span> <span class="string">liuyan</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="2-2-仅改-name-字段"><a href="#2-2-仅改-name-字段" class="headerlink" title="2.2 仅改 name 字段"></a>2.2 仅改 name 字段</h3><table>
-<thead>
-<tr>
-<th>字段</th>
-<th>作用</th>
-<th>是否修改</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>name</code></td>
-<td>导航栏显示的文字</td>
-<td>改为 <code>liuyan</code></td>
-</tr>
-<tr>
-<td><code>url</code></td>
-<td>点击后跳转的路径</td>
-<td>不改，仍为 <code>/musics</code></td>
-</tr>
-<tr>
-<td><code>icon</code></td>
-<td>菜单项图标</td>
-<td>不改，仍为 <code>fas fa-music</code></td>
-</tr>
-</tbody></table>
-<p><code>name</code> 只影响导航栏显示文字，不影响页面路径和功能。</p>
-<hr>
-<h2 id="三、Matery-菜单结构说明"><a href="#三、Matery-菜单结构说明" class="headerlink" title="三、Matery 菜单结构说明"></a>三、Matery 菜单结构说明</h2><h3 id="3-1-一级菜单"><a href="#3-1-一级菜单" class="headerlink" title="3.1 一级菜单"></a>3.1 一级菜单</h3><figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">menu:</span></span><br><span class="line">  <span class="attr">Index:</span>             <span class="comment"># ← 一级菜单名</span></span><br><span class="line">    <span class="attr">url:</span> <span class="string">/</span>           <span class="comment"># ← 链接</span></span><br><span class="line">    <span class="attr">icon:</span> <span class="string">fas</span> <span class="string">fa-home</span></span><br></pre></td></tr></table></figure>
-
-<p>一级菜单直接显示在导航栏，点击跳转。</p>
-<h3 id="3-2-二级下拉菜单"><a href="#3-2-二级下拉菜单" class="headerlink" title="3.2 二级下拉菜单"></a>3.2 二级下拉菜单</h3><figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">menu:</span></span><br><span class="line">  <span class="attr">About:</span>                    <span class="comment"># ← 父菜单名（悬停展开下拉）</span></span><br><span class="line">    <span class="attr">icon:</span> <span class="string">fas</span> <span class="string">fa-user-circle</span></span><br><span class="line">    <span class="attr">children:</span>               <span class="comment"># ← 子菜单列表</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">liuyan</span>        <span class="comment">#    子项显示名</span></span><br><span class="line">        <span class="attr">url:</span> <span class="string">/musics</span>        <span class="comment">#    子项链接</span></span><br><span class="line">        <span class="attr">icon:</span> <span class="string">fas</span> <span class="string">fa-music</span>   <span class="comment">#    子项图标</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">about</span></span><br><span class="line">        <span class="attr">url:</span> <span class="string">/about</span></span><br><span class="line">        <span class="attr">icon:</span> <span class="string">fas</span> <span class="string">fa-paste</span></span><br></pre></td></tr></table></figure>
-
-<p><code>children</code> 下的每个 <code>- name:</code> 都是一个下拉菜单项。</p>
-<h3 id="3-3-字段对照表"><a href="#3-3-字段对照表" class="headerlink" title="3.3 字段对照表"></a>3.3 字段对照表</h3><table>
-<thead>
-<tr>
-<th>字段</th>
-<th>位置</th>
-<th>作用</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>menu.键名</code></td>
-<td>一级菜单</td>
-<td>导航栏直接显示的文字</td>
-</tr>
-<tr>
-<td><code>children[].name</code></td>
-<td>二级菜单</td>
-<td>下拉菜单中显示的文字</td>
-</tr>
-<tr>
-<td><code>url</code></td>
-<td>通用</td>
-<td>点击跳转的路径</td>
-</tr>
-<tr>
-<td><code>icon</code></td>
-<td>通用</td>
-<td>Font Awesome 图标类名</td>
-</tr>
-</tbody></table>
-<hr>
-<h2 id="四、其他常见修改示例"><a href="#四、其他常见修改示例" class="headerlink" title="四、其他常见修改示例"></a>四、其他常见修改示例</h2><h3 id="改菜单名称"><a href="#改菜单名称" class="headerlink" title="改菜单名称"></a>改菜单名称</h3><figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 把 &quot;about&quot; 改成 &quot;关于我&quot;</span></span><br><span class="line"><span class="bullet">-</span> <span class="attr">name:</span> <span class="string">关于我</span></span><br><span class="line">  <span class="attr">url:</span> <span class="string">/about</span></span><br><span class="line">  <span class="attr">icon:</span> <span class="string">fas</span> <span class="string">fa-paste</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="改菜单图标"><a href="#改菜单图标" class="headerlink" title="改菜单图标"></a>改菜单图标</h3><p>图标来自 <a href="https://fontawesome.com/icons">Font Awesome</a>，替换 <code>icon</code> 值即可：</p>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 把音乐图标改成评论图标</span></span><br><span class="line"><span class="bullet">-</span> <span class="attr">name:</span> <span class="string">liuyan</span></span><br><span class="line">  <span class="attr">url:</span> <span class="string">/musics</span></span><br><span class="line">  <span class="attr">icon:</span> <span class="string">fas</span> <span class="string">fa-comments</span>    <span class="comment"># 原来是 fas fa-music</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="添加新菜单项"><a href="#添加新菜单项" class="headerlink" title="添加新菜单项"></a>添加新菜单项</h3><p>在 <code>children</code> 下新增一个 <code>- name:</code> 块：</p>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">About:</span></span><br><span class="line">  <span class="attr">icon:</span> <span class="string">fas</span> <span class="string">fa-user-circle</span></span><br><span class="line">  <span class="attr">children:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">liuyan</span></span><br><span class="line">      <span class="attr">url:</span> <span class="string">/musics</span></span><br><span class="line">      <span class="attr">icon:</span> <span class="string">fas</span> <span class="string">fa-music</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">text</span>              <span class="comment"># ← 新增</span></span><br><span class="line">      <span class="attr">url:</span> <span class="string">/text</span>              <span class="comment"># ← 新增</span></span><br><span class="line">      <span class="attr">icon:</span> <span class="string">fas</span> <span class="string">fa-file-alt</span>   <span class="comment"># ← 新增</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="删除菜单项"><a href="#删除菜单项" class="headerlink" title="删除菜单项"></a>删除菜单项</h3><p>直接删除对应的 <code>- name:</code> 整块即可。</p>
-<hr>
-<h2 id="五、注意事项"><a href="#五、注意事项" class="headerlink" title="五、注意事项"></a>五、注意事项</h2><ol>
-<li><strong>name 与 url 是独立的</strong>：改 <code>name</code> 不需要改 <code>url</code>，页面路径不受影响</li>
-<li><strong>name 支持中文</strong>：可以写 <code>name: 留言</code> 或任意文字</li>
-<li><strong>修改后需重启</strong>：<code>_config.yml</code> 修改后需重新运行 <code>hexo s</code> 才能生效</li>
-<li><strong>缩进必须用空格</strong>：YAML 不允许 Tab 缩进，必须用空格，且层级对齐</li>
-</ol>
-]]></content>
-      <categories>
-        <category>技术教程</category>
-      </categories>
-      <tags>
-        <tag>Hexo</tag>
-        <tag>主题配置</tag>
-        <tag>导航菜单</tag>
-      </tags>
   </entry>
 </search>
