@@ -271,69 +271,6 @@
 ]]></content>
   </entry>
   <entry>
-    <title>Gitee 防盗链</title>
-    <url>/2019/07/22/Gitee%20%E9%98%B2%E7%9B%97%E9%93%BE/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><p> 未来楼市如村<br> 问题确认：Gitee 防盗链 (Anti-Hotlink)<br> 解决方案（推荐程度从高到低）<br>方案 1 ⭐ 用 jsDelivr CDN 代理 GitHub 仓库（最推荐）<br>如果你在 GitHub 上有同样的 fuliefu 仓库，可以免费加速且无防盗链：</p>
-<p><a href="https://cdn.jsdelivr.net/gh/huajiaojiang/fuliefu@master/image/hexomaterry/babecue.jpg">https://cdn.jsdelivr.net/gh/huajiaojiang/fuliefu@master/image/hexomaterry/babecue.jpg</a><br>方案 2 用 GitHub Raw 直链</p>
-<p><a href="https://raw.githubusercontent.com/huajiaojiang/fuliefu/master/image/hexomaterry/babecue.jpg">https://raw.githubusercontent.com/huajiaojiang/fuliefu/master/image/hexomaterry/babecue.jpg</a><br>方案 3 在博客 HTML <head> 里添加 no-referrer meta（快速绕过）<br>让浏览器不发送 Referer，Gitee 就无法识别跨站引用：</p>
-<meta name="referrer" content="no-referrer">
-⚠️ 这会影响全站所有外链请求的 Referer，可能影响统计、评论等服务。
-
-<p>方案 4 把图片放到本地 source&#x2F; 目录<br>最稳定，但会增加仓库体积。</p>
-<p>请问你希望我采用哪种方案修改 galleries.json？ 如果选方案 1 或 2，请确认你的图片是否同步在 GitHub 上；如果选方案 3，我帮你改主题的布局模板文件。</p>
-<p>galleries.json<br>让浏览器不发送 Referer，Gitee 就无法识别跨站引用<br>修改详情<br>文件： themes&#x2F;hexo-theme-matery&#x2F;layout&#x2F;_partial&#x2F;head.ejs（第66行）</p>
-<p>新增内容：</p>
-<meta name="referrer" content="no-referrer">
-工作原理
-修改前	修改后
-浏览器加载图片时携带 Referer: https://你的博客域名/	浏览器不发送任何 Referer 头
-Gitee 防盗链检测到跨站引用 → ❌ 403	Gitee 无法识别来源 → ✅ 正常返回
-下一步操作
-需要重新生成博客以使修改生效：
-
-
-<p>hexo clean &amp;&amp; hexo g &amp;&amp; hexo s<br>然后打开 <a href="http://localhost:4000/">http://localhost:4000</a> ，访问图库页面，第112行那张 babecue.jpg 以及其它 5 张 Gitee 图片应该都能正常显示了。</p>
-<p>⚠️ 副作用提醒<br>no-referrer 是全站生效的，请注意以下可能受影响的功能：</p>
-<p>功能	影响<br>第三方统计（百度统计、不蒜子等）	⚠️ 可能无法识别访问来源<br>Gitalk &#x2F; 评论系统的 OAuth 跳转	✅ 不影响（OAuth 走的是 redirect_uri）<br>友链跳转统计	⚠️ 对方网站看不到访问来自你的博客<br>SEO（搜索引擎追踪）	⚠️ 轻微影响<br>如果你希望只对图片生效而不影响其它请求，可以告诉我，我可以改成更精细的方案——只在 <img> 标签上加 referrerpolicy&#x3D;”no-referrer”。</p>
-<p>找到图库页面的模板，对 <img> 标签添加 referrerpolicy。</p>
-<p>本次做了以下3处修改</p>
-<ol>
-<li><p>撤销全局 no-referrer（head.ejs）<br>✅ 已移除，博客恢复正常 Referer 行为，统计、评论等功能不受影响。</p>
-</li>
-<li><p>修复第166行 URL（galleries.json）</p>
-</li>
-</ol>
-<ul>
-<li>“<a href="https://raw.giteeusercontent.com/huajiaojiang/fuliefu/raw/master/image/hexomaterry/yao.jpg">https://raw.giteeusercontent.com/huajiaojiang/fuliefu/raw/master/image/hexomaterry/yao.jpg</a>“</li>
-</ul>
-<ul>
-<li>“<a href="https://gitee.com/huajiaojiang/fuliefu/raw/master/image/hexomaterry/yao.jpg">https://gitee.com/huajiaojiang/fuliefu/raw/master/image/hexomaterry/yao.jpg</a>“</li>
-</ul>
-<ol start="3">
-<li>只对图库的 <img> 标签禁止 Referer（gallery.ejs 第35-37行）</li>
-</ol>
-<ul>
-<li><img src="..." alt="..."></li>
-</ul>
-<ul>
-<li><img src="..." alt="..." referrerpolicy="no-referrer">
-效果
-场景	Referer 行为
-图库页面加载图片（Gitee 等外部图床）	✅ 不发送 Referer，Gitee 返回 200
-博客其它页面、Gitalk、统计等	✅ 正常发送 Referer，功能不受影响
-生效方法</li>
-</ul>
-]]></content>
-      <categories>
-        <category>yy</category>
-      </categories>
-      <tags>
-        <tag>人</tag>
-        <tag>事物</tag>
-        <tag>世界</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Hexo Matery text 页面添加 Canvas 彩色粒子上升特效教程</title>
     <url>/2026/04/16/Hexo-Matery-text%E9%A1%B5%E9%9D%A2Canvas%E5%BD%A9%E8%89%B2%E7%B2%92%E5%AD%90%E7%89%B9%E6%95%88%E6%95%99%E7%A8%8B/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="一、改造前后对比"><a href="#一、改造前后对比" class="headerlink" title="一、改造前后对比"></a>一、改造前后对比</h2><table>
@@ -654,6 +591,453 @@ Gitee 防盗链检测到跨站引用 → ❌ 403	Gitee 无法识别来源 → �
         <tag>Hexo</tag>
         <tag>主题配置</tag>
         <tag>导航菜单</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hexo-Matery导航栏Logo不显示修复教程</title>
+    <url>/2026/10/19/Hexo-Matery%E5%AF%BC%E8%88%AA%E6%A0%8FLogo%E4%B8%8D%E6%98%BE%E7%A4%BA%E4%BF%AE%E5%A4%8D%E6%95%99%E7%A8%8B/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><ul>
+<li><a href="#%E9%97%AE%E9%A2%98%E7%8E%B0%E8%B1%A1">问题现象</a></li>
+<li><a href="#%E5%8E%9F%E5%9B%A0%E5%88%86%E6%9E%90">原因分析</a></li>
+<li><a href="#%E4%BF%AE%E5%A4%8D%E6%AD%A5%E9%AA%A4">修复步骤</a><ul>
+<li><a href="#%E7%AC%AC%E4%B8%80%E6%AD%A5%E4%BF%AE%E6%94%B9%E5%AF%BC%E8%88%AA%E6%A0%8F-logo-%E6%A8%A1%E6%9D%BF">第一步：修改导航栏 Logo 模板</a></li>
+<li><a href="#%E7%AC%AC%E4%BA%8C%E6%AD%A5%E4%BF%AE%E6%94%B9%E7%A7%BB%E5%8A%A8%E7%AB%AF%E4%BE%A7%E8%BE%B9%E6%A0%8F-logo-%E6%A8%A1%E6%9D%BF">第二步：修改移动端侧边栏 Logo 模板</a></li>
+<li><a href="#%E7%AC%AC%E4%B8%89%E6%AD%A5%E4%BF%AE%E6%94%B9%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE%E4%B8%AD%E7%9A%84-logo-%E8%B7%AF%E5%BE%84">第三步：修改主题配置中的 Logo 路径</a></li>
+<li><a href="#%E7%AC%AC%E5%9B%9B%E6%AD%A5%E6%8A%8A%E5%9B%BE%E7%89%87%E5%A4%8D%E5%88%B6%E5%88%B0%E7%AB%99%E7%82%B9%E7%9B%AE%E5%BD%95">第四步：把图片复制到站点目录</a></li>
+</ul>
+</li>
+<li><a href="#%E9%AA%8C%E8%AF%81%E6%95%88%E6%9E%9C">验证效果</a></li>
+<li><a href="#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9">注意事项</a></li>
+</ul>
+<h2 id="问题现象"><a href="#问题现象" class="headerlink" title="问题现象"></a>问题现象</h2><p>运行 <code>hexo server</code> 后访问 <code>http://localhost:4000/</code>，导航栏左侧 <code>class=&quot;waves-effect waves-light&quot;</code> 里的 Logo 图片不显示，浏览器控制台看到图片请求 404 或一直加载失败。</p>
+<p>F12 查看元素会发现 Logo 的 <code>img</code> 标签长这样：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;https://cdn.jsdelivr.net/gh/你的用户名/你的仓库@1.34/medias/images/xxx.jpg&quot;</span> <span class="attr">class</span>=<span class="string">&quot;logo-img&quot;</span> <span class="attr">alt</span>=<span class="string">&quot;LOGO&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>图片地址指向了 jsDelivr 的 GitHub CDN，而不是本地文件。</p>
+<h2 id="原因分析"><a href="#原因分析" class="headerlink" title="原因分析"></a>原因分析</h2><p>Matery 主题的 Logo 模板在渲染时，会在 <code>theme.logo</code> 路径前面拼接 <code>theme.jsDelivr.url</code> 前缀：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;% if (theme.logo !== undefined &amp;&amp; theme.logo.length &gt; 0) &#123; %&gt;</span><br><span class="line">&lt;img src=&quot;&lt;%- theme.jsDelivr.url %&gt;&lt;%- url_for(theme.logo) %&gt;&quot; class=&quot;logo-img&quot; alt=&quot;LOGO&quot;&gt;</span><br><span class="line">&lt;% &#125; %&gt;</span><br></pre></td></tr></table></figure>
+
+<p>这样只要 <code>themes/hexo-theme-matery/_config.yml</code> 里配置了 <code>jsDelivr.url</code>，Logo 就会走 CDN。一旦出现以下任一情况，Logo 就会 404 不显示：</p>
+<ol>
+<li>jsDelivr 在国内被墙或节点失效（本次实测请求直接超时）；</li>
+<li>远端 GitHub 仓库对应的 tag 版本里没有这张图片；</li>
+<li>仓库版本号（如 <code>@1.34</code>）与实际部署内容不一致。</li>
+</ol>
+<p>而图片本体其实一直躺在本地 <code>themes/hexo-theme-matery/source/medias/</code> 目录里，根本没有必要走 CDN。</p>
+<h2 id="修复步骤"><a href="#修复步骤" class="headerlink" title="修复步骤"></a>修复步骤</h2><h3 id="第一步：修改导航栏-Logo-模板"><a href="#第一步：修改导航栏-Logo-模板" class="headerlink" title="第一步：修改导航栏 Logo 模板"></a>第一步：修改导航栏 Logo 模板</h3><p>编辑 <code>themes/hexo-theme-matery/layout/_partial/header.ejs</code>，找到第 8 行左右，去掉 <code>theme.jsDelivr.url</code> 前缀：</p>
+<p>修改前：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;&lt;%- theme.jsDelivr.url %&gt;&lt;%- url_for(theme.logo) %&gt;&quot;</span> <span class="attr">class</span>=<span class="string">&quot;logo-img&quot;</span> <span class="attr">alt</span>=<span class="string">&quot;LOGO&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>修改后：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;&lt;%- url_for(theme.logo) %&gt;&quot;</span> <span class="attr">class</span>=<span class="string">&quot;logo-img&quot;</span> <span class="attr">alt</span>=<span class="string">&quot;LOGO&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="第二步：修改移动端侧边栏-Logo-模板"><a href="#第二步：修改移动端侧边栏-Logo-模板" class="headerlink" title="第二步：修改移动端侧边栏 Logo 模板"></a>第二步：修改移动端侧边栏 Logo 模板</h3><p>编辑 <code>themes/hexo-theme-matery/layout/_partial/mobile-nav.ejs</code>，找到第 9 行左右，做同样的修改：</p>
+<p>修改前：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;&lt;%- theme.jsDelivr.url %&gt;&lt;%- url_for(theme.logo) %&gt;&quot;</span> <span class="attr">class</span>=<span class="string">&quot;logo-img circle responsive-img&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>修改后：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;&lt;%- url_for(theme.logo) %&gt;&quot;</span> <span class="attr">class</span>=<span class="string">&quot;logo-img circle responsive-img&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="第三步：修改主题配置中的-Logo-路径"><a href="#第三步：修改主题配置中的-Logo-路径" class="headerlink" title="第三步：修改主题配置中的 Logo 路径"></a>第三步：修改主题配置中的 Logo 路径</h3><p>编辑 <code>themes/hexo-theme-matery/_config.yml</code>，找到约第 179 行的 <code>logo</code> 配置项，改成你想要的图片路径（相对 <code>source</code> 目录的站点绝对路径）：</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Configure website favicon and LOGO</span></span><br><span class="line"><span class="comment"># 配置网站favicon和网站LOGO</span></span><br><span class="line"><span class="attr">favicon:</span> <span class="string">/medias/banner/zhan.jpg</span> <span class="comment">#网址logo显示</span></span><br><span class="line"><span class="attr">logo:</span> <span class="string">/medias/banner/tai.png</span> <span class="comment">#博客logo手机页面</span></span><br></pre></td></tr></table></figure>
+
+<p>这里我把 Logo 换成了 <code>themes/hexo-theme-matery/source/medias/banner/tai.png</code>，对应站点路径就是 <code>/medias/banner/tai.png</code>。</p>
+<h3 id="第四步：把图片复制到站点目录"><a href="#第四步：把图片复制到站点目录" class="headerlink" title="第四步：把图片复制到站点目录"></a>第四步：把图片复制到站点目录</h3><p>因为站点根目录下已经生成了 <code>medias/</code> 文件夹，为了保证不重新生成也能直接访问到图片，把主题里的图片复制过去：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cp</span> themes/hexo-theme-matery/source/medias/banner/tai.png medias/banner/tai.png</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>提示：Hexo 生成时会自动把主题 <code>source</code> 下的静态文件合并进站点，所以执行 <code>hexo clean &amp;&amp; hexo g</code> 后这步是自动完成的；手动复制只是让当前已生成的静态页面立即可用。</p>
+</blockquote>
+<h2 id="验证效果"><a href="#验证效果" class="headerlink" title="验证效果"></a>验证效果</h2><p>重启 Hexo 服务：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo clean &amp;&amp; hexo server</span><br></pre></td></tr></table></figure>
+
+<p>刷新 <code>http://localhost:4000/</code>，导航栏左上角应能正常显示 Logo。F12 检查 <code>img</code> 标签，<code>src</code> 应该变成了本地路径：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;/medias/banner/tai.png&quot;</span> <span class="attr">class</span>=<span class="string">&quot;logo-img&quot;</span> <span class="attr">alt</span>=<span class="string">&quot;LOGO&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><ol>
+<li><strong>jsDelivr 前缀在主题里被大量使用</strong>：导航 Logo、轮播图、头像等多处模板都拼接了 <code>theme.jsDelivr.url</code>。如果线上还有其他图片&#x2F;资源加载不出来，多半是同一个原因，可以按需逐个去掉前缀，或把 <code>jsDelivr.url</code> 换成国内可访问的 CDN（如 <code>https://fastly.jsdelivr.net/gh/...</code>）。</li>
+<li><strong>Logo 图片不要太大</strong>：这次使用的 <code>tai.png</code> 有 1.9MB，导航栏 Logo 显示区域一般只有 40px 高，建议用 TinyPNG 等工具压缩到 100KB 以内，否则会明显拖慢首屏加载。</li>
+<li><strong>favicon 和 Logo 是两个配置</strong>：<code>favicon</code> 是浏览器标签页小图标，<code>logo</code> 是导航栏显示的图片，按需分别修改。</li>
+</ol>
+]]></content>
+      <categories>
+        <category>技术教程</category>
+      </categories>
+      <tags>
+        <tag>前端</tag>
+        <tag>Hexo</tag>
+        <tag>Matery</tag>
+        <tag>Logo</tag>
+        <tag>jsDelivr</tag>
+        <tag>CDN</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Gitee 防盗链</title>
+    <url>/2019/07/22/Gitee%20%E9%98%B2%E7%9B%97%E9%93%BE/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><p> 未来楼市如村<br> 问题确认：Gitee 防盗链 (Anti-Hotlink)<br> 解决方案（推荐程度从高到低）<br>方案 1 ⭐ 用 jsDelivr CDN 代理 GitHub 仓库（最推荐）<br>如果你在 GitHub 上有同样的 fuliefu 仓库，可以免费加速且无防盗链：</p>
+<p><a href="https://cdn.jsdelivr.net/gh/huajiaojiang/fuliefu@master/image/hexomaterry/babecue.jpg">https://cdn.jsdelivr.net/gh/huajiaojiang/fuliefu@master/image/hexomaterry/babecue.jpg</a><br>方案 2 用 GitHub Raw 直链</p>
+<p><a href="https://raw.githubusercontent.com/huajiaojiang/fuliefu/master/image/hexomaterry/babecue.jpg">https://raw.githubusercontent.com/huajiaojiang/fuliefu/master/image/hexomaterry/babecue.jpg</a><br>方案 3 在博客 HTML <head> 里添加 no-referrer meta（快速绕过）<br>让浏览器不发送 Referer，Gitee 就无法识别跨站引用：</p>
+<meta name="referrer" content="no-referrer">
+⚠️ 这会影响全站所有外链请求的 Referer，可能影响统计、评论等服务。
+
+<p>方案 4 把图片放到本地 source&#x2F; 目录<br>最稳定，但会增加仓库体积。</p>
+<p>请问你希望我采用哪种方案修改 galleries.json？ 如果选方案 1 或 2，请确认你的图片是否同步在 GitHub 上；如果选方案 3，我帮你改主题的布局模板文件。</p>
+<p>galleries.json<br>让浏览器不发送 Referer，Gitee 就无法识别跨站引用<br>修改详情<br>文件： themes&#x2F;hexo-theme-matery&#x2F;layout&#x2F;_partial&#x2F;head.ejs（第66行）</p>
+<p>新增内容：</p>
+<meta name="referrer" content="no-referrer">
+工作原理
+修改前	修改后
+浏览器加载图片时携带 Referer: https://你的博客域名/	浏览器不发送任何 Referer 头
+Gitee 防盗链检测到跨站引用 → ❌ 403	Gitee 无法识别来源 → ✅ 正常返回
+下一步操作
+需要重新生成博客以使修改生效：
+
+
+<p>hexo clean &amp;&amp; hexo g &amp;&amp; hexo s<br>然后打开 <a href="http://localhost:4000/">http://localhost:4000</a> ，访问图库页面，第112行那张 babecue.jpg 以及其它 5 张 Gitee 图片应该都能正常显示了。</p>
+<p>⚠️ 副作用提醒<br>no-referrer 是全站生效的，请注意以下可能受影响的功能：</p>
+<p>功能	影响<br>第三方统计（百度统计、不蒜子等）	⚠️ 可能无法识别访问来源<br>Gitalk &#x2F; 评论系统的 OAuth 跳转	✅ 不影响（OAuth 走的是 redirect_uri）<br>友链跳转统计	⚠️ 对方网站看不到访问来自你的博客<br>SEO（搜索引擎追踪）	⚠️ 轻微影响<br>如果你希望只对图片生效而不影响其它请求，可以告诉我，我可以改成更精细的方案——只在 <img> 标签上加 referrerpolicy&#x3D;”no-referrer”。</p>
+<p>找到图库页面的模板，对 <img> 标签添加 referrerpolicy。</p>
+<p>本次做了以下3处修改</p>
+<ol>
+<li><p>撤销全局 no-referrer（head.ejs）<br>✅ 已移除，博客恢复正常 Referer 行为，统计、评论等功能不受影响。</p>
+</li>
+<li><p>修复第166行 URL（galleries.json）</p>
+</li>
+</ol>
+<ul>
+<li>“<a href="https://raw.giteeusercontent.com/huajiaojiang/fuliefu/raw/master/image/hexomaterry/yao.jpg">https://raw.giteeusercontent.com/huajiaojiang/fuliefu/raw/master/image/hexomaterry/yao.jpg</a>“</li>
+</ul>
+<ul>
+<li>“<a href="https://gitee.com/huajiaojiang/fuliefu/raw/master/image/hexomaterry/yao.jpg">https://gitee.com/huajiaojiang/fuliefu/raw/master/image/hexomaterry/yao.jpg</a>“</li>
+</ul>
+<ol start="3">
+<li>只对图库的 <img> 标签禁止 Referer（gallery.ejs 第35-37行）</li>
+</ol>
+<ul>
+<li><img src="..." alt="..."></li>
+</ul>
+<ul>
+<li><img src="..." alt="..." referrerpolicy="no-referrer">
+效果
+场景	Referer 行为
+图库页面加载图片（Gitee 等外部图床）	✅ 不发送 Referer，Gitee 返回 200
+博客其它页面、Gitalk、统计等	✅ 正常发送 Referer，功能不受影响
+生效方法</li>
+</ul>
+]]></content>
+      <categories>
+        <category>yy</category>
+      </categories>
+      <tags>
+        <tag>人</tag>
+        <tag>事物</tag>
+        <tag>世界</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hexo Matery 气泡粒子上升特效完整修改教程</title>
+    <url>/2026/04/15/Hexo-Matery%E6%B0%94%E6%B3%A1%E7%B2%92%E5%AD%90%E4%B8%8A%E5%8D%87%E7%89%B9%E6%95%88%E5%AE%8C%E6%95%B4%E4%BF%AE%E6%94%B9%E6%95%99%E7%A8%8B/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>本教程涵盖 Hexo Matery 主题中 <strong>两套不同的粒子上升特效</strong> 的完整修改过程。</p>
+<hr>
+<h2 id="一、两套特效的区别"><a href="#一、两套特效的区别" class="headerlink" title="一、两套特效的区别"></a>一、两套特效的区别</h2><table>
+<thead>
+<tr>
+<th>对比项</th>
+<th>主页 Canvas 粒子</th>
+<th>文章&#x2F;页面 CSS 气泡</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>技术方案</td>
+<td>Canvas 2D + JS <code>requestAnimationFrame</code></td>
+<td>CSS <code>@keyframes</code> + jQuery 生成 DOM</td>
+</tr>
+<tr>
+<td>文件位置</td>
+<td><code>layout/index.ejs</code></td>
+<td><code>layout/post.ejs</code>、<code>layout/_partial/post-cover.ejs</code>、<code>layout/_partial/bg-cover.ejs</code>、<code>layout/page.ejs</code></td>
+</tr>
+<tr>
+<td>适用范围</td>
+<td>仅主页 <code>#smarts</code> 区域</td>
+<td>文章封面、文章正文、通用 page 页面</td>
+</tr>
+<tr>
+<td>控制上升高度</td>
+<td><code>clearOffset</code> + <code>alpha衰减</code></td>
+<td>CSS <code>transform: translate(0, -N%)</code> + <code>animation</code> 时长</td>
+</tr>
+<tr>
+<td>控制颜色</td>
+<td><code>settings.color</code> + <code>randomColor()</code></td>
+<td>CSS <code>background-color</code></td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="二、主页-Canvas-粒子修改（index-ejs）"><a href="#二、主页-Canvas-粒子修改（index-ejs）" class="headerlink" title="二、主页 Canvas 粒子修改（index.ejs）"></a>二、主页 Canvas 粒子修改（index.ejs）</h2><h3 id="2-1-文件路径"><a href="#2-1-文件路径" class="headerlink" title="2.1 文件路径"></a>2.1 文件路径</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">themes/hexo-theme-matery/layout/index.ejs</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-2-核心参数"><a href="#2-2-核心参数" class="headerlink" title="2.2 核心参数"></a>2.2 核心参数</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> settings = options || &#123;</span><br><span class="line">    <span class="attr">color</span>: <span class="string">&#x27;random&#x27;</span>,       <span class="comment">// &#x27;random&#x27; 启用随机彩色</span></span><br><span class="line">    <span class="attr">radius</span>: <span class="number">10</span>,            <span class="comment">// 粒子半径上限（px）</span></span><br><span class="line">    <span class="attr">density</span>: <span class="number">0.3</span>,          <span class="comment">// 粒子密度 = 容器宽度 * density</span></span><br><span class="line">    <span class="attr">clearOffset</span>: <span class="number">0.9</span>       <span class="comment">// 初始 alpha 浮动范围（越大粒子活越久）</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-3-修改详情"><a href="#2-3-修改详情" class="headerlink" title="2.3 修改详情"></a>2.3 修改详情</h3><h4 id="修改一：开启随机彩色-完全不透明"><a href="#修改一：开启随机彩色-完全不透明" class="headerlink" title="修改一：开启随机彩色 + 完全不透明"></a>修改一：开启随机彩色 + 完全不透明</h4><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 修改前</span></span><br><span class="line"><span class="attr">color</span>: <span class="string">&#x27;rgba(255,255,255,.5)&#x27;</span>,   <span class="comment">// 白色半透明</span></span><br><span class="line"><span class="keyword">const</span> alpha = <span class="title class_">Math</span>.<span class="title function_">random</span>().<span class="title function_">toPrecision</span>(<span class="number">2</span>);  <span class="comment">// 随机透明度</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 修改后</span></span><br><span class="line"><span class="attr">color</span>: <span class="string">&#x27;random&#x27;</span>,                 <span class="comment">// 启用随机颜色分支</span></span><br><span class="line"><span class="keyword">const</span> alpha = <span class="number">1</span>;                 <span class="comment">// 完全不透明</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>原理</strong>：<code>Circle.init()</code> 中判断 <code>settings.color === &#39;random&#39;</code> 时调用 <code>randomColor()</code>，生成随机 RGB 值。</p>
+<h4 id="修改二：上升到最高值"><a href="#修改二：上升到最高值" class="headerlink" title="修改二：上升到最高值"></a>修改二：上升到最高值</h4><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 修改前</span></span><br><span class="line"><span class="attr">clearOffset</span>: <span class="number">0.2</span>          <span class="comment">// alpha 范围 0.1~0.3</span></span><br><span class="line">that.<span class="property">alpha</span> -= <span class="number">0.0005</span>;     <span class="comment">// 每帧衰减 0.0005</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 修改后</span></span><br><span class="line"><span class="attr">clearOffset</span>: <span class="number">0.9</span>          <span class="comment">// alpha 范围 0.1~1.0</span></span><br><span class="line">that.<span class="property">alpha</span> -= <span class="number">0.0001</span>;     <span class="comment">// 每帧衰减 0.0001（原来的 1/5）</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>寿命计算</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>状态</th>
+<th>alpha 范围</th>
+<th>衰减速率</th>
+<th>最长寿命</th>
+<th>约等于</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>修改前</td>
+<td>0.1~0.3</td>
+<td>0.0005&#x2F;帧</td>
+<td>600 帧</td>
+<td>10 秒 @60fps</td>
+</tr>
+<tr>
+<td>修改后</td>
+<td>0.1~1.0</td>
+<td>0.0001&#x2F;帧</td>
+<td>10000 帧</td>
+<td>167 秒 @60fps</td>
+</tr>
+</tbody></table>
+<p>粒子存活时间提升约 <strong>16 倍</strong>，足以从底部升到容器顶部。</p>
+<h3 id="2-4-参数速查表"><a href="#2-4-参数速查表" class="headerlink" title="2.4 参数速查表"></a>2.4 参数速查表</h3><table>
+<thead>
+<tr>
+<th>效果</th>
+<th>修改方式</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>白色粒子</td>
+<td><code>color: &#39;rgba(255,255,255,0.5)&#39;</code></td>
+</tr>
+<tr>
+<td>随机彩色</td>
+<td><code>color: &#39;random&#39;</code></td>
+</tr>
+<tr>
+<td>固定红色</td>
+<td><code>color: &#39;rgba(255,0,0,1)&#39;</code></td>
+</tr>
+<tr>
+<td>粒子更大</td>
+<td><code>radius: 20</code></td>
+</tr>
+<tr>
+<td>粒子更多更密</td>
+<td><code>density: 0.6</code></td>
+</tr>
+<tr>
+<td>升得更高</td>
+<td>加大 <code>clearOffset</code> + 减小 alpha 衰减</td>
+</tr>
+<tr>
+<td>升得更快</td>
+<td><code>that.speed = Math.random() * 3</code></td>
+</tr>
+<tr>
+<td>半透明</td>
+<td><code>randomColor()</code> 中 <code>alpha = 0.5</code></td>
+</tr>
+<tr>
+<td>完全不透明</td>
+<td><code>randomColor()</code> 中 <code>alpha = 1</code></td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="三、文章封面-CSS-气泡修改（post-cover-ejs）"><a href="#三、文章封面-CSS-气泡修改（post-cover-ejs）" class="headerlink" title="三、文章封面 CSS 气泡修改（post-cover.ejs）"></a>三、文章封面 CSS 气泡修改（post-cover.ejs）</h2><h3 id="3-1-文件路径"><a href="#3-1-文件路径" class="headerlink" title="3.1 文件路径"></a>3.1 文件路径</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">themes/hexo-theme-matery/layout/_partial/post-cover.ejs</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-2-特效原理"><a href="#3-2-特效原理" class="headerlink" title="3.2 特效原理"></a>3.2 特效原理</h3><p>CSS 气泡与 Canvas 粒子不同，它通过：</p>
+<ol>
+<li><strong>jQuery</strong> 动态生成多个 <code>&lt;span class=&quot;particle&quot;&gt;</code> 元素</li>
+<li><strong>CSS <code>@keyframes</code></strong> 控制上升动画（<code>transform: translate(0, -N%)</code>）</li>
+<li><strong><code>animation-delay</code></strong> 随机延迟让气泡交错出现</li>
+</ol>
+<h3 id="3-3-修改详情：上升到最高值"><a href="#3-3-修改详情：上升到最高值" class="headerlink" title="3.3 修改详情：上升到最高值"></a>3.3 修改详情：上升到最高值</h3><p>控制气泡上升高度的是两个 CSS 属性：</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="comment">/* 修改前 */</span></span><br><span class="line"><span class="attribute">animation</span>: bubblesCover <span class="number">18s</span> ease-in infinite;</span><br><span class="line"><span class="attribute">transform</span>: <span class="built_in">translate</span>(<span class="number">0</span>, -<span class="number">8000%</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 修改后 */</span></span><br><span class="line"><span class="attribute">animation</span>: bubblesCover <span class="number">60s</span> ease-in infinite;    <span class="comment">/* 动画时长 18s → 60s */</span></span><br><span class="line"><span class="attribute">transform</span>: <span class="built_in">translate</span>(<span class="number">0</span>, -<span class="number">80000%</span>);                <span class="comment">/* 位移 -8000% → -80000% */</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="参数说明"><a href="#参数说明" class="headerlink" title="参数说明"></a>参数说明</h4><table>
+<thead>
+<tr>
+<th>CSS 属性</th>
+<th>作用</th>
+<th>修改前</th>
+<th>修改后</th>
+<th>效果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>animation</code> 时长</td>
+<td>一次完整上升动画的持续时间</td>
+<td><code>18s</code></td>
+<td><code>60s</code></td>
+<td>上升过程更久，视觉更平滑</td>
+</tr>
+<tr>
+<td><code>translate(0, -N%)</code></td>
+<td>气泡最终上升的距离（相对自身大小的百分比）</td>
+<td><code>-8000%</code></td>
+<td><code>-80000%</code></td>
+<td>上升距离提升 10 倍</td>
+</tr>
+</tbody></table>
+<h4 id="完整-CSS-关键帧"><a href="#完整-CSS-关键帧" class="headerlink" title="完整 CSS 关键帧"></a>完整 CSS 关键帧</h4><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="keyword">@keyframes</span> bubblesCover &#123;</span><br><span class="line">    <span class="number">0%</span> &#123; <span class="attribute">opacity</span>: <span class="number">0</span>; &#125;</span><br><span class="line">    <span class="number">5%</span> &#123; <span class="attribute">opacity</span>: <span class="number">1</span>; <span class="attribute">transform</span>: <span class="built_in">translate</span>(<span class="number">0</span>, -<span class="number">20%</span>); &#125;</span><br><span class="line">    <span class="number">100%</span> &#123; <span class="attribute">opacity</span>: <span class="number">0</span>; <span class="attribute">transform</span>: <span class="built_in">translate</span>(<span class="number">0</span>, -<span class="number">80000%</span>); &#125;  <span class="comment">/* 最高值 */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-4-封面容器关键样式"><a href="#3-4-封面容器关键样式" class="headerlink" title="3.4 封面容器关键样式"></a>3.4 封面容器关键样式</h3><p>封面 div 必须设置以下样式才能正确显示气泡：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;post-cover&quot;</span> <span class="attr">style</span>=<span class="string">&quot;position: relative; overflow: hidden;&quot;</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 气泡容器，绝对定位铺满封面 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">style</span>=<span class="string">&quot;width:100%; height:100%; position:absolute; bottom:0; left:0;&quot;</span></span></span><br><span class="line"><span class="tag">         <span class="attr">class</span>=<span class="string">&quot;particletext bubbles-cover&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>position: relative</code> — 让气泡容器的 <code>absolute</code> 定位相对于封面</li>
+<li><code>overflow: hidden</code> — 防止气泡溢出封面区域</li>
+</ul>
+<hr>
+<h2 id="四、文章正文-CSS-气泡修改（post-ejs）"><a href="#四、文章正文-CSS-气泡修改（post-ejs）" class="headerlink" title="四、文章正文 CSS 气泡修改（post.ejs）"></a>四、文章正文 CSS 气泡修改（post.ejs）</h2><h3 id="4-1-文件路径"><a href="#4-1-文件路径" class="headerlink" title="4.1 文件路径"></a>4.1 文件路径</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">themes/hexo-theme-matery/layout/post.ejs</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-2-修改详情"><a href="#4-2-修改详情" class="headerlink" title="4.2 修改详情"></a>4.2 修改详情</h3><p>与封面气泡相同的参数调整：</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="comment">/* 修改前 */</span></span><br><span class="line"><span class="attribute">animation</span>: bubbles <span class="number">18s</span> ease-in infinite;</span><br><span class="line"><span class="attribute">transform</span>: <span class="built_in">translate</span>(<span class="number">0</span>, -<span class="number">8000%</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 修改后 */</span></span><br><span class="line"><span class="attribute">animation</span>: bubbles <span class="number">60s</span> ease-in infinite;</span><br><span class="line"><span class="attribute">transform</span>: <span class="built_in">translate</span>(<span class="number">0</span>, -<span class="number">80000%</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-3-正文气泡容器"><a href="#4-3-正文气泡容器" class="headerlink" title="4.3 正文气泡容器"></a>4.3 正文气泡容器</h3><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">style</span>=<span class="string">&quot;width:100%; height:100%; position:relative; bottom:0px;&quot;</span></span></span><br><span class="line"><span class="tag">     <span class="attr">class</span>=<span class="string">&quot;particletext bubbles&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>正文区域使用 <code>position: relative</code> 而非 <code>absolute</code>，气泡跟随文档流排列在文章内容下方。</p>
+<hr>
+<h2 id="五、通用-page-页面气泡（page-ejs-bg-cover-ejs）"><a href="#五、通用-page-页面气泡（page-ejs-bg-cover-ejs）" class="headerlink" title="五、通用 page 页面气泡（page.ejs + bg-cover.ejs）"></a>五、通用 page 页面气泡（page.ejs + bg-cover.ejs）</h2><h3 id="5-1-适用页面"><a href="#5-1-适用页面" class="headerlink" title="5.1 适用页面"></a>5.1 适用页面</h3><p>所有 <code>layout: &quot;page&quot;</code> 类型的页面，例如 <code>/text/</code>。</p>
+<h3 id="5-2-涉及文件"><a href="#5-2-涉及文件" class="headerlink" title="5.2 涉及文件"></a>5.2 涉及文件</h3><table>
+<thead>
+<tr>
+<th>文件</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>layout/page.ejs</code></td>
+<td>页面正文区域气泡</td>
+</tr>
+<tr>
+<td><code>layout/_partial/bg-cover.ejs</code></td>
+<td>页面封面顶部气泡</td>
+</tr>
+</tbody></table>
+<h3 id="5-3-page-ejs-添加的气泡代码"><a href="#5-3-page-ejs-添加的气泡代码" class="headerlink" title="5.3 page.ejs 添加的气泡代码"></a>5.3 page.ejs 添加的气泡代码</h3><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="language-css"></span></span><br><span class="line"><span class="language-css"><span class="selector-class">.page-bubbles</span> &gt; <span class="selector-class">.particle</span> &#123;</span></span><br><span class="line"><span class="language-css">    <span class="attribute">opacity</span>: <span class="number">0</span>;</span></span><br><span class="line"><span class="language-css">    <span class="attribute">position</span>: absolute;</span></span><br><span class="line"><span class="language-css">    <span class="attribute">background-color</span>: <span class="built_in">rgba</span>(<span class="number">128</span>,<span class="number">255</span>,<span class="number">0</span>,<span class="number">0.7</span>);       <span class="comment">/* 荧光绿 */</span></span></span><br><span class="line"><span class="language-css">    <span class="attribute">animation</span>: pageBubbles <span class="number">60s</span> ease-in infinite;  <span class="comment">/* 60秒完整上升 */</span></span></span><br><span class="line"><span class="language-css">    <span class="attribute">border-radius</span>: <span class="number">100%</span>;</span></span><br><span class="line"><span class="language-css">&#125;</span></span><br><span class="line"><span class="language-css"><span class="keyword">@keyframes</span> pageBubbles &#123;</span></span><br><span class="line"><span class="language-css">    <span class="number">0%</span> &#123; <span class="attribute">opacity</span>: <span class="number">0</span>; &#125;</span></span><br><span class="line"><span class="language-css">    <span class="number">5%</span> &#123; <span class="attribute">opacity</span>: <span class="number">1</span>; <span class="attribute">transform</span>: <span class="built_in">translate</span>(<span class="number">0</span>, -<span class="number">20%</span>); &#125;</span></span><br><span class="line"><span class="language-css">    <span class="number">100%</span> &#123; <span class="attribute">opacity</span>: <span class="number">0</span>; <span class="attribute">transform</span>: <span class="built_in">translate</span>(<span class="number">0</span>, -<span class="number">80000%</span>); &#125;  <span class="comment">/* 最高值 */</span></span></span><br><span class="line"><span class="language-css">&#125;</span></span><br><span class="line"><span class="language-css"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">style</span>=<span class="string">&quot;width:100%; height:100%; position:relative; bottom:0px;&quot;</span></span></span><br><span class="line"><span class="tag">     <span class="attr">class</span>=<span class="string">&quot;particletext page-bubbles&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="5-4-bg-cover-ejs-封面气泡"><a href="#5-4-bg-cover-ejs-封面气泡" class="headerlink" title="5.4 bg-cover.ejs 封面气泡"></a>5.4 bg-cover.ejs 封面气泡</h3><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;bg-cover about-cover&quot;</span> <span class="attr">style</span>=<span class="string">&quot;position:relative; overflow:hidden;&quot;</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 原有内容 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="language-css"></span></span><br><span class="line"><span class="language-css">    <span class="selector-class">.about-cover</span> <span class="selector-class">.bubbles-bg</span> &gt; <span class="selector-class">.particle</span> &#123;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">opacity</span>: <span class="number">0</span>;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">position</span>: absolute;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">background-color</span>: <span class="built_in">rgba</span>(<span class="number">128</span>,<span class="number">255</span>,<span class="number">0</span>,<span class="number">0.7</span>);</span></span><br><span class="line"><span class="language-css">        <span class="attribute">animation</span>: bubblesBg <span class="number">60s</span> ease-in infinite;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">border-radius</span>: <span class="number">100%</span>;</span></span><br><span class="line"><span class="language-css">    &#125;</span></span><br><span class="line"><span class="language-css">    <span class="keyword">@keyframes</span> bubblesBg &#123;</span></span><br><span class="line"><span class="language-css">        <span class="number">0%</span> &#123; <span class="attribute">opacity</span>: <span class="number">0</span>; &#125;</span></span><br><span class="line"><span class="language-css">        <span class="number">5%</span> &#123; <span class="attribute">opacity</span>: <span class="number">1</span>; <span class="attribute">transform</span>: <span class="built_in">translate</span>(<span class="number">0</span>, -<span class="number">20%</span>); &#125;</span></span><br><span class="line"><span class="language-css">        <span class="number">100%</span> &#123; <span class="attribute">opacity</span>: <span class="number">0</span>; <span class="attribute">transform</span>: <span class="built_in">translate</span>(<span class="number">0</span>, -<span class="number">80000%</span>); &#125;</span></span><br><span class="line"><span class="language-css">    &#125;</span></span><br><span class="line"><span class="language-css">    </span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">style</span>=<span class="string">&quot;width:100%; height:100%; position:absolute; bottom:0; left:0;&quot;</span></span></span><br><span class="line"><span class="tag">         <span class="attr">class</span>=<span class="string">&quot;particletext bubbles-bg&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="六、CSS-气泡-JS-生成逻辑详解"><a href="#六、CSS-气泡-JS-生成逻辑详解" class="headerlink" title="六、CSS 气泡 JS 生成逻辑详解"></a>六、CSS 气泡 JS 生成逻辑详解</h2><p>所有页面的气泡均由 jQuery 动态生成：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">$.<span class="title function_">each</span>($(<span class="string">&quot;.particletext.bubbles&quot;</span>), <span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="comment">// 气泡数量 = 容器宽度 / 50 * 10</span></span><br><span class="line">    <span class="keyword">var</span> bubblecount = ($(<span class="variable language_">this</span>).<span class="title function_">width</span>() / <span class="number">50</span>) * <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt;= bubblecount; i++) &#123;</span><br><span class="line">        <span class="comment">// 气泡大小：4px ~ 8px</span></span><br><span class="line">        <span class="keyword">var</span> size = ($.<span class="title function_">rnd</span>(<span class="number">40</span>, <span class="number">80</span>) / <span class="number">10</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 随机位置 + 随机延迟</span></span><br><span class="line">        $(<span class="variable language_">this</span>).<span class="title function_">append</span>(</span><br><span class="line">            <span class="string">&#x27;&lt;span class=&quot;particle&quot; style=&quot;&#x27;</span></span><br><span class="line">            + <span class="string">&#x27;top:&#x27;</span> + $.<span class="title function_">rnd</span>(<span class="number">20</span>, <span class="number">80</span>) + <span class="string">&#x27;%;&#x27;</span>      <span class="comment">// 垂直起始位置 20%~80%</span></span><br><span class="line">            + <span class="string">&#x27;left:&#x27;</span> + $.<span class="title function_">rnd</span>(<span class="number">0</span>, <span class="number">95</span>) + <span class="string">&#x27;%;&#x27;</span>       <span class="comment">// 水平位置 0%~95%</span></span><br><span class="line">            + <span class="string">&#x27;width:&#x27;</span> + size + <span class="string">&#x27;px;&#x27;</span></span><br><span class="line">            + <span class="string">&#x27;height:&#x27;</span> + size + <span class="string">&#x27;px;&#x27;</span></span><br><span class="line">            + <span class="string">&#x27;animation-delay:&#x27;</span> + ($.<span class="title function_">rnd</span>(<span class="number">0</span>, <span class="number">180</span>) / <span class="number">10</span>) + <span class="string">&#x27;s;&#x27;</span>  <span class="comment">// 延迟 0~18秒</span></span><br><span class="line">            + <span class="string">&#x27;&quot;&gt;&lt;/span&gt;&#x27;</span></span><br><span class="line">        );</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="关键参数调整"><a href="#关键参数调整" class="headerlink" title="关键参数调整"></a>关键参数调整</h3><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>当前值</th>
+<th>作用</th>
+<th>调整建议</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>bubblecount</code> 公式中的 <code>50</code></td>
+<td><code>50</code></td>
+<td>每 50px 宽度产生 10 个气泡</td>
+<td>改小 &#x3D; 更密，改大 &#x3D; 更稀</td>
+</tr>
+<tr>
+<td><code>$.rnd(40, 80) / 10</code></td>
+<td>4~8px</td>
+<td>气泡直径</td>
+<td><code>$.rnd(60, 120) / 10</code> &#x3D; 更大</td>
+</tr>
+<tr>
+<td><code>$.rnd(0, 180) / 10</code></td>
+<td>0~18s</td>
+<td>动画延迟</td>
+<td>必须与 CSS <code>animation</code> 时长配合</td>
+</tr>
+<tr>
+<td>CSS <code>background-color</code></td>
+<td><code>rgba(128,255,0,0.7)</code></td>
+<td>荧光绿</td>
+<td>改为任意颜色</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p><strong>注意</strong>：<code>animation-delay</code> 的最大值应与 CSS 动画时长匹配。当前动画时长为 60s，延迟为 0<del>18s，所以气泡在前 18 秒内陆续启动，保证视觉连续性。如需更均匀分布，可改为 <code>$.rnd(0, 600) / 10</code>（0</del>60s）。</p>
+</blockquote>
+<hr>
+<h2 id="七、所有修改文件汇总"><a href="#七、所有修改文件汇总" class="headerlink" title="七、所有修改文件汇总"></a>七、所有修改文件汇总</h2><table>
+<thead>
+<tr>
+<th>文件</th>
+<th>修改内容</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>layout/index.ejs</code></td>
+<td>主页 Canvas 粒子：<code>color:&#39;random&#39;</code>、<code>alpha=1</code>、<code>clearOffset:0.9</code>、衰减 <code>0.0001</code></td>
+</tr>
+<tr>
+<td><code>layout/post.ejs</code></td>
+<td>文章正文气泡：动画时长 <code>60s</code>、位移 <code>-80000%</code></td>
+</tr>
+<tr>
+<td><code>layout/_partial/post-cover.ejs</code></td>
+<td>文章封面气泡：动画时长 <code>60s</code>、位移 <code>-80000%</code></td>
+</tr>
+<tr>
+<td><code>layout/_partial/bg-cover.ejs</code></td>
+<td>通用页面封面气泡：新增完整气泡代码</td>
+</tr>
+<tr>
+<td><code>layout/page.ejs</code></td>
+<td>通用页面正文气泡：新增完整气泡代码</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="八、CSS-气泡上升高度速查"><a href="#八、CSS-气泡上升高度速查" class="headerlink" title="八、CSS 气泡上升高度速查"></a>八、CSS 气泡上升高度速查</h2><table>
+<thead>
+<tr>
+<th><code>animation</code> 时长</th>
+<th><code>translate</code> 值</th>
+<th>效果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>18s</code></td>
+<td><code>-8000%</code></td>
+<td>默认高度（较低）</td>
+</tr>
+<tr>
+<td><code>30s</code></td>
+<td><code>-20000%</code></td>
+<td>中等高度</td>
+</tr>
+<tr>
+<td><code>60s</code></td>
+<td><code>-80000%</code></td>
+<td>最高值（当前设置）</td>
+</tr>
+</tbody></table>
+<p><strong>公式</strong>：上升高度 &#x3D; 气泡尺寸 * translate百分比 &#x2F; 100。一个 6px 的气泡，<code>-80000%</code> 意味着上升 <code>6 * 80000 / 100 = 4800px</code>，远超任何页面高度。</p>
+]]></content>
+      <categories>
+        <category>技术教程</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
+        <tag>Canvas</tag>
+        <tag>前端特效</tag>
+        <tag>JavaScript</tag>
+        <tag>CSS动画</tag>
       </tags>
   </entry>
   <entry>
@@ -1278,311 +1662,6 @@ Gitee 防盗链检测到跨站引用 → ❌ 403	Gitee 无法识别来源 → �
         <tag>Twikoo</tag>
         <tag>评论系统</tag>
         <tag>Vercel</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Hexo Matery 气泡粒子上升特效完整修改教程</title>
-    <url>/2026/04/15/Hexo-Matery%E6%B0%94%E6%B3%A1%E7%B2%92%E5%AD%90%E4%B8%8A%E5%8D%87%E7%89%B9%E6%95%88%E5%AE%8C%E6%95%B4%E4%BF%AE%E6%94%B9%E6%95%99%E7%A8%8B/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>本教程涵盖 Hexo Matery 主题中 <strong>两套不同的粒子上升特效</strong> 的完整修改过程。</p>
-<hr>
-<h2 id="一、两套特效的区别"><a href="#一、两套特效的区别" class="headerlink" title="一、两套特效的区别"></a>一、两套特效的区别</h2><table>
-<thead>
-<tr>
-<th>对比项</th>
-<th>主页 Canvas 粒子</th>
-<th>文章&#x2F;页面 CSS 气泡</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>技术方案</td>
-<td>Canvas 2D + JS <code>requestAnimationFrame</code></td>
-<td>CSS <code>@keyframes</code> + jQuery 生成 DOM</td>
-</tr>
-<tr>
-<td>文件位置</td>
-<td><code>layout/index.ejs</code></td>
-<td><code>layout/post.ejs</code>、<code>layout/_partial/post-cover.ejs</code>、<code>layout/_partial/bg-cover.ejs</code>、<code>layout/page.ejs</code></td>
-</tr>
-<tr>
-<td>适用范围</td>
-<td>仅主页 <code>#smarts</code> 区域</td>
-<td>文章封面、文章正文、通用 page 页面</td>
-</tr>
-<tr>
-<td>控制上升高度</td>
-<td><code>clearOffset</code> + <code>alpha衰减</code></td>
-<td>CSS <code>transform: translate(0, -N%)</code> + <code>animation</code> 时长</td>
-</tr>
-<tr>
-<td>控制颜色</td>
-<td><code>settings.color</code> + <code>randomColor()</code></td>
-<td>CSS <code>background-color</code></td>
-</tr>
-</tbody></table>
-<hr>
-<h2 id="二、主页-Canvas-粒子修改（index-ejs）"><a href="#二、主页-Canvas-粒子修改（index-ejs）" class="headerlink" title="二、主页 Canvas 粒子修改（index.ejs）"></a>二、主页 Canvas 粒子修改（index.ejs）</h2><h3 id="2-1-文件路径"><a href="#2-1-文件路径" class="headerlink" title="2.1 文件路径"></a>2.1 文件路径</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">themes/hexo-theme-matery/layout/index.ejs</span><br></pre></td></tr></table></figure>
-
-<h3 id="2-2-核心参数"><a href="#2-2-核心参数" class="headerlink" title="2.2 核心参数"></a>2.2 核心参数</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> settings = options || &#123;</span><br><span class="line">    <span class="attr">color</span>: <span class="string">&#x27;random&#x27;</span>,       <span class="comment">// &#x27;random&#x27; 启用随机彩色</span></span><br><span class="line">    <span class="attr">radius</span>: <span class="number">10</span>,            <span class="comment">// 粒子半径上限（px）</span></span><br><span class="line">    <span class="attr">density</span>: <span class="number">0.3</span>,          <span class="comment">// 粒子密度 = 容器宽度 * density</span></span><br><span class="line">    <span class="attr">clearOffset</span>: <span class="number">0.9</span>       <span class="comment">// 初始 alpha 浮动范围（越大粒子活越久）</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="2-3-修改详情"><a href="#2-3-修改详情" class="headerlink" title="2.3 修改详情"></a>2.3 修改详情</h3><h4 id="修改一：开启随机彩色-完全不透明"><a href="#修改一：开启随机彩色-完全不透明" class="headerlink" title="修改一：开启随机彩色 + 完全不透明"></a>修改一：开启随机彩色 + 完全不透明</h4><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 修改前</span></span><br><span class="line"><span class="attr">color</span>: <span class="string">&#x27;rgba(255,255,255,.5)&#x27;</span>,   <span class="comment">// 白色半透明</span></span><br><span class="line"><span class="keyword">const</span> alpha = <span class="title class_">Math</span>.<span class="title function_">random</span>().<span class="title function_">toPrecision</span>(<span class="number">2</span>);  <span class="comment">// 随机透明度</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 修改后</span></span><br><span class="line"><span class="attr">color</span>: <span class="string">&#x27;random&#x27;</span>,                 <span class="comment">// 启用随机颜色分支</span></span><br><span class="line"><span class="keyword">const</span> alpha = <span class="number">1</span>;                 <span class="comment">// 完全不透明</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>原理</strong>：<code>Circle.init()</code> 中判断 <code>settings.color === &#39;random&#39;</code> 时调用 <code>randomColor()</code>，生成随机 RGB 值。</p>
-<h4 id="修改二：上升到最高值"><a href="#修改二：上升到最高值" class="headerlink" title="修改二：上升到最高值"></a>修改二：上升到最高值</h4><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 修改前</span></span><br><span class="line"><span class="attr">clearOffset</span>: <span class="number">0.2</span>          <span class="comment">// alpha 范围 0.1~0.3</span></span><br><span class="line">that.<span class="property">alpha</span> -= <span class="number">0.0005</span>;     <span class="comment">// 每帧衰减 0.0005</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 修改后</span></span><br><span class="line"><span class="attr">clearOffset</span>: <span class="number">0.9</span>          <span class="comment">// alpha 范围 0.1~1.0</span></span><br><span class="line">that.<span class="property">alpha</span> -= <span class="number">0.0001</span>;     <span class="comment">// 每帧衰减 0.0001（原来的 1/5）</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>寿命计算</strong>：</p>
-<table>
-<thead>
-<tr>
-<th>状态</th>
-<th>alpha 范围</th>
-<th>衰减速率</th>
-<th>最长寿命</th>
-<th>约等于</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>修改前</td>
-<td>0.1~0.3</td>
-<td>0.0005&#x2F;帧</td>
-<td>600 帧</td>
-<td>10 秒 @60fps</td>
-</tr>
-<tr>
-<td>修改后</td>
-<td>0.1~1.0</td>
-<td>0.0001&#x2F;帧</td>
-<td>10000 帧</td>
-<td>167 秒 @60fps</td>
-</tr>
-</tbody></table>
-<p>粒子存活时间提升约 <strong>16 倍</strong>，足以从底部升到容器顶部。</p>
-<h3 id="2-4-参数速查表"><a href="#2-4-参数速查表" class="headerlink" title="2.4 参数速查表"></a>2.4 参数速查表</h3><table>
-<thead>
-<tr>
-<th>效果</th>
-<th>修改方式</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>白色粒子</td>
-<td><code>color: &#39;rgba(255,255,255,0.5)&#39;</code></td>
-</tr>
-<tr>
-<td>随机彩色</td>
-<td><code>color: &#39;random&#39;</code></td>
-</tr>
-<tr>
-<td>固定红色</td>
-<td><code>color: &#39;rgba(255,0,0,1)&#39;</code></td>
-</tr>
-<tr>
-<td>粒子更大</td>
-<td><code>radius: 20</code></td>
-</tr>
-<tr>
-<td>粒子更多更密</td>
-<td><code>density: 0.6</code></td>
-</tr>
-<tr>
-<td>升得更高</td>
-<td>加大 <code>clearOffset</code> + 减小 alpha 衰减</td>
-</tr>
-<tr>
-<td>升得更快</td>
-<td><code>that.speed = Math.random() * 3</code></td>
-</tr>
-<tr>
-<td>半透明</td>
-<td><code>randomColor()</code> 中 <code>alpha = 0.5</code></td>
-</tr>
-<tr>
-<td>完全不透明</td>
-<td><code>randomColor()</code> 中 <code>alpha = 1</code></td>
-</tr>
-</tbody></table>
-<hr>
-<h2 id="三、文章封面-CSS-气泡修改（post-cover-ejs）"><a href="#三、文章封面-CSS-气泡修改（post-cover-ejs）" class="headerlink" title="三、文章封面 CSS 气泡修改（post-cover.ejs）"></a>三、文章封面 CSS 气泡修改（post-cover.ejs）</h2><h3 id="3-1-文件路径"><a href="#3-1-文件路径" class="headerlink" title="3.1 文件路径"></a>3.1 文件路径</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">themes/hexo-theme-matery/layout/_partial/post-cover.ejs</span><br></pre></td></tr></table></figure>
-
-<h3 id="3-2-特效原理"><a href="#3-2-特效原理" class="headerlink" title="3.2 特效原理"></a>3.2 特效原理</h3><p>CSS 气泡与 Canvas 粒子不同，它通过：</p>
-<ol>
-<li><strong>jQuery</strong> 动态生成多个 <code>&lt;span class=&quot;particle&quot;&gt;</code> 元素</li>
-<li><strong>CSS <code>@keyframes</code></strong> 控制上升动画（<code>transform: translate(0, -N%)</code>）</li>
-<li><strong><code>animation-delay</code></strong> 随机延迟让气泡交错出现</li>
-</ol>
-<h3 id="3-3-修改详情：上升到最高值"><a href="#3-3-修改详情：上升到最高值" class="headerlink" title="3.3 修改详情：上升到最高值"></a>3.3 修改详情：上升到最高值</h3><p>控制气泡上升高度的是两个 CSS 属性：</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="comment">/* 修改前 */</span></span><br><span class="line"><span class="attribute">animation</span>: bubblesCover <span class="number">18s</span> ease-in infinite;</span><br><span class="line"><span class="attribute">transform</span>: <span class="built_in">translate</span>(<span class="number">0</span>, -<span class="number">8000%</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 修改后 */</span></span><br><span class="line"><span class="attribute">animation</span>: bubblesCover <span class="number">60s</span> ease-in infinite;    <span class="comment">/* 动画时长 18s → 60s */</span></span><br><span class="line"><span class="attribute">transform</span>: <span class="built_in">translate</span>(<span class="number">0</span>, -<span class="number">80000%</span>);                <span class="comment">/* 位移 -8000% → -80000% */</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="参数说明"><a href="#参数说明" class="headerlink" title="参数说明"></a>参数说明</h4><table>
-<thead>
-<tr>
-<th>CSS 属性</th>
-<th>作用</th>
-<th>修改前</th>
-<th>修改后</th>
-<th>效果</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>animation</code> 时长</td>
-<td>一次完整上升动画的持续时间</td>
-<td><code>18s</code></td>
-<td><code>60s</code></td>
-<td>上升过程更久，视觉更平滑</td>
-</tr>
-<tr>
-<td><code>translate(0, -N%)</code></td>
-<td>气泡最终上升的距离（相对自身大小的百分比）</td>
-<td><code>-8000%</code></td>
-<td><code>-80000%</code></td>
-<td>上升距离提升 10 倍</td>
-</tr>
-</tbody></table>
-<h4 id="完整-CSS-关键帧"><a href="#完整-CSS-关键帧" class="headerlink" title="完整 CSS 关键帧"></a>完整 CSS 关键帧</h4><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="keyword">@keyframes</span> bubblesCover &#123;</span><br><span class="line">    <span class="number">0%</span> &#123; <span class="attribute">opacity</span>: <span class="number">0</span>; &#125;</span><br><span class="line">    <span class="number">5%</span> &#123; <span class="attribute">opacity</span>: <span class="number">1</span>; <span class="attribute">transform</span>: <span class="built_in">translate</span>(<span class="number">0</span>, -<span class="number">20%</span>); &#125;</span><br><span class="line">    <span class="number">100%</span> &#123; <span class="attribute">opacity</span>: <span class="number">0</span>; <span class="attribute">transform</span>: <span class="built_in">translate</span>(<span class="number">0</span>, -<span class="number">80000%</span>); &#125;  <span class="comment">/* 最高值 */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="3-4-封面容器关键样式"><a href="#3-4-封面容器关键样式" class="headerlink" title="3.4 封面容器关键样式"></a>3.4 封面容器关键样式</h3><p>封面 div 必须设置以下样式才能正确显示气泡：</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;post-cover&quot;</span> <span class="attr">style</span>=<span class="string">&quot;position: relative; overflow: hidden;&quot;</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 气泡容器，绝对定位铺满封面 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">style</span>=<span class="string">&quot;width:100%; height:100%; position:absolute; bottom:0; left:0;&quot;</span></span></span><br><span class="line"><span class="tag">         <span class="attr">class</span>=<span class="string">&quot;particletext bubbles-cover&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><code>position: relative</code> — 让气泡容器的 <code>absolute</code> 定位相对于封面</li>
-<li><code>overflow: hidden</code> — 防止气泡溢出封面区域</li>
-</ul>
-<hr>
-<h2 id="四、文章正文-CSS-气泡修改（post-ejs）"><a href="#四、文章正文-CSS-气泡修改（post-ejs）" class="headerlink" title="四、文章正文 CSS 气泡修改（post.ejs）"></a>四、文章正文 CSS 气泡修改（post.ejs）</h2><h3 id="4-1-文件路径"><a href="#4-1-文件路径" class="headerlink" title="4.1 文件路径"></a>4.1 文件路径</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">themes/hexo-theme-matery/layout/post.ejs</span><br></pre></td></tr></table></figure>
-
-<h3 id="4-2-修改详情"><a href="#4-2-修改详情" class="headerlink" title="4.2 修改详情"></a>4.2 修改详情</h3><p>与封面气泡相同的参数调整：</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="comment">/* 修改前 */</span></span><br><span class="line"><span class="attribute">animation</span>: bubbles <span class="number">18s</span> ease-in infinite;</span><br><span class="line"><span class="attribute">transform</span>: <span class="built_in">translate</span>(<span class="number">0</span>, -<span class="number">8000%</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 修改后 */</span></span><br><span class="line"><span class="attribute">animation</span>: bubbles <span class="number">60s</span> ease-in infinite;</span><br><span class="line"><span class="attribute">transform</span>: <span class="built_in">translate</span>(<span class="number">0</span>, -<span class="number">80000%</span>);</span><br></pre></td></tr></table></figure>
-
-<h3 id="4-3-正文气泡容器"><a href="#4-3-正文气泡容器" class="headerlink" title="4.3 正文气泡容器"></a>4.3 正文气泡容器</h3><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">style</span>=<span class="string">&quot;width:100%; height:100%; position:relative; bottom:0px;&quot;</span></span></span><br><span class="line"><span class="tag">     <span class="attr">class</span>=<span class="string">&quot;particletext bubbles&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>正文区域使用 <code>position: relative</code> 而非 <code>absolute</code>，气泡跟随文档流排列在文章内容下方。</p>
-<hr>
-<h2 id="五、通用-page-页面气泡（page-ejs-bg-cover-ejs）"><a href="#五、通用-page-页面气泡（page-ejs-bg-cover-ejs）" class="headerlink" title="五、通用 page 页面气泡（page.ejs + bg-cover.ejs）"></a>五、通用 page 页面气泡（page.ejs + bg-cover.ejs）</h2><h3 id="5-1-适用页面"><a href="#5-1-适用页面" class="headerlink" title="5.1 适用页面"></a>5.1 适用页面</h3><p>所有 <code>layout: &quot;page&quot;</code> 类型的页面，例如 <code>/text/</code>。</p>
-<h3 id="5-2-涉及文件"><a href="#5-2-涉及文件" class="headerlink" title="5.2 涉及文件"></a>5.2 涉及文件</h3><table>
-<thead>
-<tr>
-<th>文件</th>
-<th>作用</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>layout/page.ejs</code></td>
-<td>页面正文区域气泡</td>
-</tr>
-<tr>
-<td><code>layout/_partial/bg-cover.ejs</code></td>
-<td>页面封面顶部气泡</td>
-</tr>
-</tbody></table>
-<h3 id="5-3-page-ejs-添加的气泡代码"><a href="#5-3-page-ejs-添加的气泡代码" class="headerlink" title="5.3 page.ejs 添加的气泡代码"></a>5.3 page.ejs 添加的气泡代码</h3><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="language-css"></span></span><br><span class="line"><span class="language-css"><span class="selector-class">.page-bubbles</span> &gt; <span class="selector-class">.particle</span> &#123;</span></span><br><span class="line"><span class="language-css">    <span class="attribute">opacity</span>: <span class="number">0</span>;</span></span><br><span class="line"><span class="language-css">    <span class="attribute">position</span>: absolute;</span></span><br><span class="line"><span class="language-css">    <span class="attribute">background-color</span>: <span class="built_in">rgba</span>(<span class="number">128</span>,<span class="number">255</span>,<span class="number">0</span>,<span class="number">0.7</span>);       <span class="comment">/* 荧光绿 */</span></span></span><br><span class="line"><span class="language-css">    <span class="attribute">animation</span>: pageBubbles <span class="number">60s</span> ease-in infinite;  <span class="comment">/* 60秒完整上升 */</span></span></span><br><span class="line"><span class="language-css">    <span class="attribute">border-radius</span>: <span class="number">100%</span>;</span></span><br><span class="line"><span class="language-css">&#125;</span></span><br><span class="line"><span class="language-css"><span class="keyword">@keyframes</span> pageBubbles &#123;</span></span><br><span class="line"><span class="language-css">    <span class="number">0%</span> &#123; <span class="attribute">opacity</span>: <span class="number">0</span>; &#125;</span></span><br><span class="line"><span class="language-css">    <span class="number">5%</span> &#123; <span class="attribute">opacity</span>: <span class="number">1</span>; <span class="attribute">transform</span>: <span class="built_in">translate</span>(<span class="number">0</span>, -<span class="number">20%</span>); &#125;</span></span><br><span class="line"><span class="language-css">    <span class="number">100%</span> &#123; <span class="attribute">opacity</span>: <span class="number">0</span>; <span class="attribute">transform</span>: <span class="built_in">translate</span>(<span class="number">0</span>, -<span class="number">80000%</span>); &#125;  <span class="comment">/* 最高值 */</span></span></span><br><span class="line"><span class="language-css">&#125;</span></span><br><span class="line"><span class="language-css"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">style</span>=<span class="string">&quot;width:100%; height:100%; position:relative; bottom:0px;&quot;</span></span></span><br><span class="line"><span class="tag">     <span class="attr">class</span>=<span class="string">&quot;particletext page-bubbles&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="5-4-bg-cover-ejs-封面气泡"><a href="#5-4-bg-cover-ejs-封面气泡" class="headerlink" title="5.4 bg-cover.ejs 封面气泡"></a>5.4 bg-cover.ejs 封面气泡</h3><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;bg-cover about-cover&quot;</span> <span class="attr">style</span>=<span class="string">&quot;position:relative; overflow:hidden;&quot;</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 原有内容 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="language-css"></span></span><br><span class="line"><span class="language-css">    <span class="selector-class">.about-cover</span> <span class="selector-class">.bubbles-bg</span> &gt; <span class="selector-class">.particle</span> &#123;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">opacity</span>: <span class="number">0</span>;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">position</span>: absolute;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">background-color</span>: <span class="built_in">rgba</span>(<span class="number">128</span>,<span class="number">255</span>,<span class="number">0</span>,<span class="number">0.7</span>);</span></span><br><span class="line"><span class="language-css">        <span class="attribute">animation</span>: bubblesBg <span class="number">60s</span> ease-in infinite;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">border-radius</span>: <span class="number">100%</span>;</span></span><br><span class="line"><span class="language-css">    &#125;</span></span><br><span class="line"><span class="language-css">    <span class="keyword">@keyframes</span> bubblesBg &#123;</span></span><br><span class="line"><span class="language-css">        <span class="number">0%</span> &#123; <span class="attribute">opacity</span>: <span class="number">0</span>; &#125;</span></span><br><span class="line"><span class="language-css">        <span class="number">5%</span> &#123; <span class="attribute">opacity</span>: <span class="number">1</span>; <span class="attribute">transform</span>: <span class="built_in">translate</span>(<span class="number">0</span>, -<span class="number">20%</span>); &#125;</span></span><br><span class="line"><span class="language-css">        <span class="number">100%</span> &#123; <span class="attribute">opacity</span>: <span class="number">0</span>; <span class="attribute">transform</span>: <span class="built_in">translate</span>(<span class="number">0</span>, -<span class="number">80000%</span>); &#125;</span></span><br><span class="line"><span class="language-css">    &#125;</span></span><br><span class="line"><span class="language-css">    </span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">style</span>=<span class="string">&quot;width:100%; height:100%; position:absolute; bottom:0; left:0;&quot;</span></span></span><br><span class="line"><span class="tag">         <span class="attr">class</span>=<span class="string">&quot;particletext bubbles-bg&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<hr>
-<h2 id="六、CSS-气泡-JS-生成逻辑详解"><a href="#六、CSS-气泡-JS-生成逻辑详解" class="headerlink" title="六、CSS 气泡 JS 生成逻辑详解"></a>六、CSS 气泡 JS 生成逻辑详解</h2><p>所有页面的气泡均由 jQuery 动态生成：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">$.<span class="title function_">each</span>($(<span class="string">&quot;.particletext.bubbles&quot;</span>), <span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="comment">// 气泡数量 = 容器宽度 / 50 * 10</span></span><br><span class="line">    <span class="keyword">var</span> bubblecount = ($(<span class="variable language_">this</span>).<span class="title function_">width</span>() / <span class="number">50</span>) * <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt;= bubblecount; i++) &#123;</span><br><span class="line">        <span class="comment">// 气泡大小：4px ~ 8px</span></span><br><span class="line">        <span class="keyword">var</span> size = ($.<span class="title function_">rnd</span>(<span class="number">40</span>, <span class="number">80</span>) / <span class="number">10</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 随机位置 + 随机延迟</span></span><br><span class="line">        $(<span class="variable language_">this</span>).<span class="title function_">append</span>(</span><br><span class="line">            <span class="string">&#x27;&lt;span class=&quot;particle&quot; style=&quot;&#x27;</span></span><br><span class="line">            + <span class="string">&#x27;top:&#x27;</span> + $.<span class="title function_">rnd</span>(<span class="number">20</span>, <span class="number">80</span>) + <span class="string">&#x27;%;&#x27;</span>      <span class="comment">// 垂直起始位置 20%~80%</span></span><br><span class="line">            + <span class="string">&#x27;left:&#x27;</span> + $.<span class="title function_">rnd</span>(<span class="number">0</span>, <span class="number">95</span>) + <span class="string">&#x27;%;&#x27;</span>       <span class="comment">// 水平位置 0%~95%</span></span><br><span class="line">            + <span class="string">&#x27;width:&#x27;</span> + size + <span class="string">&#x27;px;&#x27;</span></span><br><span class="line">            + <span class="string">&#x27;height:&#x27;</span> + size + <span class="string">&#x27;px;&#x27;</span></span><br><span class="line">            + <span class="string">&#x27;animation-delay:&#x27;</span> + ($.<span class="title function_">rnd</span>(<span class="number">0</span>, <span class="number">180</span>) / <span class="number">10</span>) + <span class="string">&#x27;s;&#x27;</span>  <span class="comment">// 延迟 0~18秒</span></span><br><span class="line">            + <span class="string">&#x27;&quot;&gt;&lt;/span&gt;&#x27;</span></span><br><span class="line">        );</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-<h3 id="关键参数调整"><a href="#关键参数调整" class="headerlink" title="关键参数调整"></a>关键参数调整</h3><table>
-<thead>
-<tr>
-<th>参数</th>
-<th>当前值</th>
-<th>作用</th>
-<th>调整建议</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>bubblecount</code> 公式中的 <code>50</code></td>
-<td><code>50</code></td>
-<td>每 50px 宽度产生 10 个气泡</td>
-<td>改小 &#x3D; 更密，改大 &#x3D; 更稀</td>
-</tr>
-<tr>
-<td><code>$.rnd(40, 80) / 10</code></td>
-<td>4~8px</td>
-<td>气泡直径</td>
-<td><code>$.rnd(60, 120) / 10</code> &#x3D; 更大</td>
-</tr>
-<tr>
-<td><code>$.rnd(0, 180) / 10</code></td>
-<td>0~18s</td>
-<td>动画延迟</td>
-<td>必须与 CSS <code>animation</code> 时长配合</td>
-</tr>
-<tr>
-<td>CSS <code>background-color</code></td>
-<td><code>rgba(128,255,0,0.7)</code></td>
-<td>荧光绿</td>
-<td>改为任意颜色</td>
-</tr>
-</tbody></table>
-<blockquote>
-<p><strong>注意</strong>：<code>animation-delay</code> 的最大值应与 CSS 动画时长匹配。当前动画时长为 60s，延迟为 0<del>18s，所以气泡在前 18 秒内陆续启动，保证视觉连续性。如需更均匀分布，可改为 <code>$.rnd(0, 600) / 10</code>（0</del>60s）。</p>
-</blockquote>
-<hr>
-<h2 id="七、所有修改文件汇总"><a href="#七、所有修改文件汇总" class="headerlink" title="七、所有修改文件汇总"></a>七、所有修改文件汇总</h2><table>
-<thead>
-<tr>
-<th>文件</th>
-<th>修改内容</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>layout/index.ejs</code></td>
-<td>主页 Canvas 粒子：<code>color:&#39;random&#39;</code>、<code>alpha=1</code>、<code>clearOffset:0.9</code>、衰减 <code>0.0001</code></td>
-</tr>
-<tr>
-<td><code>layout/post.ejs</code></td>
-<td>文章正文气泡：动画时长 <code>60s</code>、位移 <code>-80000%</code></td>
-</tr>
-<tr>
-<td><code>layout/_partial/post-cover.ejs</code></td>
-<td>文章封面气泡：动画时长 <code>60s</code>、位移 <code>-80000%</code></td>
-</tr>
-<tr>
-<td><code>layout/_partial/bg-cover.ejs</code></td>
-<td>通用页面封面气泡：新增完整气泡代码</td>
-</tr>
-<tr>
-<td><code>layout/page.ejs</code></td>
-<td>通用页面正文气泡：新增完整气泡代码</td>
-</tr>
-</tbody></table>
-<hr>
-<h2 id="八、CSS-气泡上升高度速查"><a href="#八、CSS-气泡上升高度速查" class="headerlink" title="八、CSS 气泡上升高度速查"></a>八、CSS 气泡上升高度速查</h2><table>
-<thead>
-<tr>
-<th><code>animation</code> 时长</th>
-<th><code>translate</code> 值</th>
-<th>效果</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>18s</code></td>
-<td><code>-8000%</code></td>
-<td>默认高度（较低）</td>
-</tr>
-<tr>
-<td><code>30s</code></td>
-<td><code>-20000%</code></td>
-<td>中等高度</td>
-</tr>
-<tr>
-<td><code>60s</code></td>
-<td><code>-80000%</code></td>
-<td>最高值（当前设置）</td>
-</tr>
-</tbody></table>
-<p><strong>公式</strong>：上升高度 &#x3D; 气泡尺寸 * translate百分比 &#x2F; 100。一个 6px 的气泡，<code>-80000%</code> 意味着上升 <code>6 * 80000 / 100 = 4800px</code>，远超任何页面高度。</p>
-]]></content>
-      <categories>
-        <category>技术教程</category>
-      </categories>
-      <tags>
-        <tag>Hexo</tag>
-        <tag>Canvas</tag>
-        <tag>前端特效</tag>
-        <tag>JavaScript</tag>
-        <tag>CSS动画</tag>
       </tags>
   </entry>
   <entry>
@@ -3127,7 +3206,7 @@ Gitee 防盗链检测到跨站引用 → ❌ 403	Gitee 无法识别来源 → �
 <li>把 Vercel 的 Twikoo 数据迁移过去</li>
 <li>更新你 hexo 配置里的 envId</li>
 </ul>
-<p> ❯ 现在去 Zeabur 部署。先打开 Zeabur：<a href="https://zeabur.com/login">https://zeabur.com/login</a><br>GitHub500fan登陆，邮箱<a href="mailto:&#51;&#57;&#50;&#54;&#51;&#55;&#50;&#x32;&#x31;&#x40;&#113;&#x71;&#46;&#x63;&#111;&#x6d;">&#51;&#57;&#50;&#54;&#51;&#55;&#50;&#x32;&#x31;&#x40;&#113;&#x71;&#46;&#x63;&#111;&#x6d;</a><br>需要购买</p>
+<p> ❯ 现在去 Zeabur 部署。先打开 Zeabur：<a href="https://zeabur.com/login">https://zeabur.com/login</a><br>GitHub500fan登陆，邮箱<a href="mailto:&#51;&#x39;&#50;&#54;&#x33;&#55;&#50;&#x32;&#x31;&#x40;&#113;&#x71;&#x2e;&#x63;&#x6f;&#109;">&#51;&#x39;&#50;&#54;&#x33;&#55;&#50;&#x32;&#x31;&#x40;&#113;&#x71;&#x2e;&#x63;&#x6f;&#109;</a><br>需要购买</p>
 <pre><code>帮你在 Render 上部署 Twikoo。先看看 Twikoo 自部署的架构：
 </code></pre>
 <p>render.yaml&#96; 已经推在哪个的仓库<br>在你 GitHub 的 fork 仓库里：</p>
@@ -3181,7 +3260,7 @@ Gitee 防盗链检测到跨站引用 → ❌ 403	Gitee 无法识别来源 → �
 <li>Zeabur 原生支持 MongoDB</li>
 <li>但需要付费</li>
 </ul>
-<p>你要走哪个方案？如果选 Atlas，你先去注册，我帮你配置。<br>mongodb+srv:&#x2F;&#x2F;eric:<a href="mailto:&#x74;&#48;&#x30;&#x30;&#x30;&#48;&#54;&#50;&#x35;&#49;&#x36;&#64;&#x63;&#x6c;&#117;&#115;&#116;&#x65;&#114;&#x30;&#x2e;&#x69;&#x31;&#x75;&#48;&#x63;&#102;&#x6f;&#46;&#x6d;&#x6f;&#x6e;&#x67;&#111;&#x64;&#x62;&#46;&#x6e;&#101;&#116;">&#x74;&#48;&#x30;&#x30;&#x30;&#48;&#54;&#50;&#x35;&#49;&#x36;&#64;&#x63;&#x6c;&#117;&#115;&#116;&#x65;&#114;&#x30;&#x2e;&#x69;&#x31;&#x75;&#48;&#x63;&#102;&#x6f;&#46;&#x6d;&#x6f;&#x6e;&#x67;&#111;&#x64;&#x62;&#46;&#x6e;&#101;&#116;</a>&#x2F;?appName&#x3D;Cluster0t     </p>
+<p>你要走哪个方案？如果选 Atlas，你先去注册，我帮你配置。<br>mongodb+srv:&#x2F;&#x2F;eric:<a href="mailto:&#116;&#x30;&#48;&#48;&#x30;&#x30;&#54;&#x32;&#53;&#49;&#x36;&#x40;&#x63;&#108;&#117;&#115;&#116;&#x65;&#114;&#x30;&#46;&#105;&#x31;&#117;&#48;&#x63;&#x66;&#x6f;&#x2e;&#109;&#111;&#x6e;&#103;&#111;&#100;&#x62;&#x2e;&#x6e;&#x65;&#x74;">&#116;&#x30;&#48;&#48;&#x30;&#x30;&#54;&#x32;&#53;&#49;&#x36;&#x40;&#x63;&#108;&#117;&#115;&#116;&#x65;&#114;&#x30;&#46;&#105;&#x31;&#117;&#48;&#x63;&#x66;&#x6f;&#x2e;&#109;&#111;&#x6e;&#103;&#111;&#100;&#x62;&#x2e;&#x6e;&#x65;&#x74;</a>&#x2F;?appName&#x3D;Cluster0t     </p>
 <p>，<br>好的！连接字符串在 MongoDB Atlas 控制台获取，步骤如下：</p>
 <ol>
 <li>打开 <a href="https://cloud.mongodb.com/">https://cloud.mongodb.com/</a></li>
@@ -3191,15 +3270,15 @@ Gitee 防盗链检测到跨站引用 → ❌ 403	Gitee 无法识别来源 → �
 <li>选择 <strong>Drivers</strong>（或 Connect your application）</li>
 <li>就能看到连接字符串，类似：<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mongodb+srv://&lt;username&gt;:&lt;password&gt;@cluster0.xxxxx.mongodb.net/?retryWrites=true&amp;w=majority</span><br></pre></td></tr></table></figure></li>
 </ol>
-<p>你需要把 <code>&lt;username&gt;</code> 和 <code>&lt;password&gt;</code> 替换成你创建数据库用户时设置的用户名和密码。<br>mongodb+srv:&#x2F;&#x2F;eric:<a href="mailto:&#116;&#48;&#48;&#48;&#x30;&#48;&#x36;&#x32;&#53;&#49;&#x36;&#x40;&#99;&#108;&#117;&#115;&#116;&#101;&#114;&#48;&#x2e;&#x69;&#49;&#117;&#48;&#x63;&#x66;&#111;&#46;&#109;&#x6f;&#110;&#x67;&#111;&#x64;&#x62;&#46;&#x6e;&#101;&#x74;">&#116;&#48;&#48;&#48;&#x30;&#48;&#x36;&#x32;&#53;&#49;&#x36;&#x40;&#99;&#108;&#117;&#115;&#116;&#101;&#114;&#48;&#x2e;&#x69;&#49;&#117;&#48;&#x63;&#x66;&#111;&#46;&#109;&#x6f;&#110;&#x67;&#111;&#x64;&#x62;&#46;&#x6e;&#101;&#x74;</a>&#x2F;twikoo?appName&#x3D;Cluster0t</p>
+<p>你需要把 <code>&lt;username&gt;</code> 和 <code>&lt;password&gt;</code> 替换成你创建数据库用户时设置的用户名和密码。<br>mongodb+srv:&#x2F;&#x2F;eric:<a href="mailto:&#x74;&#x30;&#x30;&#x30;&#x30;&#x30;&#x36;&#50;&#53;&#49;&#x36;&#64;&#x63;&#108;&#x75;&#x73;&#x74;&#101;&#x72;&#48;&#x2e;&#x69;&#x31;&#117;&#48;&#99;&#x66;&#111;&#x2e;&#x6d;&#111;&#x6e;&#103;&#x6f;&#100;&#x62;&#x2e;&#110;&#101;&#116;">&#x74;&#x30;&#x30;&#x30;&#x30;&#x30;&#x36;&#50;&#53;&#49;&#x36;&#64;&#x63;&#108;&#x75;&#x73;&#x74;&#101;&#x72;&#48;&#x2e;&#x69;&#x31;&#117;&#48;&#99;&#x66;&#111;&#x2e;&#x6d;&#111;&#x6e;&#103;&#x6f;&#100;&#x62;&#x2e;&#110;&#101;&#116;</a>&#x2F;twikoo?appName&#x3D;Cluster0t</p>
 <p>mongodb+srv:&#x2F;&#x2F;eric:<db_password>@cluster0.i1u0cfo.mongodb.net&#x2F;</p>
 <p>mongodb+srv:&#x2F;&#x2F;eric:<db_password>@cluster0.i1u0cfo.mongodb.net&#x2F;?appName&#x3D;Cluster0</p>
-<p>mongodb+srv:&#x2F;&#x2F;eric:<a href="mailto:&#x74;&#x30;&#x30;&#48;&#x30;&#48;&#54;&#50;&#53;&#49;&#54;&#x40;&#x63;&#108;&#117;&#115;&#116;&#101;&#114;&#48;&#46;&#x69;&#49;&#x75;&#x30;&#99;&#x66;&#x6f;&#x2e;&#109;&#111;&#110;&#103;&#111;&#x64;&#x62;&#x2e;&#x6e;&#x65;&#116;">&#x74;&#x30;&#x30;&#48;&#x30;&#48;&#54;&#50;&#53;&#49;&#54;&#x40;&#x63;&#108;&#117;&#115;&#116;&#101;&#114;&#48;&#46;&#x69;&#49;&#x75;&#x30;&#99;&#x66;&#x6f;&#x2e;&#109;&#111;&#110;&#103;&#111;&#x64;&#x62;&#x2e;&#x6e;&#x65;&#116;</a>&#x2F;?appName&#x3D;Cluster0</p>
+<p>mongodb+srv:&#x2F;&#x2F;eric:<a href="mailto:&#x74;&#48;&#48;&#x30;&#x30;&#x30;&#x36;&#x32;&#53;&#49;&#54;&#64;&#99;&#x6c;&#117;&#x73;&#x74;&#101;&#114;&#48;&#46;&#x69;&#49;&#117;&#48;&#99;&#x66;&#111;&#x2e;&#109;&#x6f;&#110;&#x67;&#111;&#x64;&#x62;&#x2e;&#110;&#101;&#x74;">&#x74;&#48;&#48;&#x30;&#x30;&#x30;&#x36;&#x32;&#53;&#49;&#54;&#64;&#99;&#x6c;&#117;&#x73;&#x74;&#101;&#114;&#48;&#46;&#x69;&#49;&#117;&#48;&#99;&#x66;&#111;&#x2e;&#109;&#x6f;&#110;&#x67;&#111;&#x64;&#x62;&#x2e;&#110;&#101;&#x74;</a>&#x2F;?appName&#x3D;Cluster0</p>
 <p>mongodb+srv:&#x2F;&#x2F;eric:<db_password>@cluster0.i1u0cfo.mongodb.net&#x2F;?appName&#x3D;Cluster0</p>
-<p>mongodb+srv:&#x2F;&#x2F;eric:<a href="mailto:&#x54;&#116;&#x30;&#48;&#48;&#x30;&#x30;&#54;&#x32;&#53;&#49;&#54;&#64;&#x63;&#x6c;&#117;&#115;&#x74;&#101;&#114;&#x30;&#x2e;&#x69;&#x31;&#117;&#x30;&#x63;&#102;&#111;&#x2e;&#109;&#111;&#110;&#103;&#x6f;&#100;&#98;&#x2e;&#x6e;&#101;&#x74;">&#x54;&#116;&#x30;&#48;&#48;&#x30;&#x30;&#54;&#x32;&#53;&#49;&#54;&#64;&#x63;&#x6c;&#117;&#115;&#x74;&#101;&#114;&#x30;&#x2e;&#x69;&#x31;&#117;&#x30;&#x63;&#102;&#111;&#x2e;&#109;&#111;&#110;&#103;&#x6f;&#100;&#98;&#x2e;&#x6e;&#101;&#x74;</a>&#x2F;?appName&#x3D;Cluster0</p>
-<p>mongodb+srv:&#x2F;&#x2F;eric:<a href="mailto:&#116;&#48;&#48;&#48;&#48;&#x30;&#54;&#50;&#x35;&#49;&#x36;&#64;&#x63;&#108;&#117;&#x73;&#116;&#101;&#x72;&#x30;&#46;&#x69;&#x31;&#117;&#48;&#99;&#102;&#x6f;&#46;&#109;&#x6f;&#110;&#x67;&#111;&#100;&#x62;&#46;&#110;&#x65;&#116;">&#116;&#48;&#48;&#48;&#48;&#x30;&#54;&#50;&#x35;&#49;&#x36;&#64;&#x63;&#108;&#117;&#x73;&#116;&#101;&#x72;&#x30;&#46;&#x69;&#x31;&#117;&#48;&#99;&#102;&#x6f;&#46;&#109;&#x6f;&#110;&#x67;&#111;&#100;&#x62;&#46;&#110;&#x65;&#116;</a>&#x2F;</p>
+<p>mongodb+srv:&#x2F;&#x2F;eric:<a href="mailto:&#84;&#x74;&#x30;&#x30;&#x30;&#48;&#48;&#54;&#50;&#53;&#x31;&#54;&#64;&#99;&#x6c;&#x75;&#x73;&#x74;&#101;&#x72;&#x30;&#46;&#105;&#x31;&#x75;&#48;&#x63;&#102;&#x6f;&#x2e;&#x6d;&#x6f;&#110;&#x67;&#x6f;&#x64;&#x62;&#x2e;&#110;&#x65;&#x74;">&#84;&#x74;&#x30;&#x30;&#x30;&#48;&#48;&#54;&#50;&#53;&#x31;&#54;&#64;&#99;&#x6c;&#x75;&#x73;&#x74;&#101;&#x72;&#x30;&#46;&#105;&#x31;&#x75;&#48;&#x63;&#102;&#x6f;&#x2e;&#x6d;&#x6f;&#110;&#x67;&#x6f;&#x64;&#x62;&#x2e;&#110;&#x65;&#x74;</a>&#x2F;?appName&#x3D;Cluster0</p>
+<p>mongodb+srv:&#x2F;&#x2F;eric:<a href="mailto:&#116;&#48;&#x30;&#x30;&#x30;&#x30;&#x36;&#x32;&#53;&#x31;&#54;&#x40;&#x63;&#x6c;&#x75;&#x73;&#116;&#101;&#114;&#48;&#46;&#x69;&#x31;&#x75;&#x30;&#99;&#x66;&#x6f;&#x2e;&#109;&#111;&#110;&#103;&#x6f;&#100;&#98;&#x2e;&#x6e;&#101;&#116;">&#116;&#48;&#x30;&#x30;&#x30;&#x30;&#x36;&#x32;&#53;&#x31;&#54;&#x40;&#x63;&#x6c;&#x75;&#x73;&#116;&#101;&#114;&#48;&#46;&#x69;&#x31;&#x75;&#x30;&#99;&#x66;&#x6f;&#x2e;&#109;&#111;&#110;&#103;&#x6f;&#100;&#98;&#x2e;&#x6e;&#101;&#116;</a>&#x2F;</p>
 <p>在你的 Mac 终端运行这个命令（替换密码）：                                        </p>
-<p>  mongosh “mongodb+srv:&#x2F;&#x2F;eric:<a href="mailto:&#84;&#x74;&#x30;&#48;&#x30;&#x30;&#x30;&#x36;&#50;&#x35;&#49;&#x36;&#64;&#99;&#108;&#x75;&#115;&#x74;&#x65;&#114;&#x30;&#46;&#x69;&#x31;&#x75;&#x30;&#99;&#102;&#x6f;&#46;&#109;&#111;&#x6e;&#103;&#x6f;&#100;&#x62;&#x2e;&#110;&#101;&#x74;">&#84;&#x74;&#x30;&#48;&#x30;&#x30;&#x30;&#x36;&#50;&#x35;&#49;&#x36;&#64;&#99;&#108;&#x75;&#115;&#x74;&#x65;&#114;&#x30;&#46;&#x69;&#x31;&#x75;&#x30;&#99;&#102;&#x6f;&#46;&#109;&#111;&#x6e;&#103;&#x6f;&#100;&#x62;&#x2e;&#110;&#101;&#x74;</a>&#x2F;twikoo”<br>  –eval “db.comment.find().toArray()”                                             </p>
+<p>  mongosh “mongodb+srv:&#x2F;&#x2F;eric:<a href="mailto:&#84;&#116;&#48;&#x30;&#x30;&#48;&#48;&#54;&#50;&#x35;&#x31;&#x36;&#64;&#99;&#x6c;&#117;&#115;&#x74;&#101;&#114;&#x30;&#x2e;&#105;&#49;&#117;&#48;&#99;&#102;&#111;&#x2e;&#109;&#111;&#x6e;&#103;&#111;&#100;&#x62;&#x2e;&#x6e;&#101;&#116;">&#84;&#116;&#48;&#x30;&#x30;&#48;&#48;&#54;&#50;&#x35;&#x31;&#x36;&#64;&#99;&#x6c;&#117;&#115;&#x74;&#101;&#114;&#x30;&#x2e;&#105;&#49;&#117;&#48;&#99;&#102;&#111;&#x2e;&#109;&#111;&#x6e;&#103;&#111;&#100;&#x62;&#x2e;&#x6e;&#101;&#116;</a>&#x2F;twikoo”<br>  –eval “db.comment.find().toArray()”                                             </p>
 <p>  如果没装 mongosh：                                                               </p>
 <p>  brew install mongosh                                                             </p>
 <p>  这个命令会直接连接 Atlas 的 twikoo 数据库，看有没有数据。如果返回空数组 []，说明<br>  Atlas 连接正常但没有数据写入，问题在 tkserver 那边。                             </p>
@@ -3284,7 +3363,7 @@ Gitee 防盗链检测到跨站引用 → ❌ 403	Gitee 无法识别来源 → �
 <ol>
 <li>Render → Environment                                                          </li>
 <li>把 Key 从 MONGODB_URL 改成 MONGO_URI                                          </li>
-<li>Value<br>  不变：mongodb+srv:&#x2F;&#x2F;eric:<a href="mailto:&#84;&#116;&#48;&#48;&#48;&#x30;&#48;&#x36;&#x32;&#x35;&#x31;&#x36;&#x40;&#x63;&#x6c;&#x75;&#115;&#x74;&#x65;&#114;&#48;&#x2e;&#105;&#49;&#117;&#48;&#99;&#102;&#x6f;&#x2e;&#109;&#111;&#x6e;&#103;&#x6f;&#100;&#x62;&#x2e;&#x6e;&#101;&#x74;">&#84;&#116;&#48;&#48;&#48;&#x30;&#48;&#x36;&#x32;&#x35;&#x31;&#x36;&#x40;&#x63;&#x6c;&#x75;&#115;&#x74;&#x65;&#114;&#48;&#x2e;&#105;&#49;&#117;&#48;&#99;&#102;&#x6f;&#x2e;&#109;&#111;&#x6e;&#103;&#x6f;&#100;&#x62;&#x2e;&#x6e;&#101;&#x74;</a>&#x2F;twikoo        </li>
+<li>Value<br>  不变：mongodb+srv:&#x2F;&#x2F;eric:<a href="mailto:&#84;&#116;&#48;&#48;&#x30;&#x30;&#x30;&#x36;&#50;&#x35;&#x31;&#54;&#64;&#99;&#x6c;&#x75;&#115;&#116;&#x65;&#114;&#48;&#x2e;&#x69;&#49;&#x75;&#x30;&#x63;&#x66;&#111;&#46;&#109;&#x6f;&#x6e;&#x67;&#x6f;&#100;&#x62;&#46;&#x6e;&#x65;&#x74;">&#84;&#116;&#48;&#48;&#x30;&#x30;&#x30;&#x36;&#50;&#x35;&#x31;&#54;&#64;&#99;&#x6c;&#x75;&#115;&#116;&#x65;&#114;&#48;&#x2e;&#x69;&#49;&#x75;&#x30;&#x63;&#x66;&#111;&#46;&#109;&#x6f;&#x6e;&#x67;&#x6f;&#100;&#x62;&#46;&#x6e;&#x65;&#x74;</a>&#x2F;twikoo        </li>
 <li>保存，等重新部署</li>
 </ol>
 <p>  部署后看启动日志，应该会变成 Twikoo is using mongodb database。 </p>
@@ -3311,7 +3390,7 @@ Gitee 防盗链检测到跨站引用 → ❌ 403	Gitee 无法识别来源 → �
 <ol>
 <li>打开 <a href="https://uptimerobot.com/">https://uptimerobot.com/</a></li>
 <li>点击 “Get started free”</li>
-<li>用GitHub，500fan注册<br>eric<br><a href="mailto:&#x33;&#x39;&#x32;&#54;&#51;&#x37;&#50;&#50;&#49;&#64;&#113;&#x71;&#x2e;&#x63;&#111;&#x6d;">&#x33;&#x39;&#x32;&#54;&#51;&#x37;&#50;&#50;&#49;&#64;&#113;&#x71;&#x2e;&#x63;&#111;&#x6d;</a></li>
+<li>用GitHub，500fan注册<br>eric<br><a href="mailto:&#51;&#x39;&#x32;&#x36;&#x33;&#55;&#x32;&#x32;&#x31;&#x40;&#113;&#113;&#46;&#99;&#x6f;&#x6d;">&#51;&#x39;&#x32;&#x36;&#x33;&#55;&#x32;&#x32;&#x31;&#x40;&#113;&#113;&#46;&#99;&#x6f;&#x6d;</a></li>
 <li>密码：t0000062516（我设置的，你可以改）</li>
 </ol>
 <p>注册完成后告诉我，我帮你添加监控。<br>好的！现在添加监控：</p>
@@ -3517,7 +3596,7 @@ Gitee 防盗链检测到跨站引用 → ❌ 403	Gitee 无法识别来源 → �
 </ol>
 <p>  推荐用 SM.MS（免费，无需注册）：                                                 </p>
 <ol>
-<li><p>去 sm.ms 注册账号   <a href="https://s.ee/zh-CN/">https://s.ee/zh-CN/</a><br><a href="mailto:&#51;&#57;&#x32;&#54;&#51;&#55;&#50;&#x32;&#x31;&#x40;&#113;&#113;&#46;&#x63;&#111;&#x6d;">&#51;&#57;&#x32;&#54;&#51;&#55;&#50;&#x32;&#x31;&#x40;&#113;&#113;&#46;&#x63;&#111;&#x6d;</a><br>Tt0000062516@</p>
+<li><p>去 sm.ms 注册账号   <a href="https://s.ee/zh-CN/">https://s.ee/zh-CN/</a><br><a href="mailto:&#x33;&#57;&#50;&#x36;&#x33;&#x37;&#x32;&#50;&#49;&#64;&#x71;&#113;&#x2e;&#99;&#111;&#109;">&#x33;&#57;&#50;&#x36;&#x33;&#x37;&#x32;&#50;&#49;&#64;&#x71;&#113;&#x2e;&#99;&#111;&#109;</a><br>Tt0000062516@</p>
 </li>
 <li><p>获取 API Token（Dashboard → API Token）                                       </p>
 </li>
@@ -3533,7 +3612,7 @@ Gitee 防盗链检测到跨站引用 → ❌ 403	Gitee 无法识别来源 → �
 <p>  你用哪种方式？<br><a href="https://github.com/settings/tokens">https://github.com/settings/tokens</a> Giscus 评论区</p>
 <p>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是Personal access tokens (classic)twikoo-img — repo</p>
 <p>twikoo-img — repo图床，<a href="https://7bu.top/register">https://7bu.top/register</a> 注册</p>
-<p>用户名<br>eric<br>姓名<br>er<br><a href="mailto:&#x33;&#57;&#50;&#54;&#51;&#55;&#50;&#50;&#49;&#64;&#x71;&#x71;&#46;&#x63;&#x6f;&#109;">&#x33;&#57;&#50;&#54;&#51;&#55;&#50;&#50;&#49;&#64;&#x71;&#x71;&#46;&#x63;&#x6f;&#109;</a>密码t0000062516</p>
+<p>用户名<br>eric<br>姓名<br>er<br><a href="mailto:&#51;&#57;&#50;&#54;&#x33;&#x37;&#50;&#x32;&#49;&#x40;&#113;&#x71;&#46;&#x63;&#x6f;&#x6d;">&#51;&#57;&#50;&#54;&#x33;&#x37;&#50;&#x32;&#49;&#x40;&#113;&#x71;&#46;&#x63;&#x6f;&#x6d;</a>密码t0000062516</p>
 <p>你先打开 PicList 地址看看能不能访问？                                            </p>
 <p>❯ <a href="https://piclist-f85t.onrender.com/">https://piclist-f85t.onrender.com/</a> 可以打开登陆吗                                </p>
 <p>换成<br><a href="https://github.com/500fan/PicList">https://github.com/500fan/PicList</a><br>⏺ 你自己在浏览器打开 <a href="https://piclist-f85t.onrender.com/">https://piclist-f85t.onrender.com/</a> 试试看。                   </p>
@@ -4200,10 +4279,10 @@ Gitee 防盗链检测到跨站引用 → ❌ 403	Gitee 无法识别来源 → �
 
 <p>编译完成后会生成 <code>dist/</code> 目录，然后在微信开发者工具中导入这个 <code>dist/</code> 目录即可预览。</p>
 <p>要我现在帮你运行这些命令吗？<br>运行这些命令，完成之后补充到教程里说明<br>────────────────────────────────────────</p>
-<p>  ┊ 💻 preparing terminal…<br>  💻 cd &#x2F;Users&#x2F;apple&#x2F;Downloads&#x2F;blog&#x2F;zhaoo&#x2F;my-taro-app &amp;&amp; npm install<br>依赖已安装。现在编译小程序<br>  💻 cd &#x2F;Users&#x2F;apple&#x2F;Downloads&#x2F;blog&#x2F;zhaoo&#x2F;my-taro-app &amp;&amp; npm install @tarojs&#x2F;<a href="mailto:&#x70;&#x6c;&#117;&#x67;&#x69;&#x6e;&#45;&#112;&#x6c;&#x61;&#116;&#102;&#111;&#x72;&#109;&#x2d;&#x77;&#x65;&#97;&#x70;&#112;&#x40;&#x33;&#46;&#x32;&#46;&#49;">&#x70;&#x6c;&#117;&#x67;&#x69;&#x6e;&#45;&#112;&#x6c;&#x61;&#116;&#102;&#111;&#x72;&#109;&#x2d;&#x77;&#x65;&#97;&#x70;&#112;&#x40;&#x33;&#46;&#x32;&#46;&#49;</a> –registry <a href="https://registry.npmmirror.com/">https://registry.npmmirror.com</a> 2&gt;&amp;1  (26.1s)</p>
+<p>  ┊ 💻 preparing terminal…<br>  💻 cd &#x2F;Users&#x2F;apple&#x2F;Downloads&#x2F;blog&#x2F;zhaoo&#x2F;my-taro-app &amp;&amp; npm install<br>依赖已安装。现在编译小程序<br>  💻 cd &#x2F;Users&#x2F;apple&#x2F;Downloads&#x2F;blog&#x2F;zhaoo&#x2F;my-taro-app &amp;&amp; npm install @tarojs&#x2F;<a href="mailto:&#x70;&#108;&#117;&#x67;&#105;&#110;&#45;&#x70;&#108;&#97;&#x74;&#102;&#111;&#x72;&#109;&#x2d;&#119;&#x65;&#x61;&#x70;&#112;&#x40;&#x33;&#x2e;&#50;&#46;&#49;">&#x70;&#108;&#117;&#x67;&#105;&#110;&#45;&#x70;&#108;&#97;&#x74;&#102;&#111;&#x72;&#109;&#x2d;&#119;&#x65;&#x61;&#x70;&#112;&#x40;&#x33;&#x2e;&#50;&#46;&#49;</a> –registry <a href="https://registry.npmmirror.com/">https://registry.npmmirror.com</a> 2&gt;&amp;1  (26.1s)</p>
 <p> ⚕ mimo-v2.5-p<br> npm install 超时了，node_modules 已部分安装。再跑一次让它补完缺失的包：<br>╰─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯<br>  ┊ 💻 preparing terminal…<br>  💻 cd &#x2F;Users&#x2F;apple&#x2F;Downloads&#x2F;blog&#x2F;zhaoo&#x2F;my-taro-app &amp;&amp; npm install –prefer-offline –registry <a href="https://registry.npmmirror.com/">https://registry.npmmirror.com</a> 2&gt;&amp;1 | tail -10  (31.8s)</p>
 <p>安装成功！现在编译：<br>╰─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯<br>  ┊ 💻 preparing terminal…</p>
-<p>╭─ ⚕ Hermes ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮<br><code>node-sass</code> 不兼容 Node.js v24。需要替换为 <code>sass</code>（Dart Sass）：<br>╰─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯<br>  ┊ 💻 preparing terminal…<br>  💻 cd &#x2F;Users&#x2F;apple&#x2F;Downloads&#x2F;blog&#x2F;zhaoo&#x2F;my-taro-app &amp;&amp; npm uninstall node-sass –ignore-scripts 2&gt;&amp;1 &amp;&amp; npm install <a href="mailto:&#x73;&#x61;&#115;&#x73;&#x40;&#x31;&#46;&#51;&#x32;&#x2e;&#x30;">&#x73;&#x61;&#115;&#x73;&#x40;&#x31;&#46;&#51;&#x32;&#x2e;&#x30;</a> –save-dev –registry <a href="https://registry.npmmirror.com/">https://registry.npmmirror.com</a> –ignore-scripts 2&gt;&amp;1</p>
+<p>╭─ ⚕ Hermes ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮<br><code>node-sass</code> 不兼容 Node.js v24。需要替换为 <code>sass</code>（Dart Sass）：<br>╰─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯<br>  ┊ 💻 preparing terminal…<br>  💻 cd &#x2F;Users&#x2F;apple&#x2F;Downloads&#x2F;blog&#x2F;zhaoo&#x2F;my-taro-app &amp;&amp; npm uninstall node-sass –ignore-scripts 2&gt;&amp;1 &amp;&amp; npm install <a href="mailto:&#x73;&#x61;&#x73;&#x73;&#64;&#49;&#46;&#51;&#50;&#x2e;&#x30;">&#x73;&#x61;&#x73;&#x73;&#64;&#49;&#46;&#51;&#50;&#x2e;&#x30;</a> –save-dev –registry <a href="https://registry.npmmirror.com/">https://registry.npmmirror.com</a> –ignore-scripts 2&gt;&amp;1</p>
 <p> ⚕ mimo-v2<br>现在重新编译：<br>╰────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯<br>  ┊ 💻 preparing terminal…</p>
 <p>╭─ ⚕ Hermes ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮<br>node-sass 还在，需要彻底删除：<br>╰────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯<br>  ┊ 💻 preparing terminal…<br>  ⟳ compacting context…<br>⚠️  Session compressed 6 times — accuracy may degrade. Consider &#x2F;new to start fresh.</p>
 <p>╭─ ⚕ Hermes ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮<br>问题：Taro 3.2.1 的 <code>@tarojs/mini-runner</code> 硬性依赖 <code>node-sass</code>，但 node-sass 不兼容 Node.js v24。</p>
@@ -4511,213 +4590,6 @@ Gitee 防盗链检测到跨站引用 → ❌ 403	Gitee 无法识别来源 → �
         <tag>Redis</tag>
         <tag>Upstash</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>Zeabur 留言板部署教程（Express + Redis，国内可访问）</title>
-    <url>/2026/05/04/Zeabur%E7%95%99%E8%A8%80%E6%9D%BF%E9%83%A8%E7%BD%B2%E6%95%99%E7%A8%8B%EF%BC%88Express+Redis%EF%BC%8C%E5%9B%BD%E5%86%85%E5%8F%AF%E8%AE%BF%E9%97%AE%EF%BC%89/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="Zeabur-留言板部署教程（Express-Redis，国内可访问）"><a href="#Zeabur-留言板部署教程（Express-Redis，国内可访问）" class="headerlink" title="Zeabur 留言板部署教程（Express + Redis，国内可访问）"></a>Zeabur 留言板部署教程（Express + Redis，国内可访问）</h1><h2 id="一、为什么用-Zeabur？"><a href="#一、为什么用-Zeabur？" class="headerlink" title="一、为什么用 Zeabur？"></a>一、为什么用 Zeabur？</h2><table>
-<thead>
-<tr>
-<th>平台</th>
-<th>国内访问</th>
-<th>免费额度</th>
-<th>特点</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Vercel</td>
-<td>不稳定</td>
-<td>有</td>
-<td>Serverless，功能强</td>
-</tr>
-<tr>
-<td>Cloudflare Workers</td>
-<td><code>*.workers.dev</code> 被墙</td>
-<td>无限</td>
-<td>需要自定义域名</td>
-</tr>
-<tr>
-<td><strong>Zeabur</strong></td>
-<td><strong>快</strong></td>
-<td><strong>有</strong></td>
-<td><strong>中国平台，国内直连</strong></td>
-</tr>
-</tbody></table>
-<p>Zeabur 是中国平台，<code>*.zeabur.app</code> 域名国内可以直接访问，不需要自定义域名。</p>
-<h2 id="二、技术栈"><a href="#二、技术栈" class="headerlink" title="二、技术栈"></a>二、技术栈</h2><ul>
-<li><strong>后端</strong>：Express.js（Node.js）</li>
-<li><strong>数据库</strong>：Redis（Zeabur 内置）</li>
-<li><strong>图片存储</strong>：Redis（base64，90 天过期）</li>
-<li><strong>部署平台</strong>：Zeabur（中国区域）</li>
-</ul>
-<h2 id="三、项目结构"><a href="#三、项目结构" class="headerlink" title="三、项目结构"></a>三、项目结构</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">guestbook-zeabur/</span><br><span class="line">├── public/</span><br><span class="line">│   ├── index.html      # 主页面</span><br><span class="line">│   ├── style.css       # 样式</span><br><span class="line">│   └── script.js       # 前端逻辑</span><br><span class="line">├── server.js           # Express 后端</span><br><span class="line">├── package.json        # 依赖</span><br><span class="line">└── README.md           # 说明</span><br></pre></td></tr></table></figure>
-
-<h2 id="四、核心代码"><a href="#四、核心代码" class="headerlink" title="四、核心代码"></a>四、核心代码</h2><h3 id="4-1-server-js"><a href="#4-1-server-js" class="headerlink" title="4.1 server.js"></a>4.1 <code>server.js</code></h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">&#x27;express&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> <span class="title class_">Redis</span> = <span class="built_in">require</span>(<span class="string">&#x27;ioredis&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">&#x27;path&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> app = <span class="title function_">express</span>();</span><br><span class="line">app.<span class="title function_">use</span>(express.<span class="title function_">json</span>(&#123; <span class="attr">limit</span>: <span class="string">&#x27;4mb&#x27;</span> &#125;));</span><br><span class="line">app.<span class="title function_">use</span>(express.<span class="title function_">static</span>(path.<span class="title function_">join</span>(__dirname, <span class="string">&#x27;public&#x27;</span>)));</span><br><span class="line"></span><br><span class="line"><span class="comment">// Redis 连接</span></span><br><span class="line"><span class="keyword">const</span> redis = <span class="keyword">new</span> <span class="title class_">Redis</span>(process.<span class="property">env</span>.<span class="property">REDIS_URL</span> || <span class="string">&#x27;redis://localhost:6379&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="variable constant_">KV_KEY</span> = <span class="string">&#x27;guestbook:messages&#x27;</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="variable constant_">MAX_MESSAGES</span> = <span class="number">500</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// GET: 获取所有留言</span></span><br><span class="line">app.<span class="title function_">get</span>(<span class="string">&#x27;/api/messages&#x27;</span>, <span class="keyword">async</span> (req, res) =&gt; &#123;</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> messages = <span class="keyword">await</span> redis.<span class="title function_">lrange</span>(<span class="variable constant_">KV_KEY</span>, <span class="number">0</span>, -<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">const</span> parsed = messages.<span class="title function_">map</span>(<span class="function"><span class="params">m</span> =&gt;</span> <span class="title class_">JSON</span>.<span class="title function_">parse</span>(m));</span><br><span class="line">    res.<span class="title function_">json</span>(parsed);</span><br><span class="line">  &#125; <span class="keyword">catch</span> (err) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">error</span>(<span class="string">&#x27;GET Error:&#x27;</span>, err);</span><br><span class="line">    res.<span class="title function_">status</span>(<span class="number">500</span>).<span class="title function_">json</span>(&#123; <span class="attr">error</span>: <span class="string">&#x27;服务器错误&#x27;</span> &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// POST: 发布新留言</span></span><br><span class="line">app.<span class="title function_">post</span>(<span class="string">&#x27;/api/messages&#x27;</span>, <span class="keyword">async</span> (req, res) =&gt; &#123;</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> &#123; nickname, content, emoji, imageUrl, avatarUrl &#125; = req.<span class="property">body</span>;</span><br><span class="line">    <span class="keyword">if</span> (!nickname || !content) &#123;</span><br><span class="line">      <span class="keyword">return</span> res.<span class="title function_">status</span>(<span class="number">400</span>).<span class="title function_">json</span>(&#123; <span class="attr">error</span>: <span class="string">&#x27;昵称和内容不能为空&#x27;</span> &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> message = &#123;</span><br><span class="line">      <span class="attr">id</span>: <span class="title class_">Date</span>.<span class="title function_">now</span>().<span class="title function_">toString</span>(<span class="number">36</span>) + <span class="title class_">Math</span>.<span class="title function_">random</span>().<span class="title function_">toString</span>(<span class="number">36</span>).<span class="title function_">slice</span>(<span class="number">2</span>, <span class="number">6</span>),</span><br><span class="line">      nickname,</span><br><span class="line">      content,</span><br><span class="line">      <span class="attr">emoji</span>: emoji || <span class="literal">null</span>,</span><br><span class="line">      <span class="attr">imageUrl</span>: imageUrl || <span class="literal">null</span>,</span><br><span class="line">      <span class="attr">avatarUrl</span>: avatarUrl || <span class="literal">null</span>,</span><br><span class="line">      <span class="attr">createdAt</span>: <span class="keyword">new</span> <span class="title class_">Date</span>().<span class="title function_">toISOString</span>(),</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">await</span> redis.<span class="title function_">lpush</span>(<span class="variable constant_">KV_KEY</span>, <span class="title class_">JSON</span>.<span class="title function_">stringify</span>(message));</span><br><span class="line">    <span class="keyword">const</span> len = <span class="keyword">await</span> redis.<span class="title function_">llen</span>(<span class="variable constant_">KV_KEY</span>);</span><br><span class="line">    <span class="keyword">if</span> (len &gt; <span class="variable constant_">MAX_MESSAGES</span>) &#123;</span><br><span class="line">      <span class="keyword">await</span> redis.<span class="title function_">ltrim</span>(<span class="variable constant_">KV_KEY</span>, <span class="number">0</span>, <span class="variable constant_">MAX_MESSAGES</span> - <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    res.<span class="title function_">status</span>(<span class="number">201</span>).<span class="title function_">json</span>(message);</span><br><span class="line">  &#125; <span class="keyword">catch</span> (err) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">error</span>(<span class="string">&#x27;POST Error:&#x27;</span>, err);</span><br><span class="line">    res.<span class="title function_">status</span>(<span class="number">500</span>).<span class="title function_">json</span>(&#123; <span class="attr">error</span>: <span class="string">&#x27;服务器错误&#x27;</span> &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// DELETE: 删除留言</span></span><br><span class="line">app.<span class="title function_">delete</span>(<span class="string">&#x27;/api/messages&#x27;</span>, <span class="keyword">async</span> (req, res) =&gt; &#123;</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> &#123; id &#125; = req.<span class="property">body</span>;</span><br><span class="line">    <span class="keyword">if</span> (!id) <span class="keyword">return</span> res.<span class="title function_">status</span>(<span class="number">400</span>).<span class="title function_">json</span>(&#123; <span class="attr">error</span>: <span class="string">&#x27;缺少留言 ID&#x27;</span> &#125;);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> messages = <span class="keyword">await</span> redis.<span class="title function_">lrange</span>(<span class="variable constant_">KV_KEY</span>, <span class="number">0</span>, -<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">const</span> filtered = messages.<span class="title function_">filter</span>(<span class="function"><span class="params">m</span> =&gt;</span> <span class="title class_">JSON</span>.<span class="title function_">parse</span>(m).<span class="property">id</span> !== id);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (filtered.<span class="property">length</span> === messages.<span class="property">length</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> res.<span class="title function_">status</span>(<span class="number">404</span>).<span class="title function_">json</span>(&#123; <span class="attr">error</span>: <span class="string">&#x27;留言不存在&#x27;</span> &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">await</span> redis.<span class="title function_">del</span>(<span class="variable constant_">KV_KEY</span>);</span><br><span class="line">    <span class="keyword">if</span> (filtered.<span class="property">length</span> &gt; <span class="number">0</span>) &#123;</span><br><span class="line">      <span class="keyword">await</span> redis.<span class="title function_">lpush</span>(<span class="variable constant_">KV_KEY</span>, ...filtered.<span class="title function_">reverse</span>());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    res.<span class="title function_">json</span>(&#123; <span class="attr">success</span>: <span class="literal">true</span> &#125;);</span><br><span class="line">  &#125; <span class="keyword">catch</span> (err) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">error</span>(<span class="string">&#x27;DELETE Error:&#x27;</span>, err);</span><br><span class="line">    res.<span class="title function_">status</span>(<span class="number">500</span>).<span class="title function_">json</span>(&#123; <span class="attr">error</span>: <span class="string">&#x27;服务器错误&#x27;</span> &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// POST: 上传图片（存 Redis，base64）</span></span><br><span class="line">app.<span class="title function_">post</span>(<span class="string">&#x27;/api/upload&#x27;</span>, <span class="keyword">async</span> (req, res) =&gt; &#123;</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> &#123; filename, base64, data &#125; = req.<span class="property">body</span>;</span><br><span class="line">    <span class="keyword">const</span> fileData = base64 || data;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (!filename || !fileData) &#123;</span><br><span class="line">      <span class="keyword">return</span> res.<span class="title function_">status</span>(<span class="number">400</span>).<span class="title function_">json</span>(&#123; <span class="attr">error</span>: <span class="string">&#x27;缺少文件数据&#x27;</span> &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> sizeKB = <span class="title class_">Math</span>.<span class="title function_">round</span>((fileData.<span class="property">length</span> * <span class="number">3</span>) / <span class="number">4</span> / <span class="number">1024</span>);</span><br><span class="line">    <span class="keyword">if</span> (sizeKB &gt; <span class="number">1024</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> res.<span class="title function_">status</span>(<span class="number">400</span>).<span class="title function_">json</span>(&#123; <span class="attr">error</span>: <span class="string">&#x27;图片不能超过 1MB&#x27;</span> &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> ext = filename.<span class="title function_">split</span>(<span class="string">&#x27;.&#x27;</span>).<span class="title function_">pop</span>().<span class="title function_">toLowerCase</span>() || <span class="string">&#x27;png&#x27;</span>;</span><br><span class="line">    <span class="keyword">const</span> imageId = <span class="string">`img_<span class="subst">$&#123;<span class="built_in">Date</span>.now().toString(<span class="number">36</span>)&#125;</span>.<span class="subst">$&#123;ext&#125;</span>`</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 存入 Redis，90 天过期</span></span><br><span class="line">    <span class="keyword">await</span> redis.<span class="title function_">set</span>(imageId, fileData, <span class="string">&#x27;EX&#x27;</span>, <span class="number">7776000</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> protocol = req.<span class="property">secure</span> ? <span class="string">&#x27;https&#x27;</span> : <span class="string">&#x27;http&#x27;</span>;</span><br><span class="line">    <span class="keyword">const</span> url = <span class="string">`<span class="subst">$&#123;protocol&#125;</span>://<span class="subst">$&#123;req.headers.host&#125;</span>/api/image?id=<span class="subst">$&#123;imageId&#125;</span>`</span>;</span><br><span class="line"></span><br><span class="line">    res.<span class="title function_">json</span>(&#123; url &#125;);</span><br><span class="line">  &#125; <span class="keyword">catch</span> (err) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">error</span>(<span class="string">&#x27;Upload Error:&#x27;</span>, err);</span><br><span class="line">    res.<span class="title function_">status</span>(<span class="number">500</span>).<span class="title function_">json</span>(&#123; <span class="attr">error</span>: <span class="string">&#x27;上传失败&#x27;</span> &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// GET: 读取图片（强制 inline 显示）</span></span><br><span class="line">app.<span class="title function_">get</span>(<span class="string">&#x27;/api/image&#x27;</span>, <span class="keyword">async</span> (req, res) =&gt; &#123;</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> &#123; id &#125; = req.<span class="property">query</span>;</span><br><span class="line">    <span class="keyword">if</span> (!id) <span class="keyword">return</span> res.<span class="title function_">status</span>(<span class="number">400</span>).<span class="title function_">json</span>(&#123; <span class="attr">error</span>: <span class="string">&#x27;缺少图片 ID&#x27;</span> &#125;);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> base64Data = <span class="keyword">await</span> redis.<span class="title function_">get</span>(id);</span><br><span class="line">    <span class="keyword">if</span> (!base64Data) &#123;</span><br><span class="line">      <span class="keyword">return</span> res.<span class="title function_">status</span>(<span class="number">404</span>).<span class="title function_">json</span>(&#123; <span class="attr">error</span>: <span class="string">&#x27;图片不存在或已过期&#x27;</span> &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> ext = id.<span class="title function_">split</span>(<span class="string">&#x27;.&#x27;</span>).<span class="title function_">pop</span>().<span class="title function_">toLowerCase</span>();</span><br><span class="line">    <span class="keyword">const</span> mimeMap = &#123;</span><br><span class="line">      <span class="attr">png</span>: <span class="string">&#x27;image/png&#x27;</span>,</span><br><span class="line">      <span class="attr">jpg</span>: <span class="string">&#x27;image/jpeg&#x27;</span>,</span><br><span class="line">      <span class="attr">jpeg</span>: <span class="string">&#x27;image/jpeg&#x27;</span>,</span><br><span class="line">      <span class="attr">gif</span>: <span class="string">&#x27;image/gif&#x27;</span>,</span><br><span class="line">      <span class="attr">webp</span>: <span class="string">&#x27;image/webp&#x27;</span>,</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">const</span> contentType = mimeMap[ext] || <span class="string">&#x27;image/png&#x27;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> buffer = <span class="title class_">Buffer</span>.<span class="title function_">from</span>(base64Data, <span class="string">&#x27;base64&#x27;</span>);</span><br><span class="line"></span><br><span class="line">    res.<span class="title function_">setHeader</span>(<span class="string">&#x27;Content-Type&#x27;</span>, contentType);</span><br><span class="line">    res.<span class="title function_">setHeader</span>(<span class="string">&#x27;Content-Disposition&#x27;</span>, <span class="string">&#x27;inline&#x27;</span>);</span><br><span class="line">    res.<span class="title function_">setHeader</span>(<span class="string">&#x27;Cache-Control&#x27;</span>, <span class="string">&#x27;public, max-age=86400&#x27;</span>);</span><br><span class="line">    res.<span class="title function_">send</span>(buffer);</span><br><span class="line">  &#125; <span class="keyword">catch</span> (err) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">error</span>(<span class="string">&#x27;Image Error:&#x27;</span>, err);</span><br><span class="line">    res.<span class="title function_">status</span>(<span class="number">500</span>).<span class="title function_">json</span>(&#123; <span class="attr">error</span>: <span class="string">&#x27;服务器错误&#x27;</span> &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 所有其他路由返回 index.html</span></span><br><span class="line">app.<span class="title function_">get</span>(<span class="string">&#x27;*&#x27;</span>, <span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">  res.<span class="title function_">sendFile</span>(path.<span class="title function_">join</span>(__dirname, <span class="string">&#x27;public&#x27;</span>, <span class="string">&#x27;index.html&#x27;</span>));</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="variable constant_">PORT</span> = process.<span class="property">env</span>.<span class="property">PORT</span> || <span class="number">3000</span>;</span><br><span class="line">app.<span class="title function_">listen</span>(<span class="variable constant_">PORT</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`Server running on port <span class="subst">$&#123;PORT&#125;</span>`</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-<p><strong>关键点</strong>：</p>
-<ul>
-<li><code>express.static</code> 提供前端静态文件</li>
-<li><code>ioredis</code> 连接 Zeabur 的 Redis</li>
-<li>图片存 Redis（base64），通过 <code>/api/image</code> 读取</li>
-<li><code>Content-Disposition: inline</code> 强制图片在浏览器显示，不下载</li>
-</ul>
-<h3 id="4-2-package-json"><a href="#4-2-package-json" class="headerlink" title="4.2 package.json"></a>4.2 <code>package.json</code></h3><figure class="highlight json"><table><tr><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;guestbook-zeabur&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;version&quot;</span><span class="punctuation">:</span> <span class="string">&quot;1.0.0&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;private&quot;</span><span class="punctuation">:</span> <span class="keyword">true</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;scripts&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;start&quot;</span><span class="punctuation">:</span> <span class="string">&quot;node server.js&quot;</span></span><br><span class="line">  <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;dependencies&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;express&quot;</span><span class="punctuation">:</span> <span class="string">&quot;^4.18.2&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;ioredis&quot;</span><span class="punctuation">:</span> <span class="string">&quot;^5.3.2&quot;</span></span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="4-3-public-index-html"><a href="#4-3-public-index-html" class="headerlink" title="4.3 public/index.html"></a>4.3 <code>public/index.html</code></h3><p>前端页面，与 Vercel 版本相同。</p>
-<h3 id="4-4-public-script-js"><a href="#4-4-public-script-js" class="headerlink" title="4.4 public/script.js"></a>4.4 <code>public/script.js</code></h3><p>前端逻辑，与 Vercel 版本相同。图片 URL 直接使用 <code>/api/image?id=xxx</code> 格式。</p>
-<h3 id="4-5-public-style-css"><a href="#4-5-public-style-css" class="headerlink" title="4.5 public/style.css"></a>4.5 <code>public/style.css</code></h3><p>样式文件，与 Vercel 版本相同。</p>
-<h2 id="五、部署步骤"><a href="#五、部署步骤" class="headerlink" title="五、部署步骤"></a>五、部署步骤</h2><h3 id="5-1-注册-Zeabur-账号"><a href="#5-1-注册-Zeabur-账号" class="headerlink" title="5.1 注册 Zeabur 账号"></a>5.1 注册 Zeabur 账号</h3><ol>
-<li>打开 <a href="https://zeabur.com/">https://zeabur.com</a></li>
-<li>点 <strong>Sign Up</strong></li>
-<li>用 <strong>GitHub 账号</strong> 登录</li>
-</ol>
-<h3 id="5-2-创建项目"><a href="#5-2-创建项目" class="headerlink" title="5.2 创建项目"></a>5.2 创建项目</h3><ol>
-<li>登录后点 <strong>Create Project</strong></li>
-<li>名称：<code>guestbook</code></li>
-<li>区域：选择 <strong>China</strong>（国内最快）</li>
-</ol>
-<h3 id="5-3-添加-Redis-数据库"><a href="#5-3-添加-Redis-数据库" class="headerlink" title="5.3 添加 Redis 数据库"></a>5.3 添加 Redis 数据库</h3><ol>
-<li>在项目页面点 <strong>Add Service</strong></li>
-<li>选择 <strong>Database</strong> → <strong>Redis</strong></li>
-<li>等待创建完成（约 1 分钟）</li>
-</ol>
-<h3 id="5-4-部署后端"><a href="#5-4-部署后端" class="headerlink" title="5.4 部署后端"></a>5.4 部署后端</h3><ol>
-<li>在项目页面点 <strong>Add Service</strong></li>
-<li>选择 <strong>Git</strong></li>
-<li>连接你的 GitHub 账号</li>
-<li>选择 <code>guestbook-zeabur</code> 仓库</li>
-<li>点 <strong>Deploy</strong></li>
-</ol>
-<h3 id="5-5-配置环境变量"><a href="#5-5-配置环境变量" class="headerlink" title="5.5 配置环境变量"></a>5.5 配置环境变量</h3><ol>
-<li>在服务页面点 <strong>Environment</strong></li>
-<li>添加变量：<ul>
-<li><code>REDIS_URL</code> &#x3D; Redis 连接地址</li>
-</ul>
-</li>
-</ol>
-<p><strong>获取 Redis 连接地址</strong>：</p>
-<ol>
-<li>点击 Redis 服务</li>
-<li>点 <strong>Connect</strong> 标签</li>
-<li>复制 <code>REDIS_URL</code> 的值</li>
-</ol>
-<h3 id="5-6-绑定域名（可选）"><a href="#5-6-绑定域名（可选）" class="headerlink" title="5.6 绑定域名（可选）"></a>5.6 绑定域名（可选）</h3><ol>
-<li>在服务页面点 <strong>Networking</strong></li>
-<li>点 <strong>Generate Domain</strong> 生成免费域名（如 <code>guestbook-xxx.zeabur.app</code>）</li>
-<li>或绑定自定义域名</li>
-</ol>
-<h2 id="六、API-接口"><a href="#六、API-接口" class="headerlink" title="六、API 接口"></a>六、API 接口</h2><table>
-<thead>
-<tr>
-<th>接口</th>
-<th>方法</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>/api/messages</code></td>
-<td>GET</td>
-<td>获取所有留言</td>
-</tr>
-<tr>
-<td><code>/api/messages</code></td>
-<td>POST</td>
-<td>发布新留言</td>
-</tr>
-<tr>
-<td><code>/api/messages</code></td>
-<td>DELETE</td>
-<td>删除留言</td>
-</tr>
-<tr>
-<td><code>/api/upload</code></td>
-<td>POST</td>
-<td>上传图片</td>
-</tr>
-<tr>
-<td><code>/api/image?id=xxx</code></td>
-<td>GET</td>
-<td>读取图片（inline 显示）</td>
-</tr>
-</tbody></table>
-<h2 id="七、免费额度"><a href="#七、免费额度" class="headerlink" title="七、免费额度"></a>七、免费额度</h2><p>Zeabur Free Plan：</p>
-<ul>
-<li>512MB 内存</li>
-<li>1GB 磁盘</li>
-<li>100GB 流量&#x2F;月</li>
-<li>Redis：256MB</li>
-</ul>
-<p>留言板完全免费。</p>
-<h2 id="八、与-Vercel-版本的区别"><a href="#八、与-Vercel-版本的区别" class="headerlink" title="八、与 Vercel 版本的区别"></a>八、与 Vercel 版本的区别</h2><table>
-<thead>
-<tr>
-<th>功能</th>
-<th>Vercel 版</th>
-<th>Zeabur 版</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>后端</td>
-<td>Serverless Function</td>
-<td>Express 服务器</td>
-</tr>
-<tr>
-<td>数据库</td>
-<td>Upstash Redis</td>
-<td>Zeabur Redis</td>
-</tr>
-<tr>
-<td>图片存储</td>
-<td>Vercel Blob CDN</td>
-<td>Redis（base64）</td>
-</tr>
-<tr>
-<td>图片代理</td>
-<td>需要 <code>/api/image?url=xxx</code></td>
-<td>直接 <code>/api/image?id=xxx</code></td>
-</tr>
-<tr>
-<td>国内访问</td>
-<td>不稳定</td>
-<td>快</td>
-</tr>
-<tr>
-<td>免费额度</td>
-<td>有</td>
-<td>有</td>
-</tr>
-</tbody></table>
-<h2 id="九、常见问题"><a href="#九、常见问题" class="headerlink" title="九、常见问题"></a>九、常见问题</h2><h3 id="Q-部署后访问报错？"><a href="#Q-部署后访问报错？" class="headerlink" title="Q: 部署后访问报错？"></a>Q: 部署后访问报错？</h3><p>A: 检查环境变量 <code>REDIS_URL</code> 是否正确配置。</p>
-<h3 id="Q-图片上传失败？"><a href="#Q-图片上传失败？" class="headerlink" title="Q: 图片上传失败？"></a>Q: 图片上传失败？</h3><p>A: 图片大小限制 1MB（Redis 存储限制）。压缩图片后再上传。</p>
-<h3 id="Q-国内访问速度如何？"><a href="#Q-国内访问速度如何？" class="headerlink" title="Q: 国内访问速度如何？"></a>Q: 国内访问速度如何？</h3><p>A: Zeabur 中国区域国内访问很快，比 Vercel 稳定。</p>
-<h3 id="Q-可以绑定自定义域名吗？"><a href="#Q-可以绑定自定义域名吗？" class="headerlink" title="Q: 可以绑定自定义域名吗？"></a>Q: 可以绑定自定义域名吗？</h3><p>A: 可以。在服务页面点 <strong>Networking</strong> → <strong>Custom Domain</strong>。</p>
-<h3 id="Q-数据会丢失吗？"><a href="#Q-数据会丢失吗？" class="headerlink" title="Q: 数据会丢失吗？"></a>Q: 数据会丢失吗？</h3><p>A: Redis 数据持久化，不会丢失。图片 90 天过期。</p>
-<h2 id="十、项目地址"><a href="#十、项目地址" class="headerlink" title="十、项目地址"></a>十、项目地址</h2><ul>
-<li>源码：<a href="https://github.com/%E4%BD%A0%E7%9A%84%E7%94%A8%E6%88%B7%E5%90%8D/guestbook-zeabur">https://github.com/你的用户名/guestbook-zeabur</a></li>
-<li>演示：<a href="https://guestbook-xxx.zeabur.app/">https://guestbook-xxx.zeabur.app</a></li>
-</ul>
-<hr>
-<p><em>教程完成于 2026 年 5 月</em></p>
-]]></content>
-      <categories>
-        <category>教程</category>
-      </categories>
-      <tags>
-        <tag>留言板</tag>
-        <tag>zeabur</tag>
-        <tag>express</tag>
-        <tag>redis</tag>
-        <tag>国内部署</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>daan</title>
-    <url>/2026/04/12/daan/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><h3 id="多喝醋能软化血管吗？"><a href="#多喝醋能软化血管吗？" class="headerlink" title="多喝醋能软化血管吗？"></a>多喝醋能软化血管吗？</h3><p>解析，这种说法没有科学依据。人们饮用的食醋进入消化系统后，最终代谢为二氧化碳和水，不会以溶解的形式作用于血管、血脂、斑块。长期过量喝醋，反而会刺激胃黏膜，诱发或加重胃炎、胃溃疡，影响钙等矿物质的吸收代谢。</p>
-]]></content>
-      <categories>
-        <category>categories</category>
-      </categories>
   </entry>
   <entry>
     <title>Vercel留言板搭建与部署完整教程（Vercel Blob + Redis版）</title>
@@ -5145,74 +5017,220 @@ Gitee 防盗链检测到跨站引用 → ❌ 403	Gitee 无法识别来源 → �
       </categories>
       <tags>
         <tag>留言板</tag>
+        <tag>CDN</tag>
         <tag>Vercel</tag>
         <tag>Serverless</tag>
         <tag>Redis</tag>
         <tag>Upstash</tag>
         <tag>Blob</tag>
-        <tag>CDN</tag>
       </tags>
   </entry>
   <entry>
-    <title>wechat</title>
-    <url>/2024/06/15/wechat/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><hr>
-<p>tags:</p>
+    <title>Zeabur 留言板部署教程（Express + Redis，国内可访问）</title>
+    <url>/2026/05/04/Zeabur%E7%95%99%E8%A8%80%E6%9D%BF%E9%83%A8%E7%BD%B2%E6%95%99%E7%A8%8B%EF%BC%88Express+Redis%EF%BC%8C%E5%9B%BD%E5%86%85%E5%8F%AF%E8%AE%BF%E9%97%AE%EF%BC%89/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="Zeabur-留言板部署教程（Express-Redis，国内可访问）"><a href="#Zeabur-留言板部署教程（Express-Redis，国内可访问）" class="headerlink" title="Zeabur 留言板部署教程（Express + Redis，国内可访问）"></a>Zeabur 留言板部署教程（Express + Redis，国内可访问）</h1><h2 id="一、为什么用-Zeabur？"><a href="#一、为什么用-Zeabur？" class="headerlink" title="一、为什么用 Zeabur？"></a>一、为什么用 Zeabur？</h2><table>
+<thead>
+<tr>
+<th>平台</th>
+<th>国内访问</th>
+<th>免费额度</th>
+<th>特点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Vercel</td>
+<td>不稳定</td>
+<td>有</td>
+<td>Serverless，功能强</td>
+</tr>
+<tr>
+<td>Cloudflare Workers</td>
+<td><code>*.workers.dev</code> 被墙</td>
+<td>无限</td>
+<td>需要自定义域名</td>
+</tr>
+<tr>
+<td><strong>Zeabur</strong></td>
+<td><strong>快</strong></td>
+<td><strong>有</strong></td>
+<td><strong>中国平台，国内直连</strong></td>
+</tr>
+</tbody></table>
+<p>Zeabur 是中国平台，<code>*.zeabur.app</code> 域名国内可以直接访问，不需要自定义域名。</p>
+<h2 id="二、技术栈"><a href="#二、技术栈" class="headerlink" title="二、技术栈"></a>二、技术栈</h2><ul>
+<li><strong>后端</strong>：Express.js（Node.js）</li>
+<li><strong>数据库</strong>：Redis（Zeabur 内置）</li>
+<li><strong>图片存储</strong>：Redis（base64，90 天过期）</li>
+<li><strong>部署平台</strong>：Zeabur（中国区域）</li>
+</ul>
+<h2 id="三、项目结构"><a href="#三、项目结构" class="headerlink" title="三、项目结构"></a>三、项目结构</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">guestbook-zeabur/</span><br><span class="line">├── public/</span><br><span class="line">│   ├── index.html      # 主页面</span><br><span class="line">│   ├── style.css       # 样式</span><br><span class="line">│   └── script.js       # 前端逻辑</span><br><span class="line">├── server.js           # Express 后端</span><br><span class="line">├── package.json        # 依赖</span><br><span class="line">└── README.md           # 说明</span><br></pre></td></tr></table></figure>
+
+<h2 id="四、核心代码"><a href="#四、核心代码" class="headerlink" title="四、核心代码"></a>四、核心代码</h2><h3 id="4-1-server-js"><a href="#4-1-server-js" class="headerlink" title="4.1 server.js"></a>4.1 <code>server.js</code></h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">&#x27;express&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> <span class="title class_">Redis</span> = <span class="built_in">require</span>(<span class="string">&#x27;ioredis&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">&#x27;path&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> app = <span class="title function_">express</span>();</span><br><span class="line">app.<span class="title function_">use</span>(express.<span class="title function_">json</span>(&#123; <span class="attr">limit</span>: <span class="string">&#x27;4mb&#x27;</span> &#125;));</span><br><span class="line">app.<span class="title function_">use</span>(express.<span class="title function_">static</span>(path.<span class="title function_">join</span>(__dirname, <span class="string">&#x27;public&#x27;</span>)));</span><br><span class="line"></span><br><span class="line"><span class="comment">// Redis 连接</span></span><br><span class="line"><span class="keyword">const</span> redis = <span class="keyword">new</span> <span class="title class_">Redis</span>(process.<span class="property">env</span>.<span class="property">REDIS_URL</span> || <span class="string">&#x27;redis://localhost:6379&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="variable constant_">KV_KEY</span> = <span class="string">&#x27;guestbook:messages&#x27;</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="variable constant_">MAX_MESSAGES</span> = <span class="number">500</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// GET: 获取所有留言</span></span><br><span class="line">app.<span class="title function_">get</span>(<span class="string">&#x27;/api/messages&#x27;</span>, <span class="keyword">async</span> (req, res) =&gt; &#123;</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> messages = <span class="keyword">await</span> redis.<span class="title function_">lrange</span>(<span class="variable constant_">KV_KEY</span>, <span class="number">0</span>, -<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">const</span> parsed = messages.<span class="title function_">map</span>(<span class="function"><span class="params">m</span> =&gt;</span> <span class="title class_">JSON</span>.<span class="title function_">parse</span>(m));</span><br><span class="line">    res.<span class="title function_">json</span>(parsed);</span><br><span class="line">  &#125; <span class="keyword">catch</span> (err) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">error</span>(<span class="string">&#x27;GET Error:&#x27;</span>, err);</span><br><span class="line">    res.<span class="title function_">status</span>(<span class="number">500</span>).<span class="title function_">json</span>(&#123; <span class="attr">error</span>: <span class="string">&#x27;服务器错误&#x27;</span> &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// POST: 发布新留言</span></span><br><span class="line">app.<span class="title function_">post</span>(<span class="string">&#x27;/api/messages&#x27;</span>, <span class="keyword">async</span> (req, res) =&gt; &#123;</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> &#123; nickname, content, emoji, imageUrl, avatarUrl &#125; = req.<span class="property">body</span>;</span><br><span class="line">    <span class="keyword">if</span> (!nickname || !content) &#123;</span><br><span class="line">      <span class="keyword">return</span> res.<span class="title function_">status</span>(<span class="number">400</span>).<span class="title function_">json</span>(&#123; <span class="attr">error</span>: <span class="string">&#x27;昵称和内容不能为空&#x27;</span> &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> message = &#123;</span><br><span class="line">      <span class="attr">id</span>: <span class="title class_">Date</span>.<span class="title function_">now</span>().<span class="title function_">toString</span>(<span class="number">36</span>) + <span class="title class_">Math</span>.<span class="title function_">random</span>().<span class="title function_">toString</span>(<span class="number">36</span>).<span class="title function_">slice</span>(<span class="number">2</span>, <span class="number">6</span>),</span><br><span class="line">      nickname,</span><br><span class="line">      content,</span><br><span class="line">      <span class="attr">emoji</span>: emoji || <span class="literal">null</span>,</span><br><span class="line">      <span class="attr">imageUrl</span>: imageUrl || <span class="literal">null</span>,</span><br><span class="line">      <span class="attr">avatarUrl</span>: avatarUrl || <span class="literal">null</span>,</span><br><span class="line">      <span class="attr">createdAt</span>: <span class="keyword">new</span> <span class="title class_">Date</span>().<span class="title function_">toISOString</span>(),</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">await</span> redis.<span class="title function_">lpush</span>(<span class="variable constant_">KV_KEY</span>, <span class="title class_">JSON</span>.<span class="title function_">stringify</span>(message));</span><br><span class="line">    <span class="keyword">const</span> len = <span class="keyword">await</span> redis.<span class="title function_">llen</span>(<span class="variable constant_">KV_KEY</span>);</span><br><span class="line">    <span class="keyword">if</span> (len &gt; <span class="variable constant_">MAX_MESSAGES</span>) &#123;</span><br><span class="line">      <span class="keyword">await</span> redis.<span class="title function_">ltrim</span>(<span class="variable constant_">KV_KEY</span>, <span class="number">0</span>, <span class="variable constant_">MAX_MESSAGES</span> - <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    res.<span class="title function_">status</span>(<span class="number">201</span>).<span class="title function_">json</span>(message);</span><br><span class="line">  &#125; <span class="keyword">catch</span> (err) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">error</span>(<span class="string">&#x27;POST Error:&#x27;</span>, err);</span><br><span class="line">    res.<span class="title function_">status</span>(<span class="number">500</span>).<span class="title function_">json</span>(&#123; <span class="attr">error</span>: <span class="string">&#x27;服务器错误&#x27;</span> &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// DELETE: 删除留言</span></span><br><span class="line">app.<span class="title function_">delete</span>(<span class="string">&#x27;/api/messages&#x27;</span>, <span class="keyword">async</span> (req, res) =&gt; &#123;</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> &#123; id &#125; = req.<span class="property">body</span>;</span><br><span class="line">    <span class="keyword">if</span> (!id) <span class="keyword">return</span> res.<span class="title function_">status</span>(<span class="number">400</span>).<span class="title function_">json</span>(&#123; <span class="attr">error</span>: <span class="string">&#x27;缺少留言 ID&#x27;</span> &#125;);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> messages = <span class="keyword">await</span> redis.<span class="title function_">lrange</span>(<span class="variable constant_">KV_KEY</span>, <span class="number">0</span>, -<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">const</span> filtered = messages.<span class="title function_">filter</span>(<span class="function"><span class="params">m</span> =&gt;</span> <span class="title class_">JSON</span>.<span class="title function_">parse</span>(m).<span class="property">id</span> !== id);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (filtered.<span class="property">length</span> === messages.<span class="property">length</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> res.<span class="title function_">status</span>(<span class="number">404</span>).<span class="title function_">json</span>(&#123; <span class="attr">error</span>: <span class="string">&#x27;留言不存在&#x27;</span> &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">await</span> redis.<span class="title function_">del</span>(<span class="variable constant_">KV_KEY</span>);</span><br><span class="line">    <span class="keyword">if</span> (filtered.<span class="property">length</span> &gt; <span class="number">0</span>) &#123;</span><br><span class="line">      <span class="keyword">await</span> redis.<span class="title function_">lpush</span>(<span class="variable constant_">KV_KEY</span>, ...filtered.<span class="title function_">reverse</span>());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    res.<span class="title function_">json</span>(&#123; <span class="attr">success</span>: <span class="literal">true</span> &#125;);</span><br><span class="line">  &#125; <span class="keyword">catch</span> (err) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">error</span>(<span class="string">&#x27;DELETE Error:&#x27;</span>, err);</span><br><span class="line">    res.<span class="title function_">status</span>(<span class="number">500</span>).<span class="title function_">json</span>(&#123; <span class="attr">error</span>: <span class="string">&#x27;服务器错误&#x27;</span> &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// POST: 上传图片（存 Redis，base64）</span></span><br><span class="line">app.<span class="title function_">post</span>(<span class="string">&#x27;/api/upload&#x27;</span>, <span class="keyword">async</span> (req, res) =&gt; &#123;</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> &#123; filename, base64, data &#125; = req.<span class="property">body</span>;</span><br><span class="line">    <span class="keyword">const</span> fileData = base64 || data;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (!filename || !fileData) &#123;</span><br><span class="line">      <span class="keyword">return</span> res.<span class="title function_">status</span>(<span class="number">400</span>).<span class="title function_">json</span>(&#123; <span class="attr">error</span>: <span class="string">&#x27;缺少文件数据&#x27;</span> &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> sizeKB = <span class="title class_">Math</span>.<span class="title function_">round</span>((fileData.<span class="property">length</span> * <span class="number">3</span>) / <span class="number">4</span> / <span class="number">1024</span>);</span><br><span class="line">    <span class="keyword">if</span> (sizeKB &gt; <span class="number">1024</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> res.<span class="title function_">status</span>(<span class="number">400</span>).<span class="title function_">json</span>(&#123; <span class="attr">error</span>: <span class="string">&#x27;图片不能超过 1MB&#x27;</span> &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> ext = filename.<span class="title function_">split</span>(<span class="string">&#x27;.&#x27;</span>).<span class="title function_">pop</span>().<span class="title function_">toLowerCase</span>() || <span class="string">&#x27;png&#x27;</span>;</span><br><span class="line">    <span class="keyword">const</span> imageId = <span class="string">`img_<span class="subst">$&#123;<span class="built_in">Date</span>.now().toString(<span class="number">36</span>)&#125;</span>.<span class="subst">$&#123;ext&#125;</span>`</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 存入 Redis，90 天过期</span></span><br><span class="line">    <span class="keyword">await</span> redis.<span class="title function_">set</span>(imageId, fileData, <span class="string">&#x27;EX&#x27;</span>, <span class="number">7776000</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> protocol = req.<span class="property">secure</span> ? <span class="string">&#x27;https&#x27;</span> : <span class="string">&#x27;http&#x27;</span>;</span><br><span class="line">    <span class="keyword">const</span> url = <span class="string">`<span class="subst">$&#123;protocol&#125;</span>://<span class="subst">$&#123;req.headers.host&#125;</span>/api/image?id=<span class="subst">$&#123;imageId&#125;</span>`</span>;</span><br><span class="line"></span><br><span class="line">    res.<span class="title function_">json</span>(&#123; url &#125;);</span><br><span class="line">  &#125; <span class="keyword">catch</span> (err) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">error</span>(<span class="string">&#x27;Upload Error:&#x27;</span>, err);</span><br><span class="line">    res.<span class="title function_">status</span>(<span class="number">500</span>).<span class="title function_">json</span>(&#123; <span class="attr">error</span>: <span class="string">&#x27;上传失败&#x27;</span> &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// GET: 读取图片（强制 inline 显示）</span></span><br><span class="line">app.<span class="title function_">get</span>(<span class="string">&#x27;/api/image&#x27;</span>, <span class="keyword">async</span> (req, res) =&gt; &#123;</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> &#123; id &#125; = req.<span class="property">query</span>;</span><br><span class="line">    <span class="keyword">if</span> (!id) <span class="keyword">return</span> res.<span class="title function_">status</span>(<span class="number">400</span>).<span class="title function_">json</span>(&#123; <span class="attr">error</span>: <span class="string">&#x27;缺少图片 ID&#x27;</span> &#125;);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> base64Data = <span class="keyword">await</span> redis.<span class="title function_">get</span>(id);</span><br><span class="line">    <span class="keyword">if</span> (!base64Data) &#123;</span><br><span class="line">      <span class="keyword">return</span> res.<span class="title function_">status</span>(<span class="number">404</span>).<span class="title function_">json</span>(&#123; <span class="attr">error</span>: <span class="string">&#x27;图片不存在或已过期&#x27;</span> &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> ext = id.<span class="title function_">split</span>(<span class="string">&#x27;.&#x27;</span>).<span class="title function_">pop</span>().<span class="title function_">toLowerCase</span>();</span><br><span class="line">    <span class="keyword">const</span> mimeMap = &#123;</span><br><span class="line">      <span class="attr">png</span>: <span class="string">&#x27;image/png&#x27;</span>,</span><br><span class="line">      <span class="attr">jpg</span>: <span class="string">&#x27;image/jpeg&#x27;</span>,</span><br><span class="line">      <span class="attr">jpeg</span>: <span class="string">&#x27;image/jpeg&#x27;</span>,</span><br><span class="line">      <span class="attr">gif</span>: <span class="string">&#x27;image/gif&#x27;</span>,</span><br><span class="line">      <span class="attr">webp</span>: <span class="string">&#x27;image/webp&#x27;</span>,</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">const</span> contentType = mimeMap[ext] || <span class="string">&#x27;image/png&#x27;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> buffer = <span class="title class_">Buffer</span>.<span class="title function_">from</span>(base64Data, <span class="string">&#x27;base64&#x27;</span>);</span><br><span class="line"></span><br><span class="line">    res.<span class="title function_">setHeader</span>(<span class="string">&#x27;Content-Type&#x27;</span>, contentType);</span><br><span class="line">    res.<span class="title function_">setHeader</span>(<span class="string">&#x27;Content-Disposition&#x27;</span>, <span class="string">&#x27;inline&#x27;</span>);</span><br><span class="line">    res.<span class="title function_">setHeader</span>(<span class="string">&#x27;Cache-Control&#x27;</span>, <span class="string">&#x27;public, max-age=86400&#x27;</span>);</span><br><span class="line">    res.<span class="title function_">send</span>(buffer);</span><br><span class="line">  &#125; <span class="keyword">catch</span> (err) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">error</span>(<span class="string">&#x27;Image Error:&#x27;</span>, err);</span><br><span class="line">    res.<span class="title function_">status</span>(<span class="number">500</span>).<span class="title function_">json</span>(&#123; <span class="attr">error</span>: <span class="string">&#x27;服务器错误&#x27;</span> &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 所有其他路由返回 index.html</span></span><br><span class="line">app.<span class="title function_">get</span>(<span class="string">&#x27;*&#x27;</span>, <span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">  res.<span class="title function_">sendFile</span>(path.<span class="title function_">join</span>(__dirname, <span class="string">&#x27;public&#x27;</span>, <span class="string">&#x27;index.html&#x27;</span>));</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="variable constant_">PORT</span> = process.<span class="property">env</span>.<span class="property">PORT</span> || <span class="number">3000</span>;</span><br><span class="line">app.<span class="title function_">listen</span>(<span class="variable constant_">PORT</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`Server running on port <span class="subst">$&#123;PORT&#125;</span>`</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p><strong>关键点</strong>：</p>
 <ul>
-<li>SVM</li>
-<li>Have a nice day<br>categories:</li>
-<li>Machine_Learning<br>author: 解决你的问题</li>
+<li><code>express.static</code> 提供前端静态文件</li>
+<li><code>ioredis</code> 连接 Zeabur 的 Redis</li>
+<li>图片存 Redis（base64），通过 <code>/api/image</code> 读取</li>
+<li><code>Content-Disposition: inline</code> 强制图片在浏览器显示，不下载</li>
+</ul>
+<h3 id="4-2-package-json"><a href="#4-2-package-json" class="headerlink" title="4.2 package.json"></a>4.2 <code>package.json</code></h3><figure class="highlight json"><table><tr><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;guestbook-zeabur&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;version&quot;</span><span class="punctuation">:</span> <span class="string">&quot;1.0.0&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;private&quot;</span><span class="punctuation">:</span> <span class="keyword">true</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;scripts&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;start&quot;</span><span class="punctuation">:</span> <span class="string">&quot;node server.js&quot;</span></span><br><span class="line">  <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;dependencies&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;express&quot;</span><span class="punctuation">:</span> <span class="string">&quot;^4.18.2&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;ioredis&quot;</span><span class="punctuation">:</span> <span class="string">&quot;^5.3.2&quot;</span></span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="4-3-public-index-html"><a href="#4-3-public-index-html" class="headerlink" title="4.3 public/index.html"></a>4.3 <code>public/index.html</code></h3><p>前端页面，与 Vercel 版本相同。</p>
+<h3 id="4-4-public-script-js"><a href="#4-4-public-script-js" class="headerlink" title="4.4 public/script.js"></a>4.4 <code>public/script.js</code></h3><p>前端逻辑，与 Vercel 版本相同。图片 URL 直接使用 <code>/api/image?id=xxx</code> 格式。</p>
+<h3 id="4-5-public-style-css"><a href="#4-5-public-style-css" class="headerlink" title="4.5 public/style.css"></a>4.5 <code>public/style.css</code></h3><p>样式文件，与 Vercel 版本相同。</p>
+<h2 id="五、部署步骤"><a href="#五、部署步骤" class="headerlink" title="五、部署步骤"></a>五、部署步骤</h2><h3 id="5-1-注册-Zeabur-账号"><a href="#5-1-注册-Zeabur-账号" class="headerlink" title="5.1 注册 Zeabur 账号"></a>5.1 注册 Zeabur 账号</h3><ol>
+<li>打开 <a href="https://zeabur.com/">https://zeabur.com</a></li>
+<li>点 <strong>Sign Up</strong></li>
+<li>用 <strong>GitHub 账号</strong> 登录</li>
+</ol>
+<h3 id="5-2-创建项目"><a href="#5-2-创建项目" class="headerlink" title="5.2 创建项目"></a>5.2 创建项目</h3><ol>
+<li>登录后点 <strong>Create Project</strong></li>
+<li>名称：<code>guestbook</code></li>
+<li>区域：选择 <strong>China</strong>（国内最快）</li>
+</ol>
+<h3 id="5-3-添加-Redis-数据库"><a href="#5-3-添加-Redis-数据库" class="headerlink" title="5.3 添加 Redis 数据库"></a>5.3 添加 Redis 数据库</h3><ol>
+<li>在项目页面点 <strong>Add Service</strong></li>
+<li>选择 <strong>Database</strong> → <strong>Redis</strong></li>
+<li>等待创建完成（约 1 分钟）</li>
+</ol>
+<h3 id="5-4-部署后端"><a href="#5-4-部署后端" class="headerlink" title="5.4 部署后端"></a>5.4 部署后端</h3><ol>
+<li>在项目页面点 <strong>Add Service</strong></li>
+<li>选择 <strong>Git</strong></li>
+<li>连接你的 GitHub 账号</li>
+<li>选择 <code>guestbook-zeabur</code> 仓库</li>
+<li>点 <strong>Deploy</strong></li>
+</ol>
+<h3 id="5-5-配置环境变量"><a href="#5-5-配置环境变量" class="headerlink" title="5.5 配置环境变量"></a>5.5 配置环境变量</h3><ol>
+<li>在服务页面点 <strong>Environment</strong></li>
+<li>添加变量：<ul>
+<li><code>REDIS_URL</code> &#x3D; Redis 连接地址</li>
+</ul>
+</li>
+</ol>
+<p><strong>获取 Redis 连接地址</strong>：</p>
+<ol>
+<li>点击 Redis 服务</li>
+<li>点 <strong>Connect</strong> 标签</li>
+<li>复制 <code>REDIS_URL</code> 的值</li>
+</ol>
+<h3 id="5-6-绑定域名（可选）"><a href="#5-6-绑定域名（可选）" class="headerlink" title="5.6 绑定域名（可选）"></a>5.6 绑定域名（可选）</h3><ol>
+<li>在服务页面点 <strong>Networking</strong></li>
+<li>点 <strong>Generate Domain</strong> 生成免费域名（如 <code>guestbook-xxx.zeabur.app</code>）</li>
+<li>或绑定自定义域名</li>
+</ol>
+<h2 id="六、API-接口"><a href="#六、API-接口" class="headerlink" title="六、API 接口"></a>六、API 接口</h2><table>
+<thead>
+<tr>
+<th>接口</th>
+<th>方法</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>/api/messages</code></td>
+<td>GET</td>
+<td>获取所有留言</td>
+</tr>
+<tr>
+<td><code>/api/messages</code></td>
+<td>POST</td>
+<td>发布新留言</td>
+</tr>
+<tr>
+<td><code>/api/messages</code></td>
+<td>DELETE</td>
+<td>删除留言</td>
+</tr>
+<tr>
+<td><code>/api/upload</code></td>
+<td>POST</td>
+<td>上传图片</td>
+</tr>
+<tr>
+<td><code>/api/image?id=xxx</code></td>
+<td>GET</td>
+<td>读取图片（inline 显示）</td>
+</tr>
+</tbody></table>
+<h2 id="七、免费额度"><a href="#七、免费额度" class="headerlink" title="七、免费额度"></a>七、免费额度</h2><p>Zeabur Free Plan：</p>
+<ul>
+<li>512MB 内存</li>
+<li>1GB 磁盘</li>
+<li>100GB 流量&#x2F;月</li>
+<li>Redis：256MB</li>
+</ul>
+<p>留言板完全免费。</p>
+<h2 id="八、与-Vercel-版本的区别"><a href="#八、与-Vercel-版本的区别" class="headerlink" title="八、与 Vercel 版本的区别"></a>八、与 Vercel 版本的区别</h2><table>
+<thead>
+<tr>
+<th>功能</th>
+<th>Vercel 版</th>
+<th>Zeabur 版</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>后端</td>
+<td>Serverless Function</td>
+<td>Express 服务器</td>
+</tr>
+<tr>
+<td>数据库</td>
+<td>Upstash Redis</td>
+<td>Zeabur Redis</td>
+</tr>
+<tr>
+<td>图片存储</td>
+<td>Vercel Blob CDN</td>
+<td>Redis（base64）</td>
+</tr>
+<tr>
+<td>图片代理</td>
+<td>需要 <code>/api/image?url=xxx</code></td>
+<td>直接 <code>/api/image?id=xxx</code></td>
+</tr>
+<tr>
+<td>国内访问</td>
+<td>不稳定</td>
+<td>快</td>
+</tr>
+<tr>
+<td>免费额度</td>
+<td>有</td>
+<td>有</td>
+</tr>
+</tbody></table>
+<h2 id="九、常见问题"><a href="#九、常见问题" class="headerlink" title="九、常见问题"></a>九、常见问题</h2><h3 id="Q-部署后访问报错？"><a href="#Q-部署后访问报错？" class="headerlink" title="Q: 部署后访问报错？"></a>Q: 部署后访问报错？</h3><p>A: 检查环境变量 <code>REDIS_URL</code> 是否正确配置。</p>
+<h3 id="Q-图片上传失败？"><a href="#Q-图片上传失败？" class="headerlink" title="Q: 图片上传失败？"></a>Q: 图片上传失败？</h3><p>A: 图片大小限制 1MB（Redis 存储限制）。压缩图片后再上传。</p>
+<h3 id="Q-国内访问速度如何？"><a href="#Q-国内访问速度如何？" class="headerlink" title="Q: 国内访问速度如何？"></a>Q: 国内访问速度如何？</h3><p>A: Zeabur 中国区域国内访问很快，比 Vercel 稳定。</p>
+<h3 id="Q-可以绑定自定义域名吗？"><a href="#Q-可以绑定自定义域名吗？" class="headerlink" title="Q: 可以绑定自定义域名吗？"></a>Q: 可以绑定自定义域名吗？</h3><p>A: 可以。在服务页面点 <strong>Networking</strong> → <strong>Custom Domain</strong>。</p>
+<h3 id="Q-数据会丢失吗？"><a href="#Q-数据会丢失吗？" class="headerlink" title="Q: 数据会丢失吗？"></a>Q: 数据会丢失吗？</h3><p>A: Redis 数据持久化，不会丢失。图片 90 天过期。</p>
+<h2 id="十、项目地址"><a href="#十、项目地址" class="headerlink" title="十、项目地址"></a>十、项目地址</h2><ul>
+<li>源码：<a href="https://github.com/%E4%BD%A0%E7%9A%84%E7%94%A8%E6%88%B7%E5%90%8D/guestbook-zeabur">https://github.com/你的用户名/guestbook-zeabur</a></li>
+<li>演示：<a href="https://guestbook-xxx.zeabur.app/">https://guestbook-xxx.zeabur.app</a></li>
 </ul>
 <hr>
-<p><img src="http://imageproxy.chaoxing.com/0x0,q15,jpeg,samd7X0ZrJL6oHlAytD1Nbu9HyggfcanZX83-Ec8kDIk/http://p.ananas.chaoxing.com/star3/origin/3ef8e1bbeb56b0c2cd90df1ce4a3f119.png" alt="今日微信群"></p>
-
-        <div id="aplayer-usMPYaQY" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
-            <pre class="aplayer-lrc-content"></pre>
-        </div>
-        <script>
-          var ap = new APlayer({
-            element: document.getElementById("aplayer-usMPYaQY"),
-            narrow: false,
-            autoplay: false,
-            showlrc: false,
-            music: {
-              title: "“天使的翅膀”",
-              author: "“安琥”",
-              url: "“https://music.163.com/#/my/m/music/playlist?id=2211665459”",
-              pic: "",
-              lrc: ""
-            }
-          });
-          window.aplayers || (window.aplayers = []);
-          window.aplayers.push(ap);
-        </script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
-<script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
-<!-- require MetingJS -->
-<script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
-
-<pre><code>&lt;meting-js style=&quot;margin-top: 1.5rem;width: auto;height: auto;&quot;
-server=&quot;netease&quot;
-type=&quot;playlist&quot;
-id=&quot;2211665459&quot;
-theme=&quot;#2980b9&quot;
-loop=&quot;all&quot;
-autoplay=&quot;true&quot;
-order=&quot;random&quot;
-storageName=&quot;aplayer-setting&quot;
-lrctype= 0
-&gt;
-&lt;/meting-js&gt;
-</code></pre>
-<style>
-    .aplayer{
-        margin: 1.5rem 0;
-    }
-</style>
-
-<p><meting-js
-    auto="https://y.qq.com/n/yqq/song/001RGrEX3ija5X.html"><br></meting-js></p>
+<p><em>教程完成于 2026 年 5 月</em></p>
 ]]></content>
+      <categories>
+        <category>教程</category>
+      </categories>
+      <tags>
+        <tag>留言板</tag>
+        <tag>zeabur</tag>
+        <tag>express</tag>
+        <tag>redis</tag>
+        <tag>国内部署</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>daan</title>
+    <url>/2026/04/12/daan/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><h3 id="多喝醋能软化血管吗？"><a href="#多喝醋能软化血管吗？" class="headerlink" title="多喝醋能软化血管吗？"></a>多喝醋能软化血管吗？</h3><p>解析，这种说法没有科学依据。人们饮用的食醋进入消化系统后，最终代谢为二氧化碳和水，不会以溶解的形式作用于血管、血脂、斑块。长期过量喝醋，反而会刺激胃黏膜，诱发或加重胃炎、胃溃疡，影响钙等矿物质的吸收代谢。</p>
+]]></content>
+      <categories>
+        <category>categories</category>
+      </categories>
   </entry>
   <entry>
     <title>heexo 部署到腾讯云</title>
@@ -5366,6 +5384,149 @@ lrctype= 0
       </tags>
   </entry>
   <entry>
+    <title>wechat</title>
+    <url>/2024/06/15/wechat/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><hr>
+<p>tags:</p>
+<ul>
+<li>SVM</li>
+<li>Have a nice day<br>categories:</li>
+<li>Machine_Learning<br>author: 解决你的问题</li>
+</ul>
+<hr>
+<p><img src="http://imageproxy.chaoxing.com/0x0,q15,jpeg,samd7X0ZrJL6oHlAytD1Nbu9HyggfcanZX83-Ec8kDIk/http://p.ananas.chaoxing.com/star3/origin/3ef8e1bbeb56b0c2cd90df1ce4a3f119.png" alt="今日微信群"></p>
+
+        <div id="aplayer-GaMxBzQY" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+            <pre class="aplayer-lrc-content"></pre>
+        </div>
+        <script>
+          var ap = new APlayer({
+            element: document.getElementById("aplayer-GaMxBzQY"),
+            narrow: false,
+            autoplay: false,
+            showlrc: false,
+            music: {
+              title: "“天使的翅膀”",
+              author: "“安琥”",
+              url: "“https://music.163.com/#/my/m/music/playlist?id=2211665459”",
+              pic: "",
+              lrc: ""
+            }
+          });
+          window.aplayers || (window.aplayers = []);
+          window.aplayers.push(ap);
+        </script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
+<script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
+<!-- require MetingJS -->
+<script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+
+<pre><code>&lt;meting-js style=&quot;margin-top: 1.5rem;width: auto;height: auto;&quot;
+server=&quot;netease&quot;
+type=&quot;playlist&quot;
+id=&quot;2211665459&quot;
+theme=&quot;#2980b9&quot;
+loop=&quot;all&quot;
+autoplay=&quot;true&quot;
+order=&quot;random&quot;
+storageName=&quot;aplayer-setting&quot;
+lrctype= 0
+&gt;
+&lt;/meting-js&gt;
+</code></pre>
+<style>
+    .aplayer{
+        margin: 1.5rem 0;
+    }
+</style>
+
+<p><meting-js
+    auto="https://y.qq.com/n/yqq/song/001RGrEX3ija5X.html"><br></meting-js></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>不索怎得</title>
+    <url>/2021/07/09/%E4%B8%8D%E7%B4%A2%E6%80%8E%E5%BE%97/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>Welcome to</p>
+<p>朱元璋为什么还要重开科举 看看元朝都做了什么就知道了<br>2020-09-25 00:00  来自：历史名人<br><a href="http://collection.yd.chaoxing.com/apis/res/resPage.jspx?forward=articledetail&id=5f6d861da3105685317e38ce">http://collection.yd.chaoxing.com/apis/res/resPage.jspx?forward=articledetail&amp;id=5f6d861da3105685317e38ce</a><br>今天趣历史小编就给大家带来朱元璋开科举的文章，希望能对大家有所帮助。</p>
+<p>自从汉武帝以来，历代君王都将推崇儒家，作为自己的基本方针。因为其中宣传的忠君爱国思想，可以有效的抑制民智。</p>
+<p>当然，他们也会根据自己的需求，对儒学进行改造，打造出适合当下发展的儒学新理念，程朱理学，便是其中的代表。而科举制度的创立，不仅让寒门能出贵子，也让儒家教化愈发的深入人心。</p>
+<p>(一)、以儒制汉，获得民族认同感</p>
+<p>即使像元朝还有清朝，这种游牧民族主政的王朝，他们也不会放弃儒教。因为儒家学说千百年来，在中原大地上早已根深蒂固。推崇它，对自己百利而无一害。</p>
+<p>首先，能够向世人证明，自己才是统治中国的正统王朝;其次，利用忠君爱国的思想来愚百姓，让他们不管是昏君还是明君，都要不遗余力的支持。否则，就是不忠不义。</p>
+<ol>
+<li>恢复科举，不过是迫不得已</li>
+</ol>
+<p>科举制度的发展，是不断趋向于儒家的过程。隋唐一代，不仅仅局限于儒家经典，更侧重于诗词歌赋。因此，才会涌现出如此多的有才华的诗人。</p>
+<p>而到了南北两宋，天平开始向儒家倾斜。元朝因为人心不稳，故而更需要竭力推崇儒教来确保自己的统治地位不受动摇。</p>
+<p>元仁宗：”举人宜以德行为首，试艺以经术为先，词章次之。浮华过实，朕所不取”。自那以后，科举只注重于儒家的四书五经。同时，要以程颐和朱熹的注解为标准。自那以后，程朱理学便以新儒家的身份，成了公认的国家哲学。</p>
+<p>当然，它并不是真正的想要振兴儒教。只不过是要选拔出思维单一，且完全服从于自己的臣子。科举制选拔人才的第一要义，就是忠诚，其次才看你的能力。他们一方面推崇儒教，而另一方面又”以蒙古文字为重，直欲令天下臣民皆习蒙古语，通蒙古文”。</p>
+<p>如果一个民族失去了自己的母语，那就等同于丢掉了灵魂。所以，元朝虽然提倡儒教，但这只是权宜之计。归根结底，还是为了维护自己的统治。这也就是为何《廿二史札记》中反复提到”元代不重儒术”。</p>
+<ol start="2">
+<li>重整山河，意图恢复旧制</li>
+</ol>
+<p>布衣皇帝朱重八在元末乱世，夺得天下。他虽然没有文化，但是看着身边很多人说着胡语，穿着胡服，异常痛心疾首。于是他开展了一场声势浩大的”去蒙古化运动”。”自洪武元年，诏胡服、胡语、胡姓一切禁止。如今有呼姓本呼延，乞姓本乞伏，皆明初改”。</p>
+<p>而且他发现，虽然元朝表面上提倡儒教统治体系，但是却一直在建立蒙古贵族统治体系。元朝皇帝推崇的儒教，不过只在底层范围内。寒门士子虽然可以通过科举入仕，不过科举考试，时有时无。</p>
+<p>他们的出发点，还是根据自身利益来的。”自元之始，文学甚轻。自是九儒十丐之传，科举亦屡兴屡废，宜乎风雅之事，弃如弁髦”。</p>
+<p>如果照此发展下去，那么汉人的文脉必定会中断。同时，朱元璋并不像同元朝那样，让贵族一直久居高位，使得社会阶层固化。</p>
+<p>倘若如此，就很有可能步了东汉以及两晋的后尘。朱元璋还是更希望从底层选拔人才，因为他们在朝野中无依无靠，除了全身心的效忠皇帝，别无选择。</p>
+<p>(二)、重开科举，让儒家再度跻身高位</p>
+<p>“便是礼部议定取士之法：三年一科，用《五经》《四书》八股文。”洪武三年，朱元璋下令重开科举。同时，他也在元朝科举的基础上，做了进一步发展。士子们需仿圣人之言，以朱熹的口吻来论文答卷，以此做到”继往圣之绝学，为万世开太平”。</p>
+<ol>
+<li>君权神授，增强登基的合理性</li>
+</ol>
+<p>元朝为了自己长治久安，是想明面上推崇儒学，而背地里让本民族的秩序来替代它。可朱元璋本是汉人，他没有理由找其他的文化来替代儒教。</p>
+<p>更何况，儒家有了千百年的沉淀，还有朱熹程颐等先驱，为自己铺垫好了道路，既然都是现成的，那直接拿过来用便是了。</p>
+<p>虽然儒家在元朝有过断层，可时间非常短暂，要知道元朝统治中国也不到百年。因此，对于朱元璋而言还是让儒家重新上位比较简单一些。他根不红，苗不正，靠着自己一步步的走到了权力的顶端，但他也害怕有人不愿服从自己的统治。</p>
+<p>因此，他选择复兴儒教，同时对百姓注入仇恨教育。让他们知道自己才是能够带领他们抵御外族入侵的人，若是没有他，天下还在异族的统治当中。自那开始，以儒家为首的科举制度进入了一个新的发展阶段。</p>
+<p>再也没有了天马行空的文人，只有怀揣”学好文武艺，货卖帝王家”的士子。</p>
+<ol start="2">
+<li>提高士子地位，奠定舆论基础</li>
+</ol>
+<p>莘莘学子们都自号孔子门徒，朱元璋想要得到他们的支持，得到天下人的支持，就必须先在孔老夫子的身上下手。他多次夸赞孔孟学说，”孔子之言，诚万世师也，真治国良人”。如此一来，大家就真的开始信服朱元璋，认为他是一个明君。</p>
+<p>要知道，在元朝时期，十儒九丐，甚至有的连乞丐都不如。朱元璋想要重建儒家统治体系，不能只是祭奠孔子，还要拿出些实际行动，让士子们看到自己的心意。”明太祖初定天下，他务未遑，首开礼、乐二局，广征耆儒，分曹究讨”。</p>
+<p>天下初定之际，他就广召天下儒士一起商量治国理政之策。让儒生们觉得自己备受重视。本来乞丐一般的他们，已经对儒学失去了信心，而朱元璋的种种举动无异于为其打了一剂强心针。</p>
+<p>朱元璋要做的就是建立一个完全以儒家思想为统治体系的政权，选拔出来的臣子全部都听命于他，而再由他们将忠君爱国的思想，层层传递给底层的百姓。如此一来，朱元璋就能够实现长治久安。</p>
+<p>毕竟马上打天下，而不能马上治天下。倘若只用武力治国，那不就和元朝没什么两样了。还是要兼以思想统治。朱元璋虽然文化不高，但考虑的还是比较长远。</p>
+<p>(三)、八股取士，定向选拔人才</p>
+<p>“经义之文，流俗谓之八股，盖始于明宪宗成化年间”。八股文虽然不是朱元璋强令推行的，不过他可是为后世开了个好头。倘若不是其一昧的选择只考四书五经，明宪宗就不会顺理成章的推行八股文。</p>
+<ol>
+<li>儒家思想，走向了一个极端</li>
+</ol>
+<p>元朝时虽然想过以游牧民族体系代替儒家统治，但对儒家学说还是有所保留的，否则也不会重开科举。朱元璋在位之时，废除了丞相制度，标志着皇权专制在逐步的向巅峰迈进。而他推行的科举制度和元朝虽然差别不大，可力度要强劲的多。</p>
+<p>也因为都是汉族，所以士子们愿意为其效命。朱元璋很清楚自己想要什么，他需要人才，但有个先决条件，就是此人必须得忠诚。不能有那么多的花花肠子，他须得是在忠诚的基础上，而又有治国理政的能力。</p>
+<p>明朝的科举并不是为了寻找技术官僚，而是要笼络管理人才，并且对朝廷百分百的忠诚。随着皇权的不断加强，明朝的皇帝们不满足于只是以程朱理学为本的科举，倘若如此，还是会培养出那些不忠君爱国之人。</p>
+<ol start="2">
+<li>强化统治，却禁锢思想</li>
+</ol>
+<p>“大学之道，在明明德，在亲民，在止于善”。儒家倡导教人向善，做仁义之人。不过能力可以后期培养，而那颗忠心则是要自幼培育的。只要推行了八股取士，那些士子们在小时候就耳濡目染长大了要效忠朝廷，爱戴君王如何如何。</p>
+<p>等他们参加科举的时候，尽管有很多人会落榜，但从小培植起来的思想是难以改变的，他们在底层还是会向更多人去传播忠君爱国的理念。八股取士所选之人，都是自幼受到忠君爱国思想的洗礼。</p>
+<p>古代是家天下，就是说这些官员都是打工者。作为一个公司而言，自然要找全心全意忠于自己之人。</p>
+<p>“理尽一言，语无重出”。八股文直接限制了文人士子们的才华，让他们只知道有儒家经典，而不知有其他。就像袁宏道在幼儿时期，很喜欢读书，家里的书籍各种都有。不过家里认为他这是在不务正业，所以将藏书全部都收了起来。</p>
+<p>这是当时社会的一个普遍的现象，人们的思想都已经僵化了。完全按照统治者的意愿来走。他们只知道盲目的去相信朝廷，也不会管它是好是坏，这正是朱元璋想要的结果。也是商君驭民五术中的愚民。</p>
+<p>结语：</p>
+<p>古代的君王们不论提倡什么思想，都是站在维护自己统治的立场上。元朝如此，明朝亦是如此。</p>
+<p>朱元璋一心想再度让儒家思想占领统治上层，就是为了培养完全效忠于自己的人才，同时教化子民，让他们心甘情愿的维护明朝统治，而不得萌生反心。只不过，当百姓真的对国家失去信心的时候，任凭什么思想，也无济于事。</p>
+<p>参考文献：</p>
+<p>《元史》</p>
+<p>《儒林外史》</p>
+<p>《明实录》</p>
+<p>免责声明：以上内容源自网络，版权归原作者所有，如有侵犯您的原创版权请告知，我们将尽快删除相关内容。</p>
+<p>我说的才是捷径<br>每个人对每个人具体都不同<br>教程是假象，虽然我当时也用上了，受益，但是这正是专家用来骗取人性的有力兵器<br>变化快得很<br>实践起来又是陌生的同一起跑线<br>稍微用耐心反思又了不得<br><a href="https://hesifan.top/2021/042039526.html%E7%BB%99%E6%B7%B1%E8%89%B2%E6%A8%A1%E5%BC%8F">https://hesifan.top/2021/042039526.html给深色模式</a><br><a href="https://notes.zhangxiaocai.cn/posts/7404e01a.html/tianjiaartitalk">https://notes.zhangxiaocai.cn/posts/7404e01a.html/tianjiaartitalk</a><br><a href="https://bb.js.org/quick-start.html#%F0%9F%93%83%E5%89%8D%E8%A8%80">https://bb.js.org/quick-start.html#%F0%9F%93%83%E5%89%8D%E8%A8%80</a><br><a href="https://leancloud.cn/docs/start.html">https://leancloud.cn/docs/start.html</a><br><a href="https://taro-docs.jd.com/taro/docs/GETTING-STARTED/#%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F">https://taro-docs.jd.com/taro/docs/GETTING-STARTED/#%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F</a><br><a href="https://artitalk.js.org/links.html#%E5%A6%82%E4%BD%95%E5%8A%A0%E5%85%A5%E6%88%90%E5%8A%9F%E6%A1%88%E4%BE%8B">https://artitalk.js.org/links.html#%E5%A6%82%E4%BD%95%E5%8A%A0%E5%85%A5%E6%88%90%E5%8A%9F%E6%A1%88%E4%BE%8B</a><br><a href="http://i.mooc.chaoxing.com/space/index?t=1625019560226">http://i.mooc.chaoxing.com/space/index?t=1625019560226</a></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>亚硝胺</title>
+    <url>/2024/09/30/%E4%BA%9A%E7%A1%9D%E8%83%BA/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>亚硝胺是一类强烈的化学致癌物质，被视为四大食品污染物之一。它是由硝酸盐、亚硝酸盐及胺类在一定条件下生成的。亚硝胺主要存在于腌制食品、霉变食品、烟熏制品中，如腌菜、熏肉、腐乳、罐头、剁椒酱、辣酱等。此外，香烟、酒精、化妆品、啤酒以及某些不新鲜的食品，如过夜的剩菜、腐烂的蔬菜等，也可能含有亚硝胺。</p>
+<p>亚硝胺在人体内可转化为亚硝酸，进而与血红蛋白中的血红蛋白氧化为高铁血红蛋白，导致血红蛋白失去携氧能力，引起组织缺氧。长期大量摄入含有亚硝胺的食物，可能会增加患上消化系统肿瘤的风险，如胃癌、食管癌等。</p>
+<p>虽然亚硝酸盐并不一定会转化为亚硝胺产生致癌作用，但为了避免潜在的健康风险，建议在日常生活中保持饮食清洁卫生，避免吃过夜的剩菜或腐烂的蔬菜，减少腌制、熏制食品的摄入，并避免长期大量饮酒和吸烟。</p>
+]]></content>
+      <tags>
+        <tag>致癌物质</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>关于体力锻炼，午睡</title>
     <url>/2024/09/30/%E5%85%B3%E4%BA%8E%E4%BD%93%E5%8A%9B%E9%94%BB%E7%82%BC/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><h3 id="午睡黄金时间"><a href="#午睡黄金时间" class="headerlink" title="午睡黄金时间"></a>午睡黄金时间</h3><p>科学研究表明，<strong>午睡的最佳时间</strong>通常为<strong>10到20分钟</strong>。这个时间段足够让你恢复精力，而不会进入深度睡眠，避免醒来时的疲惫感。更长的午睡可能导致睡眠惯性，反而让你感到更加疲惫。<br>上午11点到下午1点半：午餐后身体自然产生困倦感，这时候有助于短暂休息，也是身体自然进入休息状态的好时机。短暂的午睡可以帮助恢复精力，提高下午的工作效率和学习效果。</p>
@@ -5445,36 +5606,6 @@ lrctype= 0
       </tags>
   </entry>
   <entry>
-    <title>亚硝胺</title>
-    <url>/2024/09/30/%E4%BA%9A%E7%A1%9D%E8%83%BA/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>亚硝胺是一类强烈的化学致癌物质，被视为四大食品污染物之一。它是由硝酸盐、亚硝酸盐及胺类在一定条件下生成的。亚硝胺主要存在于腌制食品、霉变食品、烟熏制品中，如腌菜、熏肉、腐乳、罐头、剁椒酱、辣酱等。此外，香烟、酒精、化妆品、啤酒以及某些不新鲜的食品，如过夜的剩菜、腐烂的蔬菜等，也可能含有亚硝胺。</p>
-<p>亚硝胺在人体内可转化为亚硝酸，进而与血红蛋白中的血红蛋白氧化为高铁血红蛋白，导致血红蛋白失去携氧能力，引起组织缺氧。长期大量摄入含有亚硝胺的食物，可能会增加患上消化系统肿瘤的风险，如胃癌、食管癌等。</p>
-<p>虽然亚硝酸盐并不一定会转化为亚硝胺产生致癌作用，但为了避免潜在的健康风险，建议在日常生活中保持饮食清洁卫生，避免吃过夜的剩菜或腐烂的蔬菜，减少腌制、熏制食品的摄入，并避免长期大量饮酒和吸烟。</p>
-]]></content>
-      <tags>
-        <tag>致癌物质</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>关于辩论</title>
-    <url>/2024/09/30/%E5%85%B3%E4%BA%8E%E8%BE%A9%E8%AE%BA/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>A苏格拉底就没有留下一部自己亲手写的著作。将他与雅典的人们，特别是与年轻人的辩论进行整理，然后把其哲学主张写成著作留存后世的是其弟子柏拉图。而阿德勒也是一位毫不关心著述活动，而是热衷于在维也纳的咖啡馆里与人交谈或者是在讨论小组里与人辩论的人物。他们都不是那种只知道闭门造车的知识分子。</p>
-<p>B身份认同</p>
-<p>C关系时间</p>
-<p>d不仅仅是粗俗辩论表层战争输赢，更是一种情绪的训练， 思维的实践相互碰撞，社会机会的把握，信念坚定精神，解决问题能力</p>
-<p>e</p>
-]]></content>
-      <tags>
-        <tag>探讨讨论</tag>
-        <tag>辩论</tag>
-        <tag>但是热衷交谈</tag>
-        <tag>对话</tag>
-        <tag>事实胜于雄辩</tag>
-        <tag>不关心</tag>
-        <tag>争议</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>关于自我肯定感，开心情绪，</title>
     <url>/2024/10/13/%E5%85%B3%E4%BA%8E%E8%87%AA%E6%88%91%E8%82%AF%E5%AE%9A%E6%84%9F%EF%BC%8C%E5%BC%80%E5%BF%83%E6%83%85%E7%BB%AA%EF%BC%8C/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><h3 id=""><a href="#" class="headerlink" title=""></a></h3><p>我们平常祝福别人都经常会说祝你天天快乐，事实上有多少人真的替你快乐，我坚信就世界上98%的人都不能做到天天的快乐，为什么是98%呢</p>
@@ -5522,6 +5653,25 @@ lrctype= 0
       </tags>
   </entry>
   <entry>
+    <title>关于辩论</title>
+    <url>/2024/09/30/%E5%85%B3%E4%BA%8E%E8%BE%A9%E8%AE%BA/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>A苏格拉底就没有留下一部自己亲手写的著作。将他与雅典的人们，特别是与年轻人的辩论进行整理，然后把其哲学主张写成著作留存后世的是其弟子柏拉图。而阿德勒也是一位毫不关心著述活动，而是热衷于在维也纳的咖啡馆里与人交谈或者是在讨论小组里与人辩论的人物。他们都不是那种只知道闭门造车的知识分子。</p>
+<p>B身份认同</p>
+<p>C关系时间</p>
+<p>d不仅仅是粗俗辩论表层战争输赢，更是一种情绪的训练， 思维的实践相互碰撞，社会机会的把握，信念坚定精神，解决问题能力</p>
+<p>e</p>
+]]></content>
+      <tags>
+        <tag>探讨讨论</tag>
+        <tag>辩论</tag>
+        <tag>但是热衷交谈</tag>
+        <tag>对话</tag>
+        <tag>事实胜于雄辩</tag>
+        <tag>不关心</tag>
+        <tag>争议</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>关键词</title>
     <url>/2022/03/09/%E5%85%B3%E9%94%AE%E8%AF%8D/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><hr>
@@ -5538,77 +5688,6 @@ lrctype= 0
 ]]></content>
   </entry>
   <entry>
-    <title>不索怎得</title>
-    <url>/2021/07/09/%E4%B8%8D%E7%B4%A2%E6%80%8E%E5%BE%97/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>Welcome to</p>
-<p>朱元璋为什么还要重开科举 看看元朝都做了什么就知道了<br>2020-09-25 00:00  来自：历史名人<br><a href="http://collection.yd.chaoxing.com/apis/res/resPage.jspx?forward=articledetail&id=5f6d861da3105685317e38ce">http://collection.yd.chaoxing.com/apis/res/resPage.jspx?forward=articledetail&amp;id=5f6d861da3105685317e38ce</a><br>今天趣历史小编就给大家带来朱元璋开科举的文章，希望能对大家有所帮助。</p>
-<p>自从汉武帝以来，历代君王都将推崇儒家，作为自己的基本方针。因为其中宣传的忠君爱国思想，可以有效的抑制民智。</p>
-<p>当然，他们也会根据自己的需求，对儒学进行改造，打造出适合当下发展的儒学新理念，程朱理学，便是其中的代表。而科举制度的创立，不仅让寒门能出贵子，也让儒家教化愈发的深入人心。</p>
-<p>(一)、以儒制汉，获得民族认同感</p>
-<p>即使像元朝还有清朝，这种游牧民族主政的王朝，他们也不会放弃儒教。因为儒家学说千百年来，在中原大地上早已根深蒂固。推崇它，对自己百利而无一害。</p>
-<p>首先，能够向世人证明，自己才是统治中国的正统王朝;其次，利用忠君爱国的思想来愚百姓，让他们不管是昏君还是明君，都要不遗余力的支持。否则，就是不忠不义。</p>
-<ol>
-<li>恢复科举，不过是迫不得已</li>
-</ol>
-<p>科举制度的发展，是不断趋向于儒家的过程。隋唐一代，不仅仅局限于儒家经典，更侧重于诗词歌赋。因此，才会涌现出如此多的有才华的诗人。</p>
-<p>而到了南北两宋，天平开始向儒家倾斜。元朝因为人心不稳，故而更需要竭力推崇儒教来确保自己的统治地位不受动摇。</p>
-<p>元仁宗：”举人宜以德行为首，试艺以经术为先，词章次之。浮华过实，朕所不取”。自那以后，科举只注重于儒家的四书五经。同时，要以程颐和朱熹的注解为标准。自那以后，程朱理学便以新儒家的身份，成了公认的国家哲学。</p>
-<p>当然，它并不是真正的想要振兴儒教。只不过是要选拔出思维单一，且完全服从于自己的臣子。科举制选拔人才的第一要义，就是忠诚，其次才看你的能力。他们一方面推崇儒教，而另一方面又”以蒙古文字为重，直欲令天下臣民皆习蒙古语，通蒙古文”。</p>
-<p>如果一个民族失去了自己的母语，那就等同于丢掉了灵魂。所以，元朝虽然提倡儒教，但这只是权宜之计。归根结底，还是为了维护自己的统治。这也就是为何《廿二史札记》中反复提到”元代不重儒术”。</p>
-<ol start="2">
-<li>重整山河，意图恢复旧制</li>
-</ol>
-<p>布衣皇帝朱重八在元末乱世，夺得天下。他虽然没有文化，但是看着身边很多人说着胡语，穿着胡服，异常痛心疾首。于是他开展了一场声势浩大的”去蒙古化运动”。”自洪武元年，诏胡服、胡语、胡姓一切禁止。如今有呼姓本呼延，乞姓本乞伏，皆明初改”。</p>
-<p>而且他发现，虽然元朝表面上提倡儒教统治体系，但是却一直在建立蒙古贵族统治体系。元朝皇帝推崇的儒教，不过只在底层范围内。寒门士子虽然可以通过科举入仕，不过科举考试，时有时无。</p>
-<p>他们的出发点，还是根据自身利益来的。”自元之始，文学甚轻。自是九儒十丐之传，科举亦屡兴屡废，宜乎风雅之事，弃如弁髦”。</p>
-<p>如果照此发展下去，那么汉人的文脉必定会中断。同时，朱元璋并不像同元朝那样，让贵族一直久居高位，使得社会阶层固化。</p>
-<p>倘若如此，就很有可能步了东汉以及两晋的后尘。朱元璋还是更希望从底层选拔人才，因为他们在朝野中无依无靠，除了全身心的效忠皇帝，别无选择。</p>
-<p>(二)、重开科举，让儒家再度跻身高位</p>
-<p>“便是礼部议定取士之法：三年一科，用《五经》《四书》八股文。”洪武三年，朱元璋下令重开科举。同时，他也在元朝科举的基础上，做了进一步发展。士子们需仿圣人之言，以朱熹的口吻来论文答卷，以此做到”继往圣之绝学，为万世开太平”。</p>
-<ol>
-<li>君权神授，增强登基的合理性</li>
-</ol>
-<p>元朝为了自己长治久安，是想明面上推崇儒学，而背地里让本民族的秩序来替代它。可朱元璋本是汉人，他没有理由找其他的文化来替代儒教。</p>
-<p>更何况，儒家有了千百年的沉淀，还有朱熹程颐等先驱，为自己铺垫好了道路，既然都是现成的，那直接拿过来用便是了。</p>
-<p>虽然儒家在元朝有过断层，可时间非常短暂，要知道元朝统治中国也不到百年。因此，对于朱元璋而言还是让儒家重新上位比较简单一些。他根不红，苗不正，靠着自己一步步的走到了权力的顶端，但他也害怕有人不愿服从自己的统治。</p>
-<p>因此，他选择复兴儒教，同时对百姓注入仇恨教育。让他们知道自己才是能够带领他们抵御外族入侵的人，若是没有他，天下还在异族的统治当中。自那开始，以儒家为首的科举制度进入了一个新的发展阶段。</p>
-<p>再也没有了天马行空的文人，只有怀揣”学好文武艺，货卖帝王家”的士子。</p>
-<ol start="2">
-<li>提高士子地位，奠定舆论基础</li>
-</ol>
-<p>莘莘学子们都自号孔子门徒，朱元璋想要得到他们的支持，得到天下人的支持，就必须先在孔老夫子的身上下手。他多次夸赞孔孟学说，”孔子之言，诚万世师也，真治国良人”。如此一来，大家就真的开始信服朱元璋，认为他是一个明君。</p>
-<p>要知道，在元朝时期，十儒九丐，甚至有的连乞丐都不如。朱元璋想要重建儒家统治体系，不能只是祭奠孔子，还要拿出些实际行动，让士子们看到自己的心意。”明太祖初定天下，他务未遑，首开礼、乐二局，广征耆儒，分曹究讨”。</p>
-<p>天下初定之际，他就广召天下儒士一起商量治国理政之策。让儒生们觉得自己备受重视。本来乞丐一般的他们，已经对儒学失去了信心，而朱元璋的种种举动无异于为其打了一剂强心针。</p>
-<p>朱元璋要做的就是建立一个完全以儒家思想为统治体系的政权，选拔出来的臣子全部都听命于他，而再由他们将忠君爱国的思想，层层传递给底层的百姓。如此一来，朱元璋就能够实现长治久安。</p>
-<p>毕竟马上打天下，而不能马上治天下。倘若只用武力治国，那不就和元朝没什么两样了。还是要兼以思想统治。朱元璋虽然文化不高，但考虑的还是比较长远。</p>
-<p>(三)、八股取士，定向选拔人才</p>
-<p>“经义之文，流俗谓之八股，盖始于明宪宗成化年间”。八股文虽然不是朱元璋强令推行的，不过他可是为后世开了个好头。倘若不是其一昧的选择只考四书五经，明宪宗就不会顺理成章的推行八股文。</p>
-<ol>
-<li>儒家思想，走向了一个极端</li>
-</ol>
-<p>元朝时虽然想过以游牧民族体系代替儒家统治，但对儒家学说还是有所保留的，否则也不会重开科举。朱元璋在位之时，废除了丞相制度，标志着皇权专制在逐步的向巅峰迈进。而他推行的科举制度和元朝虽然差别不大，可力度要强劲的多。</p>
-<p>也因为都是汉族，所以士子们愿意为其效命。朱元璋很清楚自己想要什么，他需要人才，但有个先决条件，就是此人必须得忠诚。不能有那么多的花花肠子，他须得是在忠诚的基础上，而又有治国理政的能力。</p>
-<p>明朝的科举并不是为了寻找技术官僚，而是要笼络管理人才，并且对朝廷百分百的忠诚。随着皇权的不断加强，明朝的皇帝们不满足于只是以程朱理学为本的科举，倘若如此，还是会培养出那些不忠君爱国之人。</p>
-<ol start="2">
-<li>强化统治，却禁锢思想</li>
-</ol>
-<p>“大学之道，在明明德，在亲民，在止于善”。儒家倡导教人向善，做仁义之人。不过能力可以后期培养，而那颗忠心则是要自幼培育的。只要推行了八股取士，那些士子们在小时候就耳濡目染长大了要效忠朝廷，爱戴君王如何如何。</p>
-<p>等他们参加科举的时候，尽管有很多人会落榜，但从小培植起来的思想是难以改变的，他们在底层还是会向更多人去传播忠君爱国的理念。八股取士所选之人，都是自幼受到忠君爱国思想的洗礼。</p>
-<p>古代是家天下，就是说这些官员都是打工者。作为一个公司而言，自然要找全心全意忠于自己之人。</p>
-<p>“理尽一言，语无重出”。八股文直接限制了文人士子们的才华，让他们只知道有儒家经典，而不知有其他。就像袁宏道在幼儿时期，很喜欢读书，家里的书籍各种都有。不过家里认为他这是在不务正业，所以将藏书全部都收了起来。</p>
-<p>这是当时社会的一个普遍的现象，人们的思想都已经僵化了。完全按照统治者的意愿来走。他们只知道盲目的去相信朝廷，也不会管它是好是坏，这正是朱元璋想要的结果。也是商君驭民五术中的愚民。</p>
-<p>结语：</p>
-<p>古代的君王们不论提倡什么思想，都是站在维护自己统治的立场上。元朝如此，明朝亦是如此。</p>
-<p>朱元璋一心想再度让儒家思想占领统治上层，就是为了培养完全效忠于自己的人才，同时教化子民，让他们心甘情愿的维护明朝统治，而不得萌生反心。只不过，当百姓真的对国家失去信心的时候，任凭什么思想，也无济于事。</p>
-<p>参考文献：</p>
-<p>《元史》</p>
-<p>《儒林外史》</p>
-<p>《明实录》</p>
-<p>免责声明：以上内容源自网络，版权归原作者所有，如有侵犯您的原创版权请告知，我们将尽快删除相关内容。</p>
-<p>我说的才是捷径<br>每个人对每个人具体都不同<br>教程是假象，虽然我当时也用上了，受益，但是这正是专家用来骗取人性的有力兵器<br>变化快得很<br>实践起来又是陌生的同一起跑线<br>稍微用耐心反思又了不得<br><a href="https://hesifan.top/2021/042039526.html%E7%BB%99%E6%B7%B1%E8%89%B2%E6%A8%A1%E5%BC%8F">https://hesifan.top/2021/042039526.html给深色模式</a><br><a href="https://notes.zhangxiaocai.cn/posts/7404e01a.html/tianjiaartitalk">https://notes.zhangxiaocai.cn/posts/7404e01a.html/tianjiaartitalk</a><br><a href="https://bb.js.org/quick-start.html#%F0%9F%93%83%E5%89%8D%E8%A8%80">https://bb.js.org/quick-start.html#%F0%9F%93%83%E5%89%8D%E8%A8%80</a><br><a href="https://leancloud.cn/docs/start.html">https://leancloud.cn/docs/start.html</a><br><a href="https://taro-docs.jd.com/taro/docs/GETTING-STARTED/#%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F">https://taro-docs.jd.com/taro/docs/GETTING-STARTED/#%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F</a><br><a href="https://artitalk.js.org/links.html#%E5%A6%82%E4%BD%95%E5%8A%A0%E5%85%A5%E6%88%90%E5%8A%9F%E6%A1%88%E4%BE%8B">https://artitalk.js.org/links.html#%E5%A6%82%E4%BD%95%E5%8A%A0%E5%85%A5%E6%88%90%E5%8A%9F%E6%A1%88%E4%BE%8B</a><br><a href="http://i.mooc.chaoxing.com/space/index?t=1625019560226">http://i.mooc.chaoxing.com/space/index?t=1625019560226</a></p>
-]]></content>
-  </entry>
-  <entry>
     <title>医药</title>
     <url>/2024/09/30/%E5%8C%BB%E5%AD%A6%E5%8E%86%E7%A8%8B/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>待更新</p>
@@ -5616,47 +5695,6 @@ lrctype= 0
       <tags>
         <tag>探讨讨论</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>及时的良药互动</title>
-    <url>/2022/03/05/%E5%8F%8A%E6%97%B6%E7%9A%84%E8%89%AF%E8%8D%AF%E4%BA%92%E5%8A%A8/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>你知道么？ 一个成年人日均摄入热量2000千卡, 日行1万步, 相当于消耗维持人体正常生活所需以外的300千卡多余热量，帮助我们保持健康体格；日行1万步，相当于完成7公里的绿色出行，日均减少1.8千克碳排放，帮我们保护大气环境。</p>
-<p> 待更新</p>
-<ul>
-<li><p>图</p>
-</li>
-<li><p>医疗互动 </p>
-</li>
-<li><p>音乐 </p>
-</li>
-<li><p>好物种草</p>
-</li>
-</ul>
-<p><a href="https://115.com/s/swnj24c3hfd?password=o132&#">https://115.com/s/swnj24c3hfd?password=o132&amp;#</a><br>#美国哈佛大学哈佛燕京图书馆古籍<br>访问码:o132   总共780G，文件7263个，这个算比较全的了，需要的赶快保存</p>
-<ul>
-<li><p>电影剧场 </p>
-</li>
-<li><p>饮食</p>
-</li>
-</ul>
-<p><a href="https://zl86n-my.sharepoint.com/:f:/g/personal/show_tmzn_top/EqQPeeoRNUVOgT9v9K1wARkBADqDqGZtwC0o5YzIUwPa9Q">https://zl86n-my.sharepoint.com/:f:/g/personal/show_tmzn_top/EqQPeeoRNUVOgT9v9K1wARkBADqDqGZtwC0o5YzIUwPa9Q</a></p>
-<p><a href="https://zl86n-my.sharepoint.com/:f:/g/personal/show_tmzn_top/EmEWxjoFxOZFqjMW68KBw7gBplrh9gwwiz043jQIJJui3w">https://zl86n-my.sharepoint.com/:f:/g/personal/show_tmzn_top/EmEWxjoFxOZFqjMW68KBw7gBplrh9gwwiz043jQIJJui3w</a></p>
-<p><a href="https://zl86n-my.sharepoint.com/:f:/g/personal/show_tmzn_top/EgZXCrs64G5Bg0FAxw3b8AwBBgXirl21aCBpsSOvPhEWRg">https://zl86n-my.sharepoint.com/:f:/g/personal/show_tmzn_top/EgZXCrs64G5Bg0FAxw3b8AwBBgXirl21aCBpsSOvPhEWRg</a><br><a href="https://zl86n-my.sharepoint.com/:f:/g/personal/show_tmzn_top/Ev03Gas72G5LkpxHEwhoUToBdThin_KcHAgwBZYL9AwFjw">https://zl86n-my.sharepoint.com/:f:/g/personal/show_tmzn_top/Ev03Gas72G5LkpxHEwhoUToBdThin_KcHAgwBZYL9AwFjw</a><br><a href="https://zl86n-my.sharepoint.com/:f:/g/personal/show_tmzn_top/EphIeS5iJNhMi-Ikx8h6eIABTmTuZfEUwPjfVtHKA6oC7Q">https://zl86n-my.sharepoint.com/:f:/g/personal/show_tmzn_top/EphIeS5iJNhMi-Ikx8h6eIABTmTuZfEUwPjfVtHKA6oC7Q</a><br><a href="https://zl86n-my.sharepoint.com/:f:/g/personal/show_tmzn_top/EnRBLTOD5iJHnhtmVbmplV0BSy1RBBd2SH5jhPExnP9JJw">https://zl86n-my.sharepoint.com/:f:/g/personal/show_tmzn_top/EnRBLTOD5iJHnhtmVbmplV0BSy1RBBd2SH5jhPExnP9JJw</a></p>
-]]></content>
-      <tags>
-        <tag>图</tag>
-        <tag>医疗互动</tag>
-        <tag>音乐</tag>
-        <tag>好物种草</tag>
-        <tag>电影剧场</tag>
-        <tag>饮食</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>二手待售</title>
-    <url>/2021/01/13/%E5%95%86%E5%BA%97/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><p><img src="http://pan-yz.chaoxing.com/preview/showpreview_579415739645202432.html?v=1622614798000"></p>
-]]></content>
   </entry>
   <entry>
     <title>医药</title>
@@ -5711,6 +5749,47 @@ lrctype= 0
         <tag>事g</tag>
         <tag>世界人</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>及时的良药互动</title>
+    <url>/2022/03/05/%E5%8F%8A%E6%97%B6%E7%9A%84%E8%89%AF%E8%8D%AF%E4%BA%92%E5%8A%A8/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>你知道么？ 一个成年人日均摄入热量2000千卡, 日行1万步, 相当于消耗维持人体正常生活所需以外的300千卡多余热量，帮助我们保持健康体格；日行1万步，相当于完成7公里的绿色出行，日均减少1.8千克碳排放，帮我们保护大气环境。</p>
+<p> 待更新</p>
+<ul>
+<li><p>图</p>
+</li>
+<li><p>医疗互动 </p>
+</li>
+<li><p>音乐 </p>
+</li>
+<li><p>好物种草</p>
+</li>
+</ul>
+<p><a href="https://115.com/s/swnj24c3hfd?password=o132&#">https://115.com/s/swnj24c3hfd?password=o132&amp;#</a><br>#美国哈佛大学哈佛燕京图书馆古籍<br>访问码:o132   总共780G，文件7263个，这个算比较全的了，需要的赶快保存</p>
+<ul>
+<li><p>电影剧场 </p>
+</li>
+<li><p>饮食</p>
+</li>
+</ul>
+<p><a href="https://zl86n-my.sharepoint.com/:f:/g/personal/show_tmzn_top/EqQPeeoRNUVOgT9v9K1wARkBADqDqGZtwC0o5YzIUwPa9Q">https://zl86n-my.sharepoint.com/:f:/g/personal/show_tmzn_top/EqQPeeoRNUVOgT9v9K1wARkBADqDqGZtwC0o5YzIUwPa9Q</a></p>
+<p><a href="https://zl86n-my.sharepoint.com/:f:/g/personal/show_tmzn_top/EmEWxjoFxOZFqjMW68KBw7gBplrh9gwwiz043jQIJJui3w">https://zl86n-my.sharepoint.com/:f:/g/personal/show_tmzn_top/EmEWxjoFxOZFqjMW68KBw7gBplrh9gwwiz043jQIJJui3w</a></p>
+<p><a href="https://zl86n-my.sharepoint.com/:f:/g/personal/show_tmzn_top/EgZXCrs64G5Bg0FAxw3b8AwBBgXirl21aCBpsSOvPhEWRg">https://zl86n-my.sharepoint.com/:f:/g/personal/show_tmzn_top/EgZXCrs64G5Bg0FAxw3b8AwBBgXirl21aCBpsSOvPhEWRg</a><br><a href="https://zl86n-my.sharepoint.com/:f:/g/personal/show_tmzn_top/Ev03Gas72G5LkpxHEwhoUToBdThin_KcHAgwBZYL9AwFjw">https://zl86n-my.sharepoint.com/:f:/g/personal/show_tmzn_top/Ev03Gas72G5LkpxHEwhoUToBdThin_KcHAgwBZYL9AwFjw</a><br><a href="https://zl86n-my.sharepoint.com/:f:/g/personal/show_tmzn_top/EphIeS5iJNhMi-Ikx8h6eIABTmTuZfEUwPjfVtHKA6oC7Q">https://zl86n-my.sharepoint.com/:f:/g/personal/show_tmzn_top/EphIeS5iJNhMi-Ikx8h6eIABTmTuZfEUwPjfVtHKA6oC7Q</a><br><a href="https://zl86n-my.sharepoint.com/:f:/g/personal/show_tmzn_top/EnRBLTOD5iJHnhtmVbmplV0BSy1RBBd2SH5jhPExnP9JJw">https://zl86n-my.sharepoint.com/:f:/g/personal/show_tmzn_top/EnRBLTOD5iJHnhtmVbmplV0BSy1RBBd2SH5jhPExnP9JJw</a></p>
+]]></content>
+      <tags>
+        <tag>图</tag>
+        <tag>医疗互动</tag>
+        <tag>音乐</tag>
+        <tag>好物种草</tag>
+        <tag>电影剧场</tag>
+        <tag>饮食</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>二手待售</title>
+    <url>/2021/01/13/%E5%95%86%E5%BA%97/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><p><img src="http://pan-yz.chaoxing.com/preview/showpreview_579415739645202432.html?v=1622614798000"></p>
+]]></content>
   </entry>
   <entry>
     <title>多喝醋能软化血管吗？</title>
@@ -5820,6 +5899,15 @@ lrctype= 0
       </tags>
   </entry>
   <entry>
+    <title>微信二维码</title>
+    <url>/2026/04/29/%E5%BE%AE%E4%BF%A1%E4%BA%8C%E7%BB%B4%E7%A0%81/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><p><img src="http://imageproxy.chaoxing.com/0x0,q15,jpeg,slEtmWeY6WexS0SaijdY_3as70_MybRg4ZDGoVY7atkM/https://p.ananas.chaoxing.com/star3/origin/b6ccee78bf534263b9699503f1a05b25.png" alt="微信二维码"></p>
+<p><img src="http://imageproxy.chaoxing.com/0x0,q15,jpeg,sSx7GoSLhEvgU5jUdZwqyozG6W91-i_LEghZ2m6schX4/https://p.ananas.chaoxing.com/star3/origin/0473fec0ee33f8e8fc0e5111decb191a.png" alt="微信二维码"></p>
+<p><img src="http://imageproxy.chaoxing.com/0x0,q15,jpeg,sEYxbeucRcJ2Q0CfEKQkU_D3INCr4BWZmzbO0Dz2asc0/https://p.ananas.chaoxing.com/star3/origin/3221eeded507850c4238687cb2380ae6.png" alt="微信二维码"></p>
+<p>082<br><img src="https://img.alicdn.com/imgextra/i4/4251995763/O1CN01VPMUY71sRVGp4SJLc_!!4251995763.jpg" alt="微信二维码"></p>
+]]></content>
+  </entry>
+  <entry>
     <title>微信公众号</title>
     <url>/2022/03/09/%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7%EF%BC%8CCSDN/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><hr>
@@ -5852,15 +5940,6 @@ lrctype= 0
         <tag>Typora</tag>
         <tag>Markdown</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>微信二维码</title>
-    <url>/2026/04/29/%E5%BE%AE%E4%BF%A1%E4%BA%8C%E7%BB%B4%E7%A0%81/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><p><img src="http://imageproxy.chaoxing.com/0x0,q15,jpeg,slEtmWeY6WexS0SaijdY_3as70_MybRg4ZDGoVY7atkM/https://p.ananas.chaoxing.com/star3/origin/b6ccee78bf534263b9699503f1a05b25.png" alt="微信二维码"></p>
-<p><img src="http://imageproxy.chaoxing.com/0x0,q15,jpeg,sSx7GoSLhEvgU5jUdZwqyozG6W91-i_LEghZ2m6schX4/https://p.ananas.chaoxing.com/star3/origin/0473fec0ee33f8e8fc0e5111decb191a.png" alt="微信二维码"></p>
-<p><img src="http://imageproxy.chaoxing.com/0x0,q15,jpeg,sEYxbeucRcJ2Q0CfEKQkU_D3INCr4BWZmzbO0Dz2asc0/https://p.ananas.chaoxing.com/star3/origin/3221eeded507850c4238687cb2380ae6.png" alt="微信二维码"></p>
-<p>082<br><img src="https://img.alicdn.com/imgextra/i4/4251995763/O1CN01VPMUY71sRVGp4SJLc_!!4251995763.jpg" alt="微信二维码"></p>
-]]></content>
   </entry>
   <entry>
     <title>春节挂件图标修复教程</title>
@@ -6031,6 +6110,16 @@ lrctype= 0
       </tags>
   </entry>
   <entry>
+    <title>社会的最小单位是何？</title>
+    <url>/2022/03/09/%E7%A4%BE%E4%BC%9A%E7%9A%84%E6%9C%80%E5%B0%8F%E5%8D%95%E4%BD%8D%E6%98%AF%E4%BD%95%EF%BC%9F/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>世界<br>guojia<br>医院<br>还是什么</p>
+<p>你对自我有哪些偏见呢？为什么要辩论呢？你热爱生活吗？社会的最小单位是何？你知道yyds吗？我生从何来死往何处，我为何要出现在这个世界上，我的出现对这个世界来说意味着什么，是世界选择了我，还是我选择了世界？我和宇宙之间有必然的联系吗，宇宙是否有尽头，时间是否有长短，过去的时间在哪里消失，未来的时间又在何处停止，我在这一刻提出的问题，还是你刚才听到的问题吗？还是..</p>
+]]></content>
+      <tags>
+        <tag>长短</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>语录</title>
     <url>/2024/06/20/%E8%AF%AD%E5%BD%95/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>作家张雪峰却提醒着我们：若不给自己设限，则人生中就没有限制你发挥的藩篱。</p>
@@ -6041,16 +6130,6 @@ lrctype= 0
       <tags>
         <tag>Typora</tag>
         <tag>Markdown</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>社会的最小单位是何？</title>
-    <url>/2022/03/09/%E7%A4%BE%E4%BC%9A%E7%9A%84%E6%9C%80%E5%B0%8F%E5%8D%95%E4%BD%8D%E6%98%AF%E4%BD%95%EF%BC%9F/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>世界<br>guojia<br>医院<br>还是什么</p>
-<p>你对自我有哪些偏见呢？为什么要辩论呢？你热爱生活吗？社会的最小单位是何？你知道yyds吗？我生从何来死往何处，我为何要出现在这个世界上，我的出现对这个世界来说意味着什么，是世界选择了我，还是我选择了世界？我和宇宙之间有必然的联系吗，宇宙是否有尽头，时间是否有长短，过去的时间在哪里消失，未来的时间又在何处停止，我在这一刻提出的问题，还是你刚才听到的问题吗？还是..</p>
-]]></content>
-      <tags>
-        <tag>长短</tag>
       </tags>
   </entry>
   <entry>
